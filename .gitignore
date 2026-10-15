@@ -1,0 +1,16 @@
+node_modules/
+**/node_modules/
+.env
+**/.env
+backend/.env
+dist/
+frontend/dist/
+**/dist/
+build/
+.DS_Store
+*.log
+mongodb_bin/
+mongodb_data/
+*.tmp
+*.msi
+.vscode/

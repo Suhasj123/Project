@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Suhas Admin",
+    "email": "suhasjsuhasj505@gmail.com",
+    "password": "$2a$10$heZmBy8OdIHxw4oNqfuhWu98GhKs2AzHL6Tf913U7NVbtDKTJjKOi",
+    "role": "admin",
+    "targetRole": "System Administrator",
+    "phone": "9876543210"
+  },
+  {
+    "name": "Student Candidate",
+    "email": "student@placement.com",
+    "password": "$2a$10$heZmBy8OdIHxw4oNqfuhWuAylugZijV1/TDNmB23a7dNyM4OlGT7G",
+    "role": "student",
+    "targetRole": "Software Engineer",
+    "phone": "9876543210"
+  }
+]

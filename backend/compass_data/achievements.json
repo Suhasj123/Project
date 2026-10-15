@@ -1,0 +1,44 @@
+[
+  {
+    "code": "FIRST_QUIZ",
+    "title": "First Quiz Completed",
+    "description": "Completed your very first aptitude or coding quiz!",
+    "badgeIcon": "🎯",
+    "category": "Quiz"
+  },
+  {
+    "code": "SOLVED_100",
+    "title": "100 Questions Solved",
+    "description": "Reached 100 questions practiced on the portal.",
+    "badgeIcon": "🔥",
+    "category": "Quiz"
+  },
+  {
+    "code": "STREAK_7",
+    "title": "7-Day Streak",
+    "description": "Practiced continuously for 7 days in a row.",
+    "badgeIcon": "⚡",
+    "category": "Streak"
+  },
+  {
+    "code": "QUIZ_MASTER",
+    "title": "Quiz Master",
+    "description": "Scored 90%+ in 5 different quiz assessments.",
+    "badgeIcon": "👑",
+    "category": "Quiz"
+  },
+  {
+    "code": "INTERVIEW_EXPERT",
+    "title": "Interview Expert",
+    "description": "Completed 3 AI Mock Interviews with High confidence rating.",
+    "badgeIcon": "🤖",
+    "category": "Interview"
+  },
+  {
+    "code": "CODING_CHAMPION",
+    "title": "Coding Champion",
+    "description": "Solved coding challenges across 3 different programming languages.",
+    "badgeIcon": "🏆",
+    "category": "Coding"
+  }
+]

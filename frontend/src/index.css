@@ -1,0 +1,281 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased bg-gray-50 text-gray-900 dark:bg-dark-bg dark:text-dark-text transition-colors duration-200;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+.glass-card {
+  @apply bg-white dark:bg-dark-card border border-gray-200 dark:border-dark-border shadow-sm rounded-2xl transition-all duration-200;
+}
+
+.glass-panel {
+  @apply bg-white/80 dark:bg-dark-card/80 backdrop-blur-md border border-gray-200/50 dark:border-dark-border/50;
+}
+
+.btn-gradient {
+  @apply bg-gradient-to-r from-brand-blue to-brand-purple text-white font-semibold transition-all duration-200 hover:opacity-95 active:scale-[0.98] shadow-sm;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-blue via-brand-purple to-indigo-500 font-extrabold;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.5);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes shimmer-slide {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes progress-grow {
+  from {
+    stroke-dashoffset: 283;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
+.animate-float-slow {
+  animation: float-slow 4s infinite ease-in-out;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.visme-card {
+  @apply relative overflow-hidden bg-white/90 dark:bg-dark-card/90 backdrop-blur-xl border border-gray-200/80 dark:border-dark-border/80 shadow-xl rounded-3xl transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:border-brand-purple/50;
+}
+
+.visme-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer-slide 3s infinite;
+}
+
+/* ========================================================= */
+/* 📄 ATS PDF EXPORT FORMATTING & ALIGNMENT PRINT ENGINE    */
+/* ========================================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm;
+  }
+
+  /* 1. Reset root, html, body and all wrapper backgrounds to pure white */
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* 2. Hide all non-printable chrome, navigation, headers, footers, sidebars, buttons, and sticky bars */
+  nav,
+  header,
+  footer,
+  aside,
+  button,
+  form,
+  .print\:hidden,
+  [class*="print:hidden"],
+  .btn-gradient,
+  .sticky,
+  .fixed,
+  .glass-card:not(.printable-document),
+  .glass-panel {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  /* 3. Neutralize all parent containers (remove dark mode backgrounds, paddings, max-widths, flex offsets) */
+  #root,
+  #root > div,
+  #root > div > div,
+  main,
+  main > div,
+  .flex,
+  .flex-1,
+  .flex-col,
+  .min-h-screen,
+  .max-w-7xl,
+  .max-w-6xl,
+  .max-w-4xl,
+  .lg\:pl-64 {
+    display: block !important;
+    position: static !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  /* 4. The Printable Document: Clean, Full Sheet, Zero Bleed, No Rounded Corners */
+  .printable-document {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-size: 10pt !important;
+    line-height: 1.35 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* 5. Document Header for Print */
+  .printable-document h1 {
+    color: #0f172a !important;
+    font-size: 21pt !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
+    margin: 0 0 2pt 0 !important;
+    line-height: 1.1 !important;
+    text-align: center !important;
+  }
+
+  .printable-document .resume-role {
+    color: #1d4ed8 !important;
+    font-size: 10.5pt !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    text-align: center !important;
+  }
+
+  .printable-document .resume-contact {
+    color: #475569 !important;
+    font-size: 9pt !important;
+    font-weight: 500 !important;
+    text-align: center !important;
+  }
+
+  /* 6. Section Headers for Print */
+  .printable-document .section-header {
+    border-bottom: 1.5pt solid #2563eb !important;
+    padding-bottom: 1.5pt !important;
+    margin-top: 6pt !important;
+    margin-bottom: 3.5pt !important;
+    color: #1e40af !important;
+    font-size: 10pt !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: baseline !important;
+  }
+
+  /* 7. Typography, Lists, and Text in Print */
+  .printable-document p,
+  .printable-document span,
+  .printable-document div {
+    color: #1e293b !important;
+  }
+
+  .printable-document strong,
+  .printable-document b {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+  }
+
+  .printable-document .flex-between {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: baseline !important;
+    width: 100% !important;
+  }
+
+  .printable-document ul {
+    margin: 1.5pt 0 !important;
+    padding-left: 12pt !important;
+  }
+
+  .printable-document li {
+    margin-bottom: 1.5pt !important;
+    line-height: 1.3 !important;
+    color: #334155 !important;
+  }
+
+  /* Avoid page breaks inside sections */
+  .printable-document .avoid-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}

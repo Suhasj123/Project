@@ -1,0 +1,345 @@
+[
+  {
+    "name": "TCS",
+    "logo": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=200",
+    "pattern": {
+      "rounds": [
+        {
+          "name": "NQT Aptitude & Coding",
+          "duration": "120 mins",
+          "description": "Quantitative, Logical, Verbal, Foundation & Advanced Coding."
+        },
+        {
+          "name": "Technical Interview",
+          "duration": "30 mins",
+          "description": "Core CS subjects (DBMS, Java/Python, OOPs, SQL)."
+        },
+        {
+          "name": "HR / MR Round",
+          "duration": "15 mins",
+          "description": "Behavioral, relocation willingness, communication assessment."
+        }
+      ],
+      "eligibility": "60% throughout 10th, 12th, and B.Tech / CS Graduation with max 1 active backlog.",
+      "difficulty": "Medium"
+    },
+    "technicalQuestions": [
+      {
+        "question": "What is the difference between primary key and unique key in SQL?",
+        "answer": "Primary key does not allow NULL values and only 1 allowed per table. Unique key allows one NULL value and multiple unique keys can exist.",
+        "topic": "DBMS"
+      },
+      {
+        "question": "Explain Method Overloading vs Method Overriding.",
+        "answer": "Overloading is compile-time polymorphism in same class with different parameters. Overriding is runtime polymorphism in child class with same method signature.",
+        "topic": "OOPs"
+      }
+    ],
+    "hrQuestions": [
+      {
+        "question": "Why do you want to join TCS?",
+        "answer": "Mention TCS market stability, extensive learning platforms (iON), and global project exposure for freshers.",
+        "tips": "Highlight your enthusiasm for continuous learning."
+      }
+    ],
+    "codingQuestions": [
+      {
+        "title": "Count Vowels and Consonants",
+        "problemStatement": "Write a program to count vowels, consonants, and spaces in a string.",
+        "solution": "Iterate character by character using char.toLowerCase() and check against vowels set.",
+        "language": "Java"
+      }
+    ],
+    "experiences": [
+      {
+        "studentName": "Rahul Sharma",
+        "college": "Tech Scholar",
+        "year": "2025",
+        "verdict": "Selected",
+        "story": "NQT test was medium. Technical round focused heavily on SQL joins and my final year React project!"
+      }
+    ],
+    "preparationTips": [
+      "Focus on TCS NQT previous year quantitative aptitude questions.",
+      "Be clear on your final year project architecture."
+    ]
+  },
+  {
+    "name": "Infosys",
+    "logo": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=200",
+    "pattern": {
+      "rounds": [
+        {
+          "name": "Online Assessment",
+          "duration": "100 mins",
+          "description": "Mathematical, Reasoning, Verbal, Pseudocode & Puzzle solving."
+        },
+        {
+          "name": "Technical + HR Interview",
+          "duration": "40 mins",
+          "description": "Single combined interview covering technical projects and scenario questions."
+        }
+      ],
+      "eligibility": "60% or 6.0 CGPA in CS / IT degrees.",
+      "difficulty": "Medium-Hard"
+    },
+    "technicalQuestions": [
+      {
+        "question": "What is a Pointers in C++ and how to avoid memory leaks?",
+        "answer": "Pointers store memory addresses. Use delete / free or smart pointers (unique_ptr, shared_ptr) to release heap memory.",
+        "topic": "C++"
+      }
+    ],
+    "hrQuestions": [
+      {
+        "question": "Are you comfortable relocating to Infosys Mysore Training Campus?",
+        "answer": "Express high enthusiasm for Mysore Global Education Center training.",
+        "tips": "Always answer positively regarding relocation."
+      }
+    ],
+    "codingQuestions": [
+      {
+        "title": "Reverse a Linked List",
+        "problemStatement": "Given head of a singly linked list, reverse the list and return new head.",
+        "solution": "Use three pointers: prev, current, next.",
+        "language": "Python"
+      }
+    ],
+    "experiences": [
+      {
+        "studentName": "Priya Verma",
+        "college": "State CS Dept",
+        "year": "2025",
+        "verdict": "Selected",
+        "story": "Pseudocode questions were tricky. Brush up on loop execution counts and bitwise operators!"
+      }
+    ],
+    "preparationTips": [
+      "Practice pseudocode output questions.",
+      "Understand core Data Structures like Stacks and Arrays."
+    ]
+  },
+  {
+    "name": "Accenture",
+    "logo": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=200",
+    "pattern": {
+      "rounds": [
+        {
+          "name": "Cognitive & Technical Assessment",
+          "duration": "90 mins",
+          "description": "English Ability, Critical Reasoning, Abstract Reasoning, MS Office & Cloud fundamentals."
+        },
+        {
+          "name": "Coding Assessment",
+          "duration": "45 mins",
+          "description": "2 Coding problems on arrays/strings."
+        },
+        {
+          "name": "Communication Assessment",
+          "duration": "30 mins",
+          "description": "Automated AI voice reading, repeating, and speaking evaluation."
+        }
+      ],
+      "eligibility": "65% or 6.5 CGPA in CS/IT with no active backlogs during onboarding.",
+      "difficulty": "Medium"
+    },
+    "technicalQuestions": [
+      {
+        "question": "Explain the difference between GET and POST HTTP methods.",
+        "answer": "GET requests parameters in URL, idempotent, cached. POST sends payload in request body, secure, non-cached.",
+        "topic": "Web Development"
+      }
+    ],
+    "hrQuestions": [
+      {
+        "question": "Describe a situation where you worked in a team under tight deadlines.",
+        "answer": "Focus on communication, task division, and resolving conflicts.",
+        "tips": "Use the STAR technique."
+      }
+    ],
+    "codingQuestions": [
+      {
+        "title": "Find Second Largest Element",
+        "problemStatement": "Find the second largest number in an unsorted array without sorting.",
+        "solution": "Maintain largest and secondLargest variables in a single pass O(N).",
+        "language": "C++"
+      }
+    ],
+    "experiences": [
+      {
+        "studentName": "Ankit Kumar",
+        "college": "City Tech",
+        "year": "2025",
+        "verdict": "Selected",
+        "story": "Communication round tests clarity and pronunciation. Speak loudly and steadily in a quiet room!"
+      }
+    ],
+    "preparationTips": [
+      "Ensure good mic quality for the automated communication round.",
+      "Practice basic MS Office & Networking questions."
+    ]
+  },
+  {
+    "name": "Wipro",
+    "logo": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=200",
+    "pattern": {
+      "rounds": [
+        {
+          "name": "NLTH Aptitude & Essay",
+          "duration": "120 mins",
+          "description": "Verbal, Analytical, Quantitative, Essay Writing, 2 Coding Qs."
+        },
+        {
+          "name": "Technical Interview",
+          "duration": "30 mins",
+          "description": "Programming basics, OOPs, Data Structures."
+        }
+      ],
+      "eligibility": "60% throughout in 10th, 12th, and Graduation.",
+      "difficulty": "Easy-Medium"
+    },
+    "technicalQuestions": [
+      {
+        "question": "What is normalized database form (1NF, 2NF, 3NF)?",
+        "answer": "1NF eliminates repeating groups. 2NF removes partial dependencies. 3NF removes transitive dependencies.",
+        "topic": "DBMS"
+      }
+    ],
+    "hrQuestions": [
+      {
+        "question": "Where do you see yourself in 3 years?",
+        "answer": "Aim to be a skilled full-stack developer taking ownership of key modules.",
+        "tips": "Show commitment to growth and stability."
+      }
+    ],
+    "codingQuestions": [
+      {
+        "title": "Palindrome String Check",
+        "problemStatement": "Check whether a given string is palindrome ignoring case.",
+        "solution": "Two-pointer approach comparing start and end characters.",
+        "language": "JavaScript"
+      }
+    ],
+    "experiences": [
+      {
+        "studentName": "Sneha Patel",
+        "college": "National Inst",
+        "year": "2025",
+        "verdict": "Selected",
+        "story": "Essay writing test checks grammar and spelling. Keep paragraphs clear!"
+      }
+    ],
+    "preparationTips": [
+      "Practice essay writing online without spellcheck.",
+      "Prepare core OOP definitions with real-world examples."
+    ]
+  },
+  {
+    "name": "Cognizant",
+    "logo": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=200",
+    "pattern": {
+      "rounds": [
+        {
+          "name": "GenC Aptitude & Skill Assessment",
+          "duration": "120 mins",
+          "description": "Quantitative, Reasoning, Verbal & Domain Specific Technical MCQs."
+        },
+        {
+          "name": "Technical Interview",
+          "duration": "45 mins",
+          "description": "Deep dive into projects, Web Technologies, and SQL."
+        }
+      ],
+      "eligibility": "60% or 6.0 CGPA throughout.",
+      "difficulty": "Medium"
+    },
+    "technicalQuestions": [
+      {
+        "question": "What is the Virtual DOM in React and how does it work?",
+        "answer": "Virtual DOM is an in-memory lightweight copy of Real DOM. React uses diffing algorithm to update only changed nodes efficiently.",
+        "topic": "MERN Stack"
+      }
+    ],
+    "hrQuestions": [
+      {
+        "question": "How do you handle constructive feedback from senior team members?",
+        "answer": "Listen actively, ask clarifying questions, and use it as an opportunity to improve code quality.",
+        "tips": "Demonstrate humility and growth mindset."
+      }
+    ],
+    "codingQuestions": [
+      {
+        "title": "Fibonacci Series Iterative",
+        "problemStatement": "Generate first N terms of Fibonacci sequence.",
+        "solution": "Iterative loop maintaining last two numbers.",
+        "language": "Java"
+      }
+    ],
+    "experiences": [
+      {
+        "studentName": "Vikas Gupta",
+        "college": "Apex College",
+        "year": "2025",
+        "verdict": "Selected",
+        "story": "Interviewers tested live SQL query writing on screen sharing!"
+      }
+    ],
+    "preparationTips": [
+      "Be comfortable writing live code and SQL queries during screen share."
+    ]
+  },
+  {
+    "name": "Capgemini",
+    "logo": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=200",
+    "pattern": {
+      "rounds": [
+        {
+          "name": "Pseudocode & Game-based Aptitude",
+          "duration": "90 mins",
+          "description": "4 Interactive memory/spatial games + Pseudocode test."
+        },
+        {
+          "name": "Behavioral & Tech Interview",
+          "duration": "30 mins",
+          "description": "Scenario questions, project presentation."
+        }
+      ],
+      "eligibility": "55% or 5.5 CGPA in CS / IT.",
+      "difficulty": "Medium"
+    },
+    "technicalQuestions": [
+      {
+        "question": "What is REST API and what are standard response status codes?",
+        "answer": "Representational State Transfer API. 200 OK, 201 Created, 400 Bad Request, 401 Unauthorized, 404 Not Found, 500 Server Error.",
+        "topic": "Web APIs"
+      }
+    ],
+    "hrQuestions": [
+      {
+        "question": "What are your key strengths and weaknesses?",
+        "answer": "State a technical strength (e.g. quick learner of modern JS frameworks) and a genuine weakness with an active solution (e.g. working on public speaking).",
+        "tips": "Never say \"I have no weakness\"."
+      }
+    ],
+    "codingQuestions": [
+      {
+        "title": "Array Factorial Calculation",
+        "problemStatement": "Calculate factorial of a number handling large values.",
+        "solution": "BigInteger or array representation for overflow.",
+        "language": "C"
+      }
+    ],
+    "experiences": [
+      {
+        "studentName": "Megha Nair",
+        "college": "Tech Campus",
+        "year": "2025",
+        "verdict": "Selected",
+        "story": "Game-based aptitude tests focus, spatial awareness, and quick decisions!"
+      }
+    ],
+    "preparationTips": [
+      "Try sample game-based aptitude practice tests before the actual assessment."
+    ]
+  }
+]
