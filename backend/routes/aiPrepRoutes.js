@@ -94,7 +94,12 @@ router.post('/mock-interview/respond', async (req, res) => {
     // Update memory/DB session transcript
     const idx = memorySessions.findIndex(s => s._id === sessionId);
     if (idx !== -1) {
-      memorySessions[idx].transcript.push({ sender: 'candidate', text: latestAnswer, timestamp: new Date() });
+      memorySessions[idx].transcript.push({
+        sender: 'candidate',
+        text: latestAnswer,
+        timestamp: new Date(),
+        evaluation: responseObj.knowledgeEvaluation
+      });
       if (responseObj.question) {
         memorySessions[idx].transcript.push({ sender: 'ai', text: responseObj.question, category: responseObj.category || 'Follow-up', timestamp: new Date() });
       }
@@ -102,6 +107,21 @@ router.post('/mock-interview/respond', async (req, res) => {
         memorySessions[idx].status = 'Completed';
       }
     }
+
+    try {
+      if (sessionId && MockInterviewSession) {
+        await MockInterviewSession.findByIdAndUpdate(sessionId, {
+          $push: {
+            transcript: {
+              sender: 'candidate',
+              text: latestAnswer,
+              timestamp: new Date(),
+              evaluation: responseObj.knowledgeEvaluation
+            }
+          }
+        });
+      }
+    } catch (e) {}
 
     return res.json(responseObj);
   } catch (err) {

@@ -82,9 +82,130 @@ OUTPUT FORMAT — respond with ONLY valid JSON, no markdown, no extra text:
     };
   },
 
-  // 2. Respond to Candidate Answer (Dynamic Follow-up)
+  // Helper to gauge candidate knowledge accurately (offline or AI-assisted)
+  gaugeCandidateKnowledge(role, interviewType, latestAnswer = '', questionAsked = '') {
+    const text = String(latestAnswer || '').trim();
+    const words = text.split(/\s+/).filter(Boolean);
+    const wordCount = words.length;
+    const lower = text.toLowerCase();
+
+    // Technical concept vocabulary
+    const techKeywords = [
+      'hash', 'map', 'array', 'complexity', 'o(1)', 'o(n)', 'time complexity', 'space complexity',
+      'cache', 'redis', 'database', 'sql', 'nosql', 'index', 'latency', 'load balancer', 'scale',
+      'scaling', 'sharding', 'microservice', 'api', 'http', 'async', 'await', 'promise', 'thread',
+      'concurrency', 'state', 'hook', 'react', 'node', 'express', 'memory', 'pointer', 'tree',
+      'graph', 'stack', 'queue', 'recursion', 'binary', 'collision', 'chaining', 'probe', 'probing',
+      'open addressing', 'load factor', 'bucket', 'cluster', 'replication', 'acid', 'transaction',
+      'event loop', 'callback', 'memoization', 'dynamic programming', 'two pointer', 'sliding window'
+    ];
+
+    // Behavioral / STAR vocabulary
+    const behavioralKeywords = [
+      'situation', 'task', 'action', 'result', 'because', 'team', 'resolved', 'conflict',
+      'deadline', 'impact', 'delivered', 'collaborated', 'challenge', 'implemented', 'improved',
+      'learned', 'led', 'responsible', 'metrics', 'achieved', 'feedback', 'prioritized', 'stakeholder'
+    ];
+
+    // System Design vocabulary
+    const designKeywords = [
+      'throughput', 'latency', 'rps', 'requests per second', 'load balancer', 'nginx', 'cdn',
+      'cloudflare', 'sharding', 'horizontal scaling', 'vertical scaling', 'replication', 'master-slave',
+      'consistency', 'availability', 'partition tolerance', 'cap theorem', 'cache', 'redis', 'memcached',
+      'kafka', 'message queue', 'pub/sub', 'nosql', 'dynamodb', 'mongodb', 'postgresql', 'b-tree',
+      'hash generator', 'base62', 'uuid', 'snowflake', 'bloom filter', 'rate limiter', 'circuit breaker'
+    ];
+
+    let relevantKeywords = techKeywords;
+    if (interviewType === 'Behavioral') {
+      relevantKeywords = behavioralKeywords;
+    } else if (interviewType === 'System Design') {
+      relevantKeywords = designKeywords;
+    }
+
+    const matched = relevantKeywords.filter(k => lower.includes(k));
+
+    // Calculate score based on substance, word count, and relevant terminology
+    let score = 50;
+    if (wordCount < 8) {
+      score = Math.min(65, 45 + wordCount * 2.5);
+    } else if (wordCount < 25) {
+      score = Math.min(80, 60 + wordCount * 0.5 + matched.length * 4);
+    } else if (wordCount < 60) {
+      score = Math.min(92, 70 + wordCount * 0.2 + matched.length * 3.5);
+    } else {
+      score = Math.min(97, 78 + matched.length * 3 + Math.min(wordCount * 0.1, 10));
+    }
+    score = Math.round(score);
+
+    let level = 'Competent';
+    if (score >= 90) level = 'Exceptional';
+    else if (score >= 80) level = 'Proficient';
+    else if (score >= 68) level = 'Competent';
+    else level = 'Developing';
+
+    const strengths = [];
+    const missingPoints = [];
+
+    if (matched.length > 0) {
+      const topConcepts = matched.slice(0, 3).map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ');
+      strengths.push(`Clearly integrated key domain terminology: ${topConcepts}.`);
+    } else {
+      strengths.push(`Provided a direct answer addressing the core question.`);
+    }
+
+    if (wordCount >= 25) {
+      strengths.push(`Structured answer with substantive technical reasoning.`);
+    } else {
+      missingPoints.push(`Elaborate further with concrete real-world implementation details.`);
+    }
+
+    if (interviewType === 'Behavioral') {
+      if (lower.includes('result') || lower.includes('impact') || lower.includes('metrics')) {
+        strengths.push(`Addressed the 'Result' and business outcome component of STAR.`);
+      } else {
+        missingPoints.push(`Strengthen the STAR framework by quantifying the final outcome or business impact.`);
+      }
+    } else if (interviewType === 'System Design') {
+      if (lower.includes('scale') || lower.includes('cache') || lower.includes('database')) {
+        strengths.push(`Addressed scaling bottlenecks and data storage layer.`);
+      } else {
+        missingPoints.push(`Consider discussing data partitioning, cache invalidation, or single points of failure.`);
+      }
+    } else {
+      if (lower.includes('complexity') || lower.includes('o(') || lower.includes('time') || lower.includes('space')) {
+        strengths.push(`Explicitly referenced algorithmic complexity trade-offs.`);
+      } else {
+        missingPoints.push(`Mention Big-O time and space complexity to demonstrate deeper analytical rigor.`);
+      }
+    }
+
+    let verdict = `Demonstrated ${level.toLowerCase()} understanding of ${role} concepts.`;
+    if (score >= 88) {
+      verdict = `Strong technical precision with clear articulation of ${role} fundamentals.`;
+    } else if (score >= 78) {
+      verdict = `Good foundational grasp with coherent explanations and terminology.`;
+    } else {
+      verdict = `Initial conceptual answer provided; needs deeper exploration of trade-offs and edge cases.`;
+    }
+
+    const briefFeedback = score >= 80
+      ? `Solid response! Candidate articulates principles clearly with relevant vocabulary.`
+      : `Decent attempt. Adding explicit technical metrics and edge case handling will elevate your score.`;
+
+    return {
+      score,
+      level,
+      verdict,
+      strengths: strengths.slice(0, 3),
+      missingPoints: missingPoints.slice(0, 2),
+      briefFeedback
+    };
+  },
+
+  // 2. Respond to Candidate Answer (Dynamic Follow-up & Live Knowledge Gauging)
   async respondMockInterview(role, interviewType, conversationHistory, latestAnswer) {
-    const prompt = `You are an expert interviewer continuing a live mock interview. Maintain a natural, adaptive conversation like a real interviewer would — ask follow-ups that probe deeper into the candidate's last answer, challenge assumptions, or move to a related question if the topic is exhausted.
+    const prompt = `You are an expert interviewer continuing a live mock interview. Maintain a natural, adaptive conversation like a real interviewer would — gauge the candidate's technical knowledge accurately from their answer, and ask follow-ups that probe deeper into their explanation, challenge assumptions, or explore related concepts.
 
 CONTEXT:
 - Role: ${role}
@@ -93,22 +214,40 @@ CONTEXT:
 - Candidate's latest answer: "${latestAnswer}"
 
 INSTRUCTIONS:
-- If the answer was vague or incomplete, ask a clarifying follow-up.
-- If the answer was strong and complete, move to a new question in the same category or transition to a new category.
+1. GAUGE KNOWLEDGE: Objectively assess the candidate's latest spoken answer for accuracy, technical depth, structure, and domain knowledge. Assign a score (0-100), proficiency level (Exceptional / Proficient / Competent / Developing), 1-line verdict, 2 key strengths, 1-2 missing concepts/gaps, and brief constructive feedback.
+2. ADAPTIVE FOLLOW-UP:
+- If the answer was vague or incomplete, ask a probing follow-up on what was missing.
+- If the answer was strong, challenge them with a realistic edge case, scale constraint, or trade-off.
 - Never break character. Never mention you are an AI. Never give the answer away.
-- Keep questions concise (1-3 sentences).
+- Keep follow-up questions concise (1-3 sentences).
 
 OUTPUT FORMAT — respond with ONLY valid JSON:
 {
-  "question": "string",
-  "category": "string",
+  "question": "string (the follow-up interview question)",
+  "category": "string (e.g. Algorithmic Complexity, Edge Cases, Scalability)",
   "is_followup": true,
-  "interview_complete": false
+  "interview_complete": false,
+  "knowledgeEvaluation": {
+    "score": 85,
+    "level": "Proficient",
+    "verdict": "Clear technical explanation with accurate collision handling logic",
+    "strengths": ["Accurately detailed chaining mechanism and bucket capacity", "Addressed load factor threshold"],
+    "missingPoints": ["Could mention open addressing probe sequences (linear/quadratic)"],
+    "briefFeedback": "Strong grasp of hash map mechanics and complexity trade-offs."
+  }
 }
 
-If you determine enough questions have been asked (typically 5-7 exchanges) to end the interview, instead respond:
+If you determine enough questions have been asked (typically 5-7 exchanges) to end the interview, respond:
 {
-  "interview_complete": true
+  "interview_complete": true,
+  "knowledgeEvaluation": {
+    "score": 90,
+    "level": "Advanced",
+    "verdict": "Comprehensive response demonstrating strong domain competence",
+    "strengths": ["Thorough coverage of requirements and edge cases"],
+    "missingPoints": [],
+    "briefFeedback": "Solid conclusion to the interview round."
+  }
 }`;
 
     try {
@@ -117,19 +256,63 @@ If you determine enough questions have been asked (typically 5-7 exchanges) to e
         const result = await model.generateContent(prompt);
         const text = result.response.text();
         const jsonMatch = text.match(/\{[\s\S]*\}/);
-        if (jsonMatch) return JSON.parse(jsonMatch[0]);
+        if (jsonMatch) {
+          const parsed = JSON.parse(jsonMatch[0]);
+          if (!parsed.knowledgeEvaluation) {
+            parsed.knowledgeEvaluation = this.gaugeCandidateKnowledge(role, interviewType, latestAnswer);
+          }
+          return parsed;
+        }
+      }
+      if (openai) {
+        const response = await openai.chat.completions.create({
+          model: 'gpt-3.5-turbo',
+          response_format: { type: 'json_object' },
+          messages: [{ role: 'user', content: prompt }]
+        });
+        const parsed = JSON.parse(response.choices[0].message.content);
+        if (!parsed.knowledgeEvaluation) {
+          parsed.knowledgeEvaluation = this.gaugeCandidateKnowledge(role, interviewType, latestAnswer);
+        }
+        return parsed;
       }
     } catch (e) {}
 
-    if (conversationHistory.length >= 6) {
-      return { interview_complete: true };
+    const knowledgeEvaluation = this.gaugeCandidateKnowledge(role, interviewType, latestAnswer);
+    const exchangeCount = conversationHistory.filter(m => m.sender === 'candidate').length;
+
+    if (exchangeCount >= 5) {
+      return {
+        interview_complete: true,
+        knowledgeEvaluation
+      };
+    }
+
+    let followUp = `That's a solid explanation. Building on that, how would your architecture adapt if user traffic spiked by 10x during peak hours?`;
+    let category = 'Scalability & Trade-offs';
+
+    if (interviewType === 'Behavioral') {
+      followUp = `Reflecting on that experience, what was the most valuable lesson you learned, and how has it influenced how you lead or collaborate on engineering teams?`;
+      category = 'Reflection & Impact';
+    } else if (interviewType === 'System Design') {
+      followUp = `What is the primary bottleneck in that architecture, and what caching or partitioning strategy would you introduce to prevent single points of failure?`;
+      category = 'System Reliability & Bottlenecks';
+    } else {
+      if (latestAnswer.toLowerCase().includes('hash') || latestAnswer.toLowerCase().includes('chaining')) {
+        followUp = `Good analysis. How does cache locality compare between open addressing and separate chaining when hardware L1/L2 CPU caches are involved?`;
+        category = 'Data Structures & Hardware Trade-offs';
+      } else {
+        followUp = `How would you handle boundary edge cases or concurrency conflicts in this scenario?`;
+        category = 'Edge Cases & Concurrency';
+      }
     }
 
     return {
-      question: `That is a solid explanation. Building on that, how would your architecture adapt if user traffic spiked by 10x during peak hours?`,
-      category: 'Scalability',
+      question: followUp,
+      category,
       is_followup: true,
-      interview_complete: false
+      interview_complete: false,
+      knowledgeEvaluation
     };
   },
 
