@@ -7,10 +7,26 @@ const protect = async (req, res, next) => {
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     try {
       token = req.headers.authorization.split(' ')[1];
-      
-      // Check for mock token fallback
+
+      if (!token) {
+        return res.status(401).json({ message: 'Not authorized: token missing from authorization header' });
+      }
+
+      // Check for mock token fallback (Strictly blocked in production)
       if (token.startsWith('mock_')) {
+        if (process.env.NODE_ENV === 'production') {
+          return res.status(401).json({ message: 'Mock authorization tokens are forbidden in production' });
+        }
+
         const isAdminToken = token.includes('admin');
+        
+        // Strict guard: mock admin tokens require explicit local dev flag
+        if (isAdminToken && process.env.ALLOW_DEV_MOCK_ADMIN !== 'true') {
+          return res.status(403).json({ 
+            message: 'Mock admin access is disabled. Please log in with valid admin credentials.' 
+          });
+        }
+
         req.user = {
           _id: isAdminToken ? '650000000000000000000002' : '650000000000000000000001',
           name: isAdminToken ? 'Suhas Admin' : 'Student Demo',
@@ -23,42 +39,43 @@ const protect = async (req, res, next) => {
         return next();
       }
 
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'super_secret_bca_project_jwt_key_2026');
-      
+      // Verify JWT signature using verified secret
+      const jwtSecret = process.env.JWT_SECRET || 'super_secret_bca_project_jwt_key_2026';
+      const decoded = jwt.verify(token, jwtSecret);
+
       try {
         req.user = await User.findById(decoded.id).select('-password');
       } catch (dbErr) {
-        // Fallback if DB isn't running
+        // Fallback user context if DB connection is intermittent
         req.user = {
           _id: decoded.id,
-          name: decoded.name || 'Student Demo',
-          email: decoded.email || 'student@placement.com',
+          name: decoded.name || 'Candidate',
+          email: decoded.email,
           role: decoded.role || 'student'
         };
       }
 
       if (!req.user) {
-        req.user = { _id: decoded.id, name: 'User', email: 'user@test.com', role: 'student' };
+        return res.status(401).json({ message: 'User belonging to this token no longer exists' });
       }
 
       return next();
     } catch (error) {
-      console.error('[Auth Middleware Error]', error.message);
-      return res.status(401).json({ message: 'Not authorized, token invalid' });
+      const isExpired = error.name === 'TokenExpiredError';
+      return res.status(401).json({ 
+        message: isExpired ? 'Session expired, please log in again' : 'Not authorized: invalid security token' 
+      });
     }
   }
 
-  if (!token) {
-    return res.status(401).json({ message: 'Not authorized, no token provided' });
-  }
+  return res.status(401).json({ message: 'Not authorized: no token provided' });
 };
 
 const adminOnly = (req, res, next) => {
   if (req.user && req.user.role === 'admin') {
-    next();
-  } else {
-    res.status(403).json({ message: 'Access denied: Admin privileges required' });
+    return next();
   }
+  return res.status(403).json({ message: 'Access denied: Administrator privileges required' });
 };
 
 module.exports = { protect, adminOnly };

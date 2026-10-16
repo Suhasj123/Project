@@ -26,16 +26,16 @@ export const CodeSandboxRunner = ({ initialCode = '', language = 'JavaScript', p
         };
 
         if (language === 'JavaScript') {
-          // Execute safe JS function call
-          const result = eval(`
-            (function() {
-              ${code}
-              // Attempt auto-invocation if standard functions are defined
-              if (typeof isPalindrome === 'function') return "Test isPalindrome('A man a plan a canal Panama'): " + isPalindrome('A man a plan a canal Panama');
-              if (typeof twoSum === 'function') return "Test twoSum([2, 7, 11, 15], 9): " + JSON.stringify(twoSum([2, 7, 11, 15], 9));
-              return "Code executed successfully with zero runtime errors.";
-            })()
-          `);
+          // Sandboxed JS execution - shadows sensitive browser globals to prevent token exfiltration / XSS
+          const sandboxedRunner = new Function(
+            'window', 'document', 'localStorage', 'sessionStorage', 'fetch', 'XMLHttpRequest', 'location',
+            `"use strict";
+             ${code}
+             if (typeof isPalindrome === 'function') return "Test isPalindrome('A man a plan a canal Panama'): " + isPalindrome('A man a plan a canal Panama');
+             if (typeof twoSum === 'function') return "Test twoSum([2, 7, 11, 15], 9): " + JSON.stringify(twoSum([2, 7, 11, 15], 9));
+             return "Code executed successfully with zero runtime errors.";`
+          );
+          const result = sandboxedRunner(undefined, undefined, undefined, undefined, undefined, undefined, undefined);
           if (result) logs.push(String(result));
         } else {
           logs.push(`[${language} Runtime Simulator]`);

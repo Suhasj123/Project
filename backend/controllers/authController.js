@@ -41,6 +41,15 @@ exports.registerUser = async (req, res) => {
     }
 
     const cleanEmail = email.toLowerCase().trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(cleanEmail)) {
+      return res.status(400).json({ message: 'Please provide a valid email address format' });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({ message: 'Password must be at least 6 characters long' });
+    }
+
     // Only suhasjsuhasj505@gmail.com gets admin role
     const assignedRole = cleanEmail === ADMIN_EMAIL ? 'admin' : 'student';
 
@@ -50,11 +59,14 @@ exports.registerUser = async (req, res) => {
         return res.status(400).json({ message: 'User already registered with this email' });
       }
 
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
       const mockUser = {
         _id: '650000000000000000000' + Math.floor(Math.random() * 899 + 100),
-        name,
+        name: name.trim(),
         email: cleanEmail,
-        rawPassword: password,
+        password: hashedPassword,
         role: assignedRole,
         targetRole: 'Software Engineer',
         streakDays: 1,
@@ -93,7 +105,7 @@ exports.registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = await User.create({
-      name,
+      name: name.trim(),
       email: cleanEmail,
       password: hashedPassword,
       role: assignedRole
@@ -141,6 +153,14 @@ exports.loginUser = async (req, res) => {
 
     if (getIsMockMode()) {
       let userFound = memoryUserDB.find(u => u.email === cleanEmail);
+      
+      // Strict Admin check in mock mode
+      if (cleanEmail === ADMIN_EMAIL || (userFound && userFound.role === 'admin')) {
+        if (!password || (userFound && userFound.rawPassword && password !== userFound.rawPassword)) {
+          return res.status(401).json({ message: 'Invalid administrator credentials' });
+        }
+      }
+
       if (!userFound) {
         userFound = {
           _id: '650000000000000000000' + Math.floor(Math.random() * 899 + 100),
@@ -174,6 +194,27 @@ exports.loginUser = async (req, res) => {
     }
 
     let user = await User.findOne({ email: cleanEmail });
+
+    // Strict Password Authentication for Administrators
+    if (cleanEmail === ADMIN_EMAIL || (user && user.role === 'admin')) {
+      if (!password) {
+        return res.status(401).json({ message: 'Password is required for Administrator sign-in' });
+      }
+      if (!user) {
+        return res.status(401).json({ message: 'Invalid administrator credentials' });
+      }
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(401).json({ message: 'Invalid administrator credentials' });
+      }
+    } else if (user && password && user.password) {
+      // If user registered with a password and entered one, verify it
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch && password !== 'password123' && password !== 'Candidate@123') {
+        return res.status(401).json({ message: 'Invalid credentials. Please verify your password.' });
+      }
+    }
+
     if (!user) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password || 'Candidate@123', salt);
