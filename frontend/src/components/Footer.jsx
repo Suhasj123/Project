@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Brain, Heart } from 'lucide-react';
+import { Brain } from 'lucide-react';
 
 export const Footer = () => {
   const { user } = useAuth();
@@ -17,8 +17,8 @@ export const Footer = () => {
           <span className="text-xs text-gray-500 font-normal border-l border-gray-300 dark:border-dark-border pl-2 ml-1">Placement & Interview Prep</span>
         </div>
 
-        <p className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
-          Built with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> for Student Placements & Viva Demonstrations.
+        <p className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 font-medium">
+          AI-Powered Interview Preparation & Assessment System
         </p>
 
         <div className="text-xs text-gray-400 dark:text-gray-500">
