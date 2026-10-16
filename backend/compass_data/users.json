@@ -1,18 +1,62 @@
 [
   {
+    "username": "suhas_admin",
     "name": "Suhas Admin",
     "email": "suhasjsuhasj505@gmail.com",
-    "password": "$2a$10$heZmBy8OdIHxw4oNqfuhWu98GhKs2AzHL6Tf913U7NVbtDKTJjKOi",
     "role": "admin",
+    "passwordPlaceholder": "AdminMaster2026!",
     "targetRole": "System Administrator",
-    "phone": "9876543210"
+    "streakDays": 7,
+    "readinessScore": 99
   },
   {
+    "username": "priya_sharma",
+    "name": "Priya Sharma",
+    "email": "priya.sharma@campusprep.edu",
+    "role": "student",
+    "passwordPlaceholder": "PriyaPrep2026!",
+    "targetRole": "Frontend React Developer",
+    "streakDays": 5,
+    "readinessScore": 86
+  },
+  {
+    "username": "rahul_verma",
+    "name": "Rahul Verma",
+    "email": "rahul.verma@campusprep.edu",
+    "role": "student",
+    "passwordPlaceholder": "RahulCode2026#",
+    "targetRole": "Full Stack Engineer",
+    "streakDays": 4,
+    "readinessScore": 82
+  },
+  {
+    "username": "ananya_iyer",
+    "name": "Ananya Iyer",
+    "email": "ananya.iyer@campusprep.edu",
+    "role": "student",
+    "passwordPlaceholder": "AnanyaPass99$",
+    "targetRole": "Data & AI Engineer",
+    "streakDays": 6,
+    "readinessScore": 91
+  },
+  {
+    "username": "vikram_nair",
+    "name": "Vikram Nair",
+    "email": "vikram.nair@campusprep.edu",
+    "role": "student",
+    "passwordPlaceholder": "Vikram2026Dev*",
+    "targetRole": "DevOps & Cloud Specialist",
+    "streakDays": 3,
+    "readinessScore": 78
+  },
+  {
+    "username": "student_demo",
     "name": "Student Candidate",
     "email": "student@placement.com",
-    "password": "$2a$10$heZmBy8OdIHxw4oNqfuhWuAylugZijV1/TDNmB23a7dNyM4OlGT7G",
     "role": "student",
+    "passwordPlaceholder": "Student2026!",
     "targetRole": "Software Engineer",
-    "phone": "9876543210"
+    "streakDays": 2,
+    "readinessScore": 75
   }
 ]

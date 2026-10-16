@@ -112,7 +112,7 @@ async function runTests() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: 'suhasjsuhasj505@gmail.com',
-        password: 'admin12345'
+        password: 'AdminMaster2026!'
       })
     });
     const data = await res.json();

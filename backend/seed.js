@@ -55,18 +55,62 @@ const seedDB = async () => {
     {
       name: 'Suhas Admin',
       email: 'suhasjsuhasj505@gmail.com',
-      password: await bcrypt.hash('admin12345', salt),
+      password: await bcrypt.hash('AdminMaster2026!', salt),
       role: 'admin',
       targetRole: 'System Administrator',
-      phone: '9876543210'
+      phone: '9876543210',
+      streakDays: 7,
+      readinessScore: 99
+    },
+    {
+      name: 'Priya Sharma',
+      email: 'priya.sharma@campusprep.edu',
+      password: await bcrypt.hash('PriyaPrep2026!', salt),
+      role: 'student',
+      targetRole: 'Frontend React Developer',
+      phone: '9876543211',
+      streakDays: 5,
+      readinessScore: 86
+    },
+    {
+      name: 'Rahul Verma',
+      email: 'rahul.verma@campusprep.edu',
+      password: await bcrypt.hash('RahulCode2026#', salt),
+      role: 'student',
+      targetRole: 'Full Stack Engineer',
+      phone: '9876543212',
+      streakDays: 4,
+      readinessScore: 82
+    },
+    {
+      name: 'Ananya Iyer',
+      email: 'ananya.iyer@campusprep.edu',
+      password: await bcrypt.hash('AnanyaPass99$', salt),
+      role: 'student',
+      targetRole: 'Data & AI Engineer',
+      phone: '9876543213',
+      streakDays: 6,
+      readinessScore: 91
+    },
+    {
+      name: 'Vikram Nair',
+      email: 'vikram.nair@campusprep.edu',
+      password: await bcrypt.hash('Vikram2026Dev*', salt),
+      role: 'student',
+      targetRole: 'DevOps & Cloud Specialist',
+      phone: '9876543214',
+      streakDays: 3,
+      readinessScore: 78
     },
     {
       name: 'Student Candidate',
       email: 'student@placement.com',
-      password: await bcrypt.hash('password123', salt),
+      password: await bcrypt.hash('Student2026!', salt),
       role: 'student',
       targetRole: 'Software Engineer',
-      phone: '9876543210'
+      phone: '9876543210',
+      streakDays: 2,
+      readinessScore: 75
     }
   ];
 
@@ -97,7 +141,7 @@ const seedDB = async () => {
       await Question.deleteMany({});
       await Company.deleteMany({});
       await Achievement.deleteMany({});
-      await User.deleteMany({ email: { $in: ['suhasjsuhasj505@gmail.com', 'student@placement.com'] } });
+      await User.deleteMany({ email: { $in: defaultUsers.map(u => u.email) } });
 
       // Insert fresh data
       const insertedQuestions = await Question.insertMany(seedQuestions);

@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-14T07:24:15.694Z",
+  "generatedAt": "2026-10-16T17:05:56.563Z",
   "totalQuestions": 34,
   "totalCompanies": 6,
   "totalAchievements": 6,
-  "totalUsers": 2,
+  "totalUsers": 6,
   "data": {
     "questions": [
       {
@@ -988,18 +988,62 @@
       {
         "name": "Suhas Admin",
         "email": "suhasjsuhasj505@gmail.com",
-        "password": "$2a$10$LWYO38o..oQhvE5BvzRMbu57KVseMaViCUlhLfQey/L6cREHCROa6",
+        "password": "$2a$10$8lwnf8gp2wxOsT49MoeKaufNimuX7QqL1Vy5WOXPoRoa1iaVrv13u",
         "role": "admin",
         "targetRole": "System Administrator",
-        "phone": "9876543210"
+        "phone": "9876543210",
+        "streakDays": 7,
+        "readinessScore": 99
+      },
+      {
+        "name": "Priya Sharma",
+        "email": "priya.sharma@campusprep.edu",
+        "password": "$2a$10$8lwnf8gp2wxOsT49MoeKau/74ZPWmnLvddbJ6GpyewqoJRH2fzidm",
+        "role": "student",
+        "targetRole": "Frontend React Developer",
+        "phone": "9876543211",
+        "streakDays": 5,
+        "readinessScore": 86
+      },
+      {
+        "name": "Rahul Verma",
+        "email": "rahul.verma@campusprep.edu",
+        "password": "$2a$10$8lwnf8gp2wxOsT49MoeKauXzC6rEBey6rXcUl7v7dl4RUQE6EP0kS",
+        "role": "student",
+        "targetRole": "Full Stack Engineer",
+        "phone": "9876543212",
+        "streakDays": 4,
+        "readinessScore": 82
+      },
+      {
+        "name": "Ananya Iyer",
+        "email": "ananya.iyer@campusprep.edu",
+        "password": "$2a$10$8lwnf8gp2wxOsT49MoeKaukhmKqinn4dqVXmUu1/TdxFHYj/tEdJ.",
+        "role": "student",
+        "targetRole": "Data & AI Engineer",
+        "phone": "9876543213",
+        "streakDays": 6,
+        "readinessScore": 91
+      },
+      {
+        "name": "Vikram Nair",
+        "email": "vikram.nair@campusprep.edu",
+        "password": "$2a$10$8lwnf8gp2wxOsT49MoeKauL5lI1u5UpAua1XoToibQ1kDmdOxY1VO",
+        "role": "student",
+        "targetRole": "DevOps & Cloud Specialist",
+        "phone": "9876543214",
+        "streakDays": 3,
+        "readinessScore": 78
       },
       {
         "name": "Student Candidate",
         "email": "student@placement.com",
-        "password": "$2a$10$LWYO38o..oQhvE5BvzRMbu0Ki.EHjfp7k2Ich0jrA85pYSq3DA5EW",
+        "password": "$2a$10$8lwnf8gp2wxOsT49MoeKauFTgotZfHuUvhh5VeGEGn3tHpBI6JhjO",
         "role": "student",
         "targetRole": "Software Engineer",
-        "phone": "9876543210"
+        "phone": "9876543210",
+        "streakDays": 2,
+        "readinessScore": 75
       }
     ]
   }
