@@ -48,7 +48,7 @@ const AppContent = () => {
         <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <Routes>
                     {/* Public Auth Routes */}
-                    <Route path="/" element={user ? <Navigate to={user.role === 'admin' ? '/admin' : '/resume-analyzer'} replace /> : <Login />} />
+                    <Route path="/" element={<Navigate to="/login" replace />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />

@@ -1,0 +1,53 @@
+{
+  "project": "InterviewPro - AI-Powered Placement & Assessment Platform",
+  "version": "1.0.0",
+  "goal": "Autonomous quality assurance, feature verification, and test execution loop",
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "title": "Core System Health & Infrastructure Verification",
+      "description": "Verify backend health endpoint, database connectivity, and port binding",
+      "testCommand": "node backend/test_runner.js",
+      "status": "completed",
+      "priority": "P0"
+    },
+    {
+      "id": "TASK-002",
+      "title": "Cross-Origin Resource Sharing (CORS) Multi-Port Support",
+      "description": "Ensure ports 3000, 3001, 3002, and all local development origins are permitted",
+      "testCommand": "node -e \"require('./backend/middleware/securityMiddleware')\"",
+      "status": "completed",
+      "priority": "P0"
+    },
+    {
+      "id": "TASK-003",
+      "title": "Candidate Knowledge Gauging & Voice Recognition Integration",
+      "description": "Verify AI mock interview evaluate endpoint and speech handling",
+      "testCommand": "node -e \"const s = require('./backend/services/aiService'); console.log(s.gaugeCandidateKnowledge('Software Engineer', 'Technical', 'hash map O(1) collision chaining', ''))\"",
+      "status": "completed",
+      "priority": "P1"
+    },
+    {
+      "id": "TASK-004",
+      "title": "Frontend Asset Compilation & Rollup Bundle Verification",
+      "description": "Ensure Vite production build completes with zero errors",
+      "testCommand": "npm --prefix frontend run build",
+      "status": "completed",
+      "priority": "P1"
+    },
+    {
+      "id": "TASK-005",
+      "title": "Automated Security Audit & Input Sanitization",
+      "description": "Verify rate limiters, Helmet CSP headers, NoSQL query sanitizers, and bcrypt password hashing",
+      "testCommand": "node backend/test_runner.js",
+      "status": "completed",
+      "priority": "P1"
+    }
+  ],
+  "autonomousSettings": {
+    "maxIterations": 15,
+    "haltOnTestFailure": true,
+    "autoGitCommit": true,
+    "commitPrefix": "ralph-loop: "
+  }
+}

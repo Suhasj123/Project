@@ -11,8 +11,7 @@ import {
   ShieldCheck,
   UserCheck,
   ArrowRight,
-  Sparkles,
-  Zap
+  Sparkles
 } from 'lucide-react';
 
 export const Login = () => {
@@ -21,10 +20,10 @@ export const Login = () => {
   const initialMode = queryParams.get('mode') === 'admin' ? 'admin' : 'candidate';
 
   const [loginMode, setLoginMode] = useState(initialMode); // 'candidate' or 'admin'
-  const [email, setEmail] = useState(initialMode === 'admin' ? 'suhasjsuhasj505@gmail.com' : 'student@placement.com');
-  const [phone, setPhone] = useState('9876543210');
-  const [password, setPassword] = useState('password123');
-  const [adminPassword, setAdminPassword] = useState('admin12345');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
   
   const [loading, setLoading] = useState(false);
 
@@ -233,17 +232,6 @@ export const Login = () => {
                   <span>{loading ? 'Authenticating Candidate...' : 'Sign In to Candidate Portal 🚀'}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
-
-                <div className="pt-2 border-t border-gray-100 dark:border-dark-border">
-                  <button
-                    type="button"
-                    onClick={() => login('student@placement.com', '9876543210', 'password123', false).then(() => navigate('/resume-analyzer'))}
-                    className="w-full py-3 rounded-xl bg-brand-purple/10 text-brand-purple font-extrabold text-xs hover:bg-brand-purple/20 transition-all flex items-center justify-center gap-2"
-                  >
-                    <Zap className="w-4 h-4 text-amber-500 fill-amber-500" />
-                    <span>⚡ 1-Click Direct Candidate Access</span>
-                  </button>
-                </div>
               </form>
             )}
 

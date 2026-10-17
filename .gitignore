@@ -14,3 +14,4 @@ mongodb_data/
 *.tmp
 *.msi
 .vscode/
+.agents/.gsd-staging/

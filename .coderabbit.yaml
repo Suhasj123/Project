@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+# CodeRabbit AI Code Review Configuration
+# Repository: https://github.com/Suhasj123/Project.git
+
+language: "en-US"
+early_access: false
+
+reviews:
+  profile: "assertive"
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false
+  review_status: true
+  collapse_walkthrough: false
+  auto_review:
+    enabled: true
+    drafts: false
+    base_branches:
+      - "main"
+      - "master"
+      - "develop"
+
+  path_filters:
+    - "!node_modules/**"
+    - "!**/node_modules/**"
+    - "!dist/**"
+    - "!**/dist/**"
+    - "!build/**"
+    - "!*.log"
+    - "!mongodb_data/**"
+    - "!mongodb_bin/**"
+
+  path_instructions:
+    - path: "backend/**/*.js"
+      instructions: |
+        - Ensure all input from req.body, req.query, and req.params is sanitized to prevent NoSQL injection.
+        - Verify JWT tokens use standard authorization header format ('Bearer <token>').
+        - Check that CORS headers permit configured frontend origins without exposing wildcard '*' in credentialed endpoints.
+        - Ensure error handlers do not leak sensitive stack traces or internal server details.
+        - Verify passwords are never logged or stored in plain text (must use bcrypt hashing).
+
+    - path: "frontend/src/**/*.jsx"
+      instructions: |
+        - Verify proper cleanup of Web Speech API instances, audio contexts, and timers in useEffect hooks.
+        - Ensure responsive design with Tailwind CSS dark mode compatibility.
+        - Validate form inputs before API submission.
+        - Avoid unnecessary re-renders and adhere to Ponytail minimal-code principles.
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  opt_out: false
+  learnings:
+    scope: "auto"
