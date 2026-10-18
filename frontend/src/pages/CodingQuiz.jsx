@@ -424,7 +424,7 @@ export const CodingQuiz = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-16">
+    <div className="quiz-stage-background max-w-4xl mx-auto space-y-8 pb-16">
       {/* Step-by-Step Placement Stepper */}
       <PlacementStepper currentStep={3} />
 

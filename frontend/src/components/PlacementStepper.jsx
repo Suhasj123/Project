@@ -5,8 +5,8 @@ import { FileText, Zap, Sparkles, Building2, CheckCircle2, ArrowRight } from 'lu
 export const PlacementStepper = ({ currentStep, currentStage }) => {
   const activeStep = currentStep || currentStage || 1;
   const steps = [
-    { number: 1, label: '1. Resume ATS Audit', path: '/resume-analyzer', icon: FileText, desc: 'Upload & Role Audit' },
-    { number: 2, label: '2. Quick Screener', path: '/quick-assessment/resume', icon: Zap, desc: 'Candidate Self-Check' },
+    { number: 1, label: '1. Resume ATS & Quick Scan', path: '/resume-analyzer', icon: FileText, desc: 'Single Upload & Audit' },
+    { number: 2, label: '2. Aptitude Screener', path: '/quick-assessment/resume', icon: Zap, desc: 'Candidate Screener' },
     { number: 3, label: '3. AI Mock Interview', path: '/ai-mock-interview', icon: Sparkles, desc: 'Voice AI Practice' },
     { number: 4, label: '4. Company Hub & PDFs', path: '/company-prep', icon: Building2, desc: '16 Recruiters & Qs' }
   ];
