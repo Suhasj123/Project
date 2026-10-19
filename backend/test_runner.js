@@ -55,10 +55,12 @@ async function runTests() {
   app.use('/api/sdlc', sdlcRoutes);
 
   const PORT = 5099;
-  const server = app.listen(PORT);
-  console.log(`[Test Server] Running on http://localhost:${PORT}`);
+  const server = await new Promise((resolve) => {
+    const s = app.listen(PORT, '127.0.0.1', () => resolve(s));
+  });
+  console.log(`[Test Server] Running on http://127.0.0.1:${PORT}`);
 
-  const baseUrl = `http://localhost:${PORT}`;
+  const baseUrl = `http://127.0.0.1:${PORT}`;
 
   let passed = 0;
   let failed = 0;
