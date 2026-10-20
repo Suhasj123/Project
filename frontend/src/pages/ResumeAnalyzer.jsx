@@ -206,15 +206,6 @@ export const ResumeAnalyzer = () => {
               </p>
             </div>
           </div>
-
-          <button
-            type="button"
-            onClick={() => navigate('/quick-assessment/aptitude-screener?sessionId=qsess_demo')}
-            className="btn-gradient px-4 py-2 rounded-xl font-bold text-xs shadow-md shrink-0 flex items-center gap-1.5"
-          >
-            <span>Jump to Screener</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
         </div>
       )}
 
