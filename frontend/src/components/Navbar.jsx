@@ -61,12 +61,12 @@ export const Navbar = () => {
     navLinks = [
       { name: 'Resume Screener & ATS', path: '/resume-analyzer', icon: FileText },
       { name: 'Prep Dashboard', path: '/prep-dashboard', icon: LayoutDashboard },
-      { name: 'Top 50-100 IT Companies 🏢', path: '/company-directory', icon: Building2 },
       { name: 'Aptitude Assessment', path: '/aptitude-quiz', icon: BookOpen },
       { name: 'Coding Challenge', path: '/coding-quiz', icon: Code2 },
       { name: 'AI Mock Interview', path: '/ai-mock-interview', icon: Brain },
       { name: 'Performance Analytics', path: '/progress', icon: BarChart3 },
       { name: 'Leaderboard', path: '/leaderboard', icon: Award },
+      { name: 'IT Companies 🏢', path: '/company-directory', icon: Building2 },
       { name: 'ATS Resume Creation 📄', path: '/resume-builder', icon: FileCheck }
     ];
   }

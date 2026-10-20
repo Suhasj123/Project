@@ -453,7 +453,7 @@ export const CompanyDirectory = () => {
         </div>
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-black uppercase tracking-wider">
           <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-          <span>TOP 50-100 IT COMPANIES CAREER DIRECTORY</span>
+          <span>IT COMPANIES CAREER DIRECTORY</span>
         </div>
         <h1 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">
           Top Companies Hiring & Placement Intelligence
