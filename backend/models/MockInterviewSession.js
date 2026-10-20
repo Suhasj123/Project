@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const mockInterviewSessionSchema = new mongoose.Schema({
+  _id: { type: String },
   candidateId: { type: String, required: true },
   role: { type: String, default: 'Software Engineer' },
   type: { type: String, enum: ['Behavioral', 'Technical', 'System Design'], default: 'Technical' },
