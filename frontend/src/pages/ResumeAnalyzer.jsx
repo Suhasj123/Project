@@ -185,29 +185,6 @@ export const ResumeAnalyzer = () => {
         </div>
       </div>
 
-      {/* Active Single-Upload Verified Resume Banner */}
-      {isAttached && (
-        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 animate-fadeIn">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-bold shrink-0 shadow-sm">
-              <CheckCircle2 className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-xs text-emerald-800 dark:text-emerald-300">
-                  Active Verified Resume Attached
-                </span>
-                <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-[10px] font-black uppercase">
-                  Single-Upload Active
-                </span>
-              </div>
-              <p className="text-[11px] text-gray-600 dark:text-gray-300 mt-0.5">
-                {attachedFileName ? attachedFileName : 'Attached candidate resume'}. Stored and auto-propagated across all placement stages.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Upload & JD Input Form */}
       <div className="glass-card p-8 space-y-6">
