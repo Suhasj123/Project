@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
       setUser(userObj);
       return { success: true, user: userObj };
     } catch (err) {
-      const msg = err.response?.data?.message || 'Login failed. Please check your credentials and server connection.';
+      const msg = err.response?.data?.message || (err.message === 'Network Error' ? 'Cannot connect to backend server. Please verify backend is running on port 5000.' : err.message) || 'Login failed. Please check your credentials and server connection.';
       return { success: false, message: msg };
     }
   };
@@ -86,7 +86,7 @@ export const AuthProvider = ({ children }) => {
         message: res.data.message || 'Registration successful. Please log in.'
       };
     } catch (err) {
-      const msg = err.response?.data?.message || 'Registration failed. Please try again.';
+      const msg = err.response?.data?.message || (err.message === 'Network Error' ? 'Cannot connect to backend server. Please verify backend is running on port 5000.' : err.message) || 'Registration failed. Please try again.';
       return { success: false, message: msg };
     }
   };
