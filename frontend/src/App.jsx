@@ -23,6 +23,7 @@ import { AdminPanel } from './pages/AdminPanel';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { ForgotPassword } from './pages/ForgotPassword';
+import { ResetPassword } from './pages/ResetPassword';
 import { RecruiterDashboard } from './pages/RecruiterDashboard';
 import { AIMockInterview } from './pages/AIMockInterview';
 import { PrepDashboard } from './pages/PrepDashboard';
@@ -39,7 +40,7 @@ import { IncrementalModel } from './pages/IncrementalModel';
 const AppContent = () => {
   const { user } = useAuth();
   const location = useLocation();
-  const isSidebarVisible = user && location.pathname !== '/login' && location.pathname !== '/register' && location.pathname !== '/forgot-password';
+  const isSidebarVisible = user && location.pathname !== '/login' && location.pathname !== '/register' && location.pathname !== '/forgot-password' && location.pathname !== '/reset-password';
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-dark-text transition-colors duration-200">
@@ -52,6 +53,7 @@ const AppContent = () => {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
 
                     {/* Quick Assessment Routes (Direct 0-OTP Candidate Flow) */}
                     <Route path="/quick-assessment" element={<ProtectedRoute><QuickAssessmentResume /></ProtectedRoute>} />

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  phone: { type: String, default: '' },
+  name: { type: String, required: true, trim: true },
+  email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+  phone: { type: String, default: '', trim: true },
   password: { type: String, required: true },
-  role: { type: String, enum: ['candidate', 'student', 'recruiter', 'admin'], default: 'candidate' },
+  role: { type: String, enum: ['candidate', 'student', 'recruiter', 'admin'], default: 'student' },
   targetRole: { type: String, default: 'Software Engineer' },
   appliedJobRole: { type: String, default: 'Software Engineer' },
   skills: [{ type: String }],
@@ -20,6 +20,8 @@ const userSchema = new mongoose.Schema({
   strongTopics: [{ type: String }],
   achievements: [{ type: String }],
   applicationStatus: { type: String, enum: ['Applied', 'Aptitude Completed', 'Coding Completed', 'Interview Scheduled', 'Interview Completed', 'Hired', 'Rejected', 'On Hold'], default: 'Applied' },
+  resetPasswordToken: { type: String, default: undefined },
+  resetPasswordExpire: { type: Date, default: undefined },
   createdAt: { type: Date, default: Date.now }
 });
 

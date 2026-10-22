@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
@@ -11,57 +11,104 @@ import {
   ShieldCheck,
   UserCheck,
   ArrowRight,
-  Sparkles
+  Sparkles,
+  Eye,
+  EyeOff,
+  AlertCircle,
+  CheckCircle2
 } from 'lucide-react';
 
 export const Login = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const initialMode = queryParams.get('mode') === 'admin' ? 'admin' : 'candidate';
+  const isRegisteredSuccess = queryParams.get('registered') === 'true';
 
   const [loginMode, setLoginMode] = useState(initialMode); // 'candidate' or 'admin'
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [adminPassword, setAdminPassword] = useState('');
-  
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState(
+    isRegisteredSuccess ? 'Registration successful. Please log in.' : ''
+  );
   const [loading, setLoading] = useState(false);
 
   const { login } = useAuth();
   const { addToast } = useToast();
   const navigate = useNavigate();
 
-  // Direct Candidate Sign In (NO OTP, NO CODE REQUIRED)
-  const handleCandidateSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!email) {
-      addToast('Please enter your Email Address.', 'warning');
-      return;
+  useEffect(() => {
+    if (isRegisteredSuccess) {
+      addToast('Registration successful. Please log in.', 'success');
     }
+  }, [isRegisteredSuccess]);
 
-    setLoading(true);
-    const success = await login(email.trim(), phone.trim() || '9876543210', password.trim() || 'password123', false);
-    setLoading(false);
-
-    if (success) {
-      addToast('Welcome to Candidate Portal! 🚀', 'success');
-      navigate('/resume-analyzer');
-    }
+  // Phone input sanitizer: only digits, max 10
+  const handlePhoneChange = (e) => {
+    const numericOnly = e.target.value.replace(/\D/g, '').slice(0, 10);
+    setPhone(numericOnly);
+    if (errorMessage) setErrorMessage('');
   };
 
-  // Direct Admin Sign In (NO OTP, NO CODE REQUIRED)
-  const handleAdminSubmit = async (e) => {
+  const validateInputs = () => {
+    if (!email || !email.trim()) {
+      setErrorMessage('Please enter your email address.');
+      addToast('Please enter your email address.', 'warning');
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      setErrorMessage('Please enter a valid email address format.');
+      addToast('Please enter a valid email address format.', 'warning');
+      return false;
+    }
+
+    if (!password) {
+      setErrorMessage('Please enter your password.');
+      addToast('Please enter your password.', 'warning');
+      return false;
+    }
+
+    if (phone && phone.trim().length > 0 && phone.trim().length !== 10) {
+      setErrorMessage('Phone number must contain exactly 10 digits (0-9).');
+      addToast('Phone number must contain exactly 10 digits.', 'warning');
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
+    setSuccessMessage('');
+
+    if (!validateInputs()) return;
 
     setLoading(true);
-    const adminEmail = email.trim() || 'suhasjsuhasj505@gmail.com';
-    const success = await login(adminEmail, '9876543210', adminPassword || 'admin12345', true);
+    const result = await login(
+      email.trim(),
+      password,
+      phone.trim(),
+      loginMode
+    );
     setLoading(false);
 
-    if (success) {
-      addToast('Admin Control Console Authenticated! 🛡️', 'success');
-      navigate('/admin');
+    if (result.success) {
+      const userRole = result.user?.role;
+      if (userRole === 'admin') {
+        addToast(`Admin Control Console Authenticated! 🛡️`, 'success');
+        navigate('/admin');
+      } else {
+        addToast(`Welcome to Candidate Portal! 🚀`, 'success');
+        navigate('/resume-analyzer');
+      }
+    } else {
+      setErrorMessage(result.message);
+      addToast(result.message, 'error');
     }
   };
 
@@ -69,7 +116,7 @@ export const Login = () => {
     <div className="max-w-6xl mx-auto py-8 md:py-16 px-4">
       <div className="grid md:grid-cols-12 gap-8 items-center">
         
-        {/* Left Column: Visme.co Interactive Presentation Showcase */}
+        {/* Left Column: Presentation Showcase */}
         <div className="md:col-span-6 space-y-8 hidden md:block">
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-black uppercase tracking-wider animate-float-slow">
@@ -101,7 +148,7 @@ export const Login = () => {
             <LottieAnimationPlayer animationType="aiBrain" className="w-32 h-32 shrink-0 z-10" />
           </div>
 
-          {/* Visme Infographic Metric Cards Grid */}
+          {/* Infographic Metric Cards Grid */}
           <div className="grid grid-cols-3 gap-4">
             <div className="visme-card p-4 text-center space-y-1">
               <span className="text-2xl font-black text-brand-purple">98.4%</span>
@@ -120,7 +167,7 @@ export const Login = () => {
           </div>
         </div>
 
-        {/* Right Column: Visme-Card Glassmorphism Login Card */}
+        {/* Right Column: Glassmorphism Login Card */}
         <div className="md:col-span-6 max-w-md w-full mx-auto">
           <div className="visme-card p-8 md:p-10 space-y-6 shadow-2xl">
             
@@ -135,9 +182,24 @@ export const Login = () => {
               <p className="text-xs text-gray-500">
                 {loginMode === 'admin'
                   ? 'Access candidate master directory, question banks, and placement analytics.'
-                  : 'Enter your credentials to access the AI placement preparation portal directly.'}
+                  : 'Enter your registered credentials to access the AI placement preparation portal.'}
               </p>
             </div>
+
+            {/* Success or Error Feedback Alerts */}
+            {successMessage && (
+              <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-bold flex items-center gap-2 animate-fadeIn">
+                <CheckCircle2 className="w-4 h-4 shrink-0" />
+                <span>{successMessage}</span>
+              </div>
+            )}
+
+            {errorMessage && (
+              <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-bold flex items-center gap-2 animate-fadeIn">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{errorMessage}</span>
+              </div>
+            )}
 
             {/* Dual Mode Switcher Tabs */}
             <div className="grid grid-cols-2 p-1.5 bg-gray-100 dark:bg-dark-border/40 rounded-2xl text-xs font-bold">
@@ -145,8 +207,7 @@ export const Login = () => {
                 type="button"
                 onClick={() => {
                   setLoginMode('candidate');
-                  setEmail('student@placement.com');
-                  generateNewCaptcha();
+                  setErrorMessage('');
                 }}
                 className={`py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 ${
                   loginMode === 'candidate'
@@ -162,8 +223,7 @@ export const Login = () => {
                 type="button"
                 onClick={() => {
                   setLoginMode('admin');
-                  setEmail('suhasjsuhasj505@gmail.com');
-                  generateNewCaptcha();
+                  setErrorMessage('');
                 }}
                 className={`py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 ${
                   loginMode === 'admin'
@@ -176,110 +236,117 @@ export const Login = () => {
               </button>
             </div>
 
-            {/* 1. Candidate Direct Sign In Flow (NO OTP) */}
-            {loginMode === 'candidate' && (
-              <form onSubmit={handleCandidateSubmit} className="space-y-4 text-xs">
-                <div>
-                  <label className="font-bold text-gray-500 mb-1 block">Email Address</label>
-                  <div className="relative">
-                    <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="student@placement.com"
-                      className="w-full pl-10 p-3.5 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-purple font-semibold"
-                      required
-                    />
-                  </div>
+            {/* Unified Credentials Form */}
+            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+              
+              {/* Email Address */}
+              <div>
+                <label className="font-bold text-gray-700 dark:text-gray-300 mb-1 block">
+                  {loginMode === 'admin' ? 'Admin Master Email' : 'Email Address'}
+                </label>
+                <div className="relative">
+                  <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (errorMessage) setErrorMessage('');
+                    }}
+                    placeholder={loginMode === 'admin' ? 'admin@interviewpro.ai' : 'student@example.com'}
+                    className="w-full pl-10 pr-3.5 py-3 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-purple font-semibold"
+                    required
+                  />
                 </div>
+              </div>
 
+              {/* Optional Phone Number (Visible for candidate mode) */}
+              {loginMode === 'candidate' && (
                 <div>
-                  <label className="font-bold text-gray-500 mb-1 block">Phone Number (Optional)</label>
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="font-bold text-gray-700 dark:text-gray-300 block">
+                      Phone Number (Optional)
+                    </label>
+                    <span className="text-[10px] text-gray-400">10 digits</span>
+                  </div>
                   <div className="relative">
                     <Phone className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
                     <input
                       type="tel"
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="+91 98765 43210"
-                      className="w-full pl-10 p-3.5 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg text-gray-900 dark:text-white focus:outline-none font-semibold"
+                      onChange={handlePhoneChange}
+                      placeholder="9876543210"
+                      maxLength={10}
+                      className="w-full pl-10 pr-3.5 py-3 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-purple font-semibold"
                     />
                   </div>
+                  {phone.length > 0 && phone.length < 10 && (
+                    <span className="text-[10px] text-amber-500 font-medium mt-1 block">
+                      {10 - phone.length} more digit{10 - phone.length > 1 ? 's' : ''} needed
+                    </span>
+                  )}
                 </div>
+              )}
 
-                <div>
-                  <label className="font-bold text-gray-500 mb-1 block">Password</label>
-                  <div className="relative">
-                    <Lock className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
-                    <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••••••"
-                      className="w-full pl-10 p-3.5 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg text-gray-900 dark:text-white focus:outline-none font-semibold"
-                    />
-                  </div>
+              {/* Password Field with Eye Visibility Control */}
+              <div>
+                <div className="flex justify-between items-center mb-1">
+                  <label className="font-bold text-gray-700 dark:text-gray-300 block">Password</label>
+                  <Link
+                    to="/forgot-password"
+                    className="text-[11px] text-brand-purple hover:underline font-bold"
+                  >
+                    Forgot Password?
+                  </Link>
                 </div>
-
-
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="btn-gradient w-full py-3.5 rounded-xl font-extrabold text-xs shadow-lg hover:scale-[1.01] transition-all flex items-center justify-center gap-2 mt-2"
-                >
-                  <span>{loading ? 'Authenticating Candidate...' : 'Sign In to Candidate Portal 🚀'}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </form>
-            )}
-
-            {/* 2. Admin Direct Login Flow (NO OTP) */}
-            {loginMode === 'admin' && (
-              <form onSubmit={handleAdminSubmit} className="space-y-4 text-xs">
-                <div>
-                  <label className="font-bold text-gray-500 mb-1 block">Admin Master Email</label>
-                  <div className="relative">
-                    <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="suhasjsuhasj505@gmail.com"
-                      className="w-full pl-10 p-3.5 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg text-gray-900 dark:text-white focus:outline-none font-semibold"
-                      required
-                    />
-                  </div>
+                <div className="relative">
+                  <Lock className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      if (errorMessage) setErrorMessage('');
+                    }}
+                    placeholder="Enter your password"
+                    className="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-purple font-semibold"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    className="absolute right-3.5 top-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors p-0.5"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
                 </div>
+              </div>
 
-                <div>
-                  <label className="font-bold text-gray-500 mb-1 block">Admin Password</label>
-                  <div className="relative">
-                    <Lock className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
-                    <input
-                      type="password"
-                      value={adminPassword}
-                      onChange={(e) => setAdminPassword(e.target.value)}
-                      placeholder="••••••••••••"
-                      className="w-full pl-10 p-3.5 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg text-gray-900 dark:text-white focus:outline-none font-semibold"
-                      required
-                    />
-                  </div>
-                </div>
-
-
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="btn-gradient w-full py-3.5 rounded-xl font-extrabold text-xs shadow-lg hover:scale-[1.01] transition-all flex items-center justify-center gap-2 mt-2"
-                >
-                  <ShieldCheck className="w-4 h-4" />
-                  <span>{loading ? 'Authenticating Admin Credentials...' : 'Login to Admin Control Console 🛡️'}</span>
-                </button>
-              </form>
-            )}
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-gradient w-full py-3.5 rounded-xl font-extrabold text-xs shadow-lg hover:scale-[1.01] transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Authenticating Credentials...</span>
+                  </>
+                ) : loginMode === 'admin' ? (
+                  <>
+                    <ShieldCheck className="w-4 h-4" />
+                    <span>Login to Admin Control Console 🛡️</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Sign In to Candidate Portal 🚀</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </form>
 
             {/* Footer Registration Redirect */}
             <div className="text-center pt-2 border-t border-gray-100 dark:border-dark-border">

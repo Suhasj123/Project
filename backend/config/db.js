@@ -29,29 +29,31 @@ const autoSeedIfEmpty = async () => {
       console.log(`[Database] Seeded ${seedAchievements.length} Achievements into MongoDB.`);
     }
 
-    const uCount = await User.countDocuments();
-    if (uCount === 0) {
-      const salt = await bcrypt.genSalt(10);
-      const adminHash = await bcrypt.hash('admin12345', salt);
-      const studentHash = await bcrypt.hash('password123', salt);
+    const salt = await bcrypt.genSalt(10);
+    const adminUser = await User.findOne({ email: 'suhasjsuhasj505@gmail.com' });
+    if (!adminUser) {
+      const adminHash = await bcrypt.hash(process.env.ADMIN_DEFAULT_PASSWORD || 'AdminMaster2026!', salt);
+      await User.create({
+        name: 'Suhas Admin',
+        email: 'suhasjsuhasj505@gmail.com',
+        password: adminHash,
+        role: 'admin',
+        targetRole: 'System Administrator'
+      });
+      console.log('[Database] Ensured Default Admin user exists in MongoDB.');
+    }
 
-      await User.create([
-        {
-          name: 'Suhas Admin',
-          email: 'suhasjsuhasj505@gmail.com',
-          password: adminHash,
-          role: 'admin',
-          targetRole: 'System Administrator'
-        },
-        {
-          name: 'Student Candidate',
-          email: 'student@placement.com',
-          password: studentHash,
-          role: 'student',
-          targetRole: 'Software Engineer'
-        }
-      ]);
-      console.log('[Database] Seeded Default Admin and Student Users into MongoDB.');
+    const studentUser = await User.findOne({ email: 'student@placement.com' });
+    if (!studentUser) {
+      const studentHash = await bcrypt.hash('Student2026!', salt);
+      await User.create({
+        name: 'Student Candidate',
+        email: 'student@placement.com',
+        password: studentHash,
+        role: 'student',
+        targetRole: 'Software Engineer'
+      });
+      console.log('[Database] Ensured Default Student user exists in MongoDB.');
     }
   } catch (err) {
     console.warn('[Database Seed Notice]', err.message);

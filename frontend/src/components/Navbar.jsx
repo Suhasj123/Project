@@ -35,7 +35,7 @@ export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // If user is not logged in or on login/auth pages, DO NOT display the navigation header/sidebar
-  if (!user || location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/forgot-password') {
+  if (!user || location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/forgot-password' || location.pathname === '/reset-password') {
     return null;
   }
 
