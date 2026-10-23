@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
+// Disable command buffering so queries fail immediately if MongoDB is not connected
+mongoose.set('bufferCommands', false);
+
 let isMockMode = false;
 
 const autoSeedIfEmpty = async () => {

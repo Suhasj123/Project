@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+const mongoose = require('mongoose');
 const User = require('../models/User');
 const { sendCandidateEmail } = require('../services/emailService');
 
@@ -84,6 +85,12 @@ exports.registerUser = async (req, res) => {
       return res.status(400).json({ message: 'Password and confirm password do not match.' });
     }
 
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({
+        message: 'MongoDB database is not connected. In Vercel Project Settings, add MONGODB_URI (e.g. MongoDB Atlas).'
+      });
+    }
+
     // Check if email already registered in MongoDB
     const existingUser = await User.findOne({ email: cleanEmail });
     if (existingUser) {
@@ -158,6 +165,12 @@ exports.loginUser = async (req, res) => {
       if (phoneValidation !== true) {
         return res.status(400).json({ message: phoneValidation });
       }
+    }
+
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({
+        message: 'MongoDB database is not connected. In Vercel Project Settings, add MONGODB_URI (e.g. MongoDB Atlas).'
+      });
     }
 
     // 1. Look up existing registered user record in MongoDB
