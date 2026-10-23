@@ -20,11 +20,11 @@ export const ProtectedRoute = ({ children, adminOnly = false, adminOrRecruiterOn
     return <Navigate to={adminOnly ? "/login?mode=admin" : "/login"} replace />;
   }
 
-  if (adminOnly && user.role !== 'admin' && user.email !== 'suhasjsuhasj505@gmail.com') {
+  if (adminOnly && user.role !== 'admin' && user.email !== 'suhasjsuhasj505@gmail.com' && user.email !== 'suhasjsuhasj123@gmail.com') {
     return <Navigate to="/login?mode=admin" replace />;
   }
 
-  if (adminOrRecruiterOnly && user.role !== 'admin' && user.role !== 'recruiter' && user.email !== 'suhasjsuhasj505@gmail.com') {
+  if (adminOrRecruiterOnly && user.role !== 'admin' && user.role !== 'recruiter' && user.email !== 'suhasjsuhasj505@gmail.com' && user.email !== 'suhasjsuhasj123@gmail.com') {
     return <Navigate to="/login?mode=admin" replace />;
   }
 

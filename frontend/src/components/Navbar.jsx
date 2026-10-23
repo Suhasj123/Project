@@ -39,12 +39,12 @@ export const Navbar = () => {
     return null;
   }
 
-  const isAdminMode = user.role === 'admin' || user.email === 'suhasjsuhasj505@gmail.com' || localStorage.getItem('prep_ai_admin_mode') === 'true';
+  const isAdminMode = user.role === 'admin' || user.email === 'suhasjsuhasj505@gmail.com' || user.email === 'suhasjsuhasj123@gmail.com' || localStorage.getItem('prep_ai_admin_mode') === 'true';
 
   // Construct Role-Specific Navigation Sidebar Panels
   let navLinks = [];
 
-  if (user.role === 'admin' || user.email === 'suhasjsuhasj505@gmail.com') {
+  if (user.role === 'admin' || user.email === 'suhasjsuhasj505@gmail.com' || user.email === 'suhasjsuhasj123@gmail.com') {
     // Admin Login Panels — Explicit Admin Management Features Only
     navLinks = [
       { name: 'Admin Console Hub', path: '/admin', icon: ShieldAlert },

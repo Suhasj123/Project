@@ -43,6 +43,13 @@ const autoSeedIfEmpty = async () => {
       console.log('[Database] Ensured Default Admin user exists in MongoDB.');
     }
 
+    const adminUser2 = await User.findOne({ email: 'suhasjsuhasj123@gmail.com' });
+    if (adminUser2 && adminUser2.role !== 'admin') {
+      adminUser2.role = 'admin';
+      await adminUser2.save();
+      console.log('[Database] Promoted suhasjsuhasj123@gmail.com to Admin role.');
+    }
+
     const studentUser = await User.findOne({ email: 'student@placement.com' });
     if (!studentUser) {
       const studentHash = await bcrypt.hash('Student2026!', salt);

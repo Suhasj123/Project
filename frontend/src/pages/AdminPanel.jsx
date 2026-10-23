@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import API from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import {
   ShieldAlert,
@@ -18,6 +19,7 @@ import {
 } from 'lucide-react';
 
 export const AdminPanel = () => {
+  const { user: currentUser } = useAuth();
   const [activeTab, setActiveTab] = useState('analytics'); // analytics, users, questions, coding, reports, aiSettings, logs
   const [analytics, setAnalytics] = useState(null);
   const [usersList, setUsersList] = useState([]);
@@ -159,7 +161,7 @@ export const AdminPanel = () => {
           </div>
           <div>
             <h1 className="text-2xl font-extrabold text-gray-900 dark:text-white">Admin Control Console</h1>
-            <p className="text-xs text-gray-500">Authorized Administrator: <strong className="text-brand-purple">suhasjsuhasj505@gmail.com</strong></p>
+            <p className="text-xs text-gray-500">Authorized Administrator: <strong className="text-brand-purple">{currentUser?.email || 'suhasjsuhasj123@gmail.com'}</strong></p>
           </div>
         </div>
 
@@ -314,7 +316,7 @@ export const AdminPanel = () => {
                         <span>View Full Resume & Dossier 📄</span>
                       </button>
 
-                      {user.email !== 'suhasjsuhasj505@gmail.com' && (
+                      {user.email !== 'suhasjsuhasj505@gmail.com' && user.email !== 'suhasjsuhasj123@gmail.com' && (
                         <button
                           onClick={() => handleDeleteUser(user._id)}
                           className="p-2 rounded-xl text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition"
