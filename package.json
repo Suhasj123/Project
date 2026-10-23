@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "AI-Powered Interview Preparation & Assessment System with GSD, Ralph Loop, Ponytail, and CodeRabbit",
   "scripts": {
+    "start": "node backend/server.js",
     "gsd": "gsd-core",
     "ralph": "powershell -ExecutionPolicy Bypass -File ./ralph.ps1",
     "ralph:bash": "bash ./ralph.sh",
@@ -13,7 +14,19 @@
     "dev:frontend": "npm --prefix frontend run dev"
   },
   "dependencies": {
-    "hyperspace": "^3.19.0"
+    "@google/generative-ai": "^0.14.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.7.1",
+    "helmet": "^8.3.0",
+    "hyperspace": "^3.19.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^10.1.2",
+    "openai": "^4.52.0"
   },
   "devDependencies": {
     "@dietrichgebert/ponytail": "^5.3.2",

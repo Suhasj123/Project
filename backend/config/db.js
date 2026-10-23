@@ -67,42 +67,66 @@ const autoSeedIfEmpty = async () => {
   }
 };
 
+let cached = global.mongooseCache;
+if (!cached) {
+  cached = global.mongooseCache = { conn: null, promise: null };
+}
+
 const connectDB = async () => {
+  // If already connected, return cached connection
+  if (cached.conn && mongoose.connection.readyState >= 1) {
+    return cached.conn;
+  }
+
   const envUri = process.env.MONGODB_URI || '';
   const isPlaceholder = envUri.includes('<YOUR_PASSWORD>') || envUri.includes('<password>');
   const localUri = 'mongodb://127.0.0.1:27017/ai_interview_prep';
 
-  // Strategy 1: Try Atlas URI if valid and not a placeholder
+  // Strategy 1: Try Atlas / remote URI if configured
   if (envUri && !isPlaceholder) {
     try {
-      const conn = await mongoose.connect(envUri, {
-        serverSelectionTimeoutMS: 3000
-      });
-      console.log(`[Database] MongoDB Atlas Connected: ${conn.connection.host}`);
+      if (!cached.promise) {
+        cached.promise = mongoose.connect(envUri, {
+          serverSelectionTimeoutMS: 5000,
+          bufferCommands: false
+        }).then(m => m);
+      }
+      cached.conn = await cached.promise;
+      console.log(`[Database] MongoDB Atlas Connected: ${cached.conn.connection.host}`);
       isMockMode = false;
       await autoSeedIfEmpty();
-      return;
+      return cached.conn;
     } catch (err) {
+      cached.promise = null;
       console.warn(`[Database Warning] Atlas connection attempt failed: ${err.message}`);
     }
   } else if (isPlaceholder) {
     console.warn(`[Database Warning] MONGODB_URI in .env contains placeholder '<YOUR_PASSWORD>'.`);
   }
 
-  // Strategy 2: Try Local MongoDB
-  try {
-    const conn = await mongoose.connect(localUri, {
-      serverSelectionTimeoutMS: 2000
-    });
-    console.log(`[Database] Local MongoDB Connected: ${conn.connection.host}`);
-    isMockMode = false;
-    await autoSeedIfEmpty();
-    return;
-  } catch (localErr) {
-    // Both Atlas and Local MongoDB unavailable
+  // Strategy 2: Try Local MongoDB (only when running locally, skip on Vercel)
+  if (!process.env.VERCEL) {
+    try {
+      if (!cached.promise) {
+        cached.promise = mongoose.connect(localUri, {
+          serverSelectionTimeoutMS: 2000,
+          bufferCommands: false
+        }).then(m => m);
+      }
+      cached.conn = await cached.promise;
+      console.log(`[Database] Local MongoDB Connected: ${cached.conn.connection.host}`);
+      isMockMode = false;
+      await autoSeedIfEmpty();
+      return cached.conn;
+    } catch (localErr) {
+      cached.promise = null;
+      isMockMode = true;
+      console.warn(`[Database Warning] Local MongoDB on 127.0.0.1:27017 is not running (${localErr.message}).`);
+      console.log(`[Database Info] Operating in Hybrid In-Memory Fallback Mode with full pre-seeded dataset.`);
+    }
+  } else {
     isMockMode = true;
-    console.warn(`[Database Warning] Local MongoDB on 127.0.0.1:27017 is not running (${localErr.message}).`);
-    console.log(`[Database Info] Operating in Hybrid In-Memory Fallback Mode with full pre-seeded dataset.`);
+    console.warn(`[Database Notice] Running on Vercel Serverless. Set MONGODB_URI in Vercel environment variables for database persistence.`);
   }
 };
 

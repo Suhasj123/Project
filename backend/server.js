@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -43,6 +44,18 @@ app.disable('x-powered-by');
 // Connect to MongoDB
 connectDB();
 
+// Ensure database is connected for each incoming request (vital for Vercel serverless cold starts)
+app.use(async (req, res, next) => {
+  try {
+    if (mongoose.connection.readyState !== 1) {
+      await connectDB();
+    }
+  } catch (err) {
+    console.warn('[DB Middleware Notice]', err.message);
+  }
+  next();
+});
+
 // 2. Apply Security Headers via Helmet
 app.use(securityHeaders);
 
@@ -58,6 +71,18 @@ app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 
 // 6. NoSQL Injection & Payload Sanitization
 app.use(sanitizeInput);
+
+// Root API Welcome & Health Route (Public)
+app.get('/', (req, res) => {
+  res.json({
+    status: 'online',
+    app: 'InterviewPro - Full-Stack Online Hiring & Assessment Platform API',
+    health: '/api/health',
+    environment: process.env.NODE_ENV || 'development',
+    serverless: !!process.env.VERCEL,
+    timestamp: new Date()
+  });
+});
 
 // Healthcheck Route (Public)
 app.get('/api/health', (req, res) => {
@@ -124,21 +149,25 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
-  console.log(`=======================================================`);
-  console.log(` 🚀 AI Interview Prep Server running on port ${PORT}`);
-  console.log(` 🌐 Healthcheck: http://localhost:${PORT}/api/health`);
-  console.log(` 🛡️  Security headers, rate limiting, and CORS enabled`);
-  console.log(`=======================================================`);
-});
+module.exports = app;
 
-server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error(`\n⚠️  Port ${PORT} is already in use by another running instance.`);
-    console.log(`👉 The server is ALREADY running and healthy at http://localhost:${PORT}`);
-    console.log(`👉 You do not need to run another terminal. Just open your browser at http://localhost:3000\n`);
-  } else {
-    console.error('[Server Error]', err);
-  }
-});
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 5000;
+  const server = app.listen(PORT, () => {
+    console.log(`=======================================================`);
+    console.log(` 🚀 AI Interview Prep Server running on port ${PORT}`);
+    console.log(` 🌐 Healthcheck: http://localhost:${PORT}/api/health`);
+    console.log(` 🛡️  Security headers, rate limiting, and CORS enabled`);
+    console.log(`=======================================================`);
+  });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`\n⚠️  Port ${PORT} is already in use by another running instance.`);
+      console.log(`👉 The server is ALREADY running and healthy at http://localhost:${PORT}`);
+      console.log(`👉 You do not need to run another terminal. Just open your browser at http://localhost:3000\n`);
+    } else {
+      console.error('[Server Error]', err);
+    }
+  });
+}
