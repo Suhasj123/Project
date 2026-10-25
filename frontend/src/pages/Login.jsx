@@ -21,10 +21,9 @@ import {
 export const Login = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const initialMode = queryParams.get('mode') === 'admin' ? 'admin' : 'candidate';
   const isRegisteredSuccess = queryParams.get('registered') === 'true';
 
-  const [loginMode, setLoginMode] = useState(initialMode); // 'candidate' or 'admin'
+  const [loginMode] = useState('candidate'); // Dedicated Candidate Portal mode
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -179,15 +178,13 @@ export const Login = () => {
             {/* Header Icon & Title */}
             <div className="text-center space-y-2">
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white mx-auto flex items-center justify-center shadow-lg">
-                {loginMode === 'admin' ? <ShieldCheck className="w-7 h-7" /> : <Brain className="w-7 h-7" />}
+                <Brain className="w-7 h-7" />
               </div>
               <h2 className="text-2xl font-black text-gray-900 dark:text-white">
-                {loginMode === 'admin' ? 'Admin Control Login' : 'Candidate Portal Access'}
+                Candidate Portal Access
               </h2>
               <p className="text-xs text-gray-500">
-                {loginMode === 'admin'
-                  ? 'Access candidate master directory, question banks, and placement analytics.'
-                  : 'Enter your registered credentials to access the AI placement preparation portal.'}
+                Enter your registered credentials to access the AI placement preparation portal.
               </p>
             </div>
 
@@ -206,39 +203,10 @@ export const Login = () => {
               </div>
             )}
 
-            {/* Dual Mode Switcher Tabs */}
-            <div className="grid grid-cols-2 p-1.5 bg-gray-100 dark:bg-dark-border/40 rounded-2xl text-xs font-bold">
-              <button
-                type="button"
-                onClick={() => {
-                  setLoginMode('candidate');
-                  setErrorMessage('');
-                }}
-                className={`py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 ${
-                  loginMode === 'candidate'
-                    ? 'bg-white dark:bg-dark-bg text-brand-purple shadow-md font-extrabold scale-105'
-                    : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'
-                }`}
-              >
-                <UserCheck className="w-4 h-4" />
-                <span>Candidate Portal</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setLoginMode('admin');
-                  setErrorMessage('');
-                }}
-                className={`py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 ${
-                  loginMode === 'admin'
-                    ? 'bg-brand-purple text-white shadow-md font-extrabold scale-105'
-                    : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'
-                }`}
-              >
-                <ShieldCheck className="w-4 h-4" />
-                <span>Admin Console</span>
-              </button>
+            {/* Candidate Portal Badge */}
+            <div className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-2xl bg-brand-purple/10 border border-brand-purple/20 text-brand-purple text-xs font-extrabold shadow-sm">
+              <UserCheck className="w-4 h-4 text-brand-purple" />
+              <span>Candidate Portal</span>
             </div>
 
             {/* Unified Credentials Form */}
@@ -247,7 +215,7 @@ export const Login = () => {
               {/* Email Address */}
               <div>
                 <label className="font-bold text-gray-700 dark:text-gray-300 mb-1 block">
-                  {loginMode === 'admin' ? 'Admin Master Email' : 'Email Address'}
+                  Email Address
                 </label>
                 <div className="relative">
                   <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
@@ -258,7 +226,7 @@ export const Login = () => {
                       setEmail(e.target.value);
                       if (errorMessage) setErrorMessage('');
                     }}
-                    placeholder={loginMode === 'admin' ? 'admin@interviewpro.ai' : 'student@example.com'}
+                    placeholder="student@example.com"
                     className="w-full pl-10 pr-3.5 py-3 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-purple font-semibold"
                     required
                   />
@@ -338,11 +306,6 @@ export const Login = () => {
                   <>
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                     <span>Authenticating Credentials...</span>
-                  </>
-                ) : loginMode === 'admin' ? (
-                  <>
-                    <ShieldCheck className="w-4 h-4" />
-                    <span>Login to Admin Control Console 🛡️</span>
                   </>
                 ) : (
                   <>

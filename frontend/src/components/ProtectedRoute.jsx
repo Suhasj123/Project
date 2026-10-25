@@ -17,7 +17,7 @@ export const ProtectedRoute = ({ children, adminOnly = false, adminOrRecruiterOn
   }
 
   if (!user) {
-    return <Navigate to={adminOnly ? "/login?mode=admin" : "/login"} replace />;
+    return <Navigate to="/login" replace />;
   }
 
   if (adminOnly && user.role !== 'admin' && user.email !== 'suhasjsuhasj505@gmail.com' && user.email !== 'suhasjsuhasj123@gmail.com') {
