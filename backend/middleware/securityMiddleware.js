@@ -146,6 +146,9 @@ const isOriginAllowed = (origin) => {
   // Allow all Vercel deployed frontend origins (project-suhas-3e82.vercel.app, previews, etc.)
   if (/^https:\/\/.*\.vercel\.app$/.test(origin)) return true;
 
+  // Allow all Render deployed origins
+  if (/^https:\/\/.*\.onrender\.com$/.test(origin)) return true;
+
   // In non-production or local environment, automatically allow all localhost & 127.0.0.1 ports
   if (process.env.NODE_ENV !== 'production') {
     const isLocalhost = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);

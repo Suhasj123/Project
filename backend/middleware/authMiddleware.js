@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const User = require('../models/User');
 
 const protect = async (req, res, next) => {
@@ -16,7 +17,13 @@ const protect = async (req, res, next) => {
       const jwtSecret = process.env.JWT_SECRET || 'super_secret_bca_project_jwt_key_2026';
       const decoded = jwt.verify(token, jwtSecret);
 
-      req.user = await User.findById(decoded.id).select('-password');
+      if (mongoose.connection.readyState === 1) {
+        req.user = await User.findById(decoded.id).select('-password');
+      } else if (global.__inMemoryUsers) {
+        req.user = global.__inMemoryUsers.find(
+          u => String(u._id) === String(decoded.id) || u.email === decoded.email
+        );
+      }
 
       if (!req.user) {
         return res.status(401).json({ message: 'User belonging to this token no longer exists.' });

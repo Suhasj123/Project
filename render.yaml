@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: interviewpro-backend
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        value: super_secret_bca_project_jwt_key_2026
+      - key: MONGODB_URI
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://project-suhas-3e82.vercel.app,http://localhost:3000

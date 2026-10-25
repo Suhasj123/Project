@@ -107,8 +107,8 @@ const connectDB = async () => {
     console.warn(`[Database Warning] MONGODB_URI in .env contains placeholder '<YOUR_PASSWORD>'.`);
   }
 
-  // Strategy 2: Try Local MongoDB (only when running locally, skip on Vercel)
-  if (!process.env.VERCEL) {
+  // Strategy 2: Try Local MongoDB (only when running locally, skip on Vercel or Render cloud)
+  if (!process.env.VERCEL && !process.env.RENDER) {
     try {
       if (!cached.promise) {
         cached.promise = mongoose.connect(localUri, {
@@ -129,7 +129,7 @@ const connectDB = async () => {
     }
   } else {
     isMockMode = true;
-    console.warn(`[Database Notice] Running on Vercel Serverless. Set MONGODB_URI in Vercel environment variables for database persistence.`);
+    console.warn(`[Database Notice] Running on Cloud Hosting (Vercel/Render). Set MONGODB_URI in environment variables for database persistence.`);
   }
 };
 
