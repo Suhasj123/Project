@@ -48,69 +48,66 @@ export const Home = () => {
   ];
 
   return (
-    <div className="space-y-20 pb-16">
+    <div className="space-y-12 sm:space-y-20 pb-16 w-full max-w-full min-w-0">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-12 pb-20">
+      <section className="relative overflow-hidden pt-6 sm:pt-12 pb-12 sm:pb-20">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-br from-brand-blue/20 via-brand-purple/20 to-transparent blur-3xl -z-10 rounded-full"></div>
         
-        <div className="max-w-5xl mx-auto text-center space-y-6 px-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-purple/10 border border-brand-purple/30 text-brand-purple text-xs font-semibold">
-            <Sparkles className="w-4 h-4" />
-            <span>AI-Powered Placement Prep Portal for Final-Year Students</span>
+        <div className="max-w-5xl mx-auto text-center space-y-4 sm:space-y-6 px-3 sm:px-4">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-brand-purple/10 border border-brand-purple/30 text-brand-purple text-xs font-semibold">
+            <Sparkles className="w-4 h-4 shrink-0" />
+            <span className="truncate">AI-Powered Placement Prep Portal for Final-Year Students</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
             Master Campus Placements with <br />
             <span className="text-gradient">Personalized AI Mentorship</span>
           </h1>
 
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Everything you need to crack dream job interviews—Aptitude Quizzes, Coding Practice, AI Mock Interviews, Resume ATS Scoring, and Company Guides in one platform.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <Link to="/register" className="btn-gradient px-8 py-4 rounded-2xl font-bold text-base flex items-center gap-2 shadow-xl hover:scale-105 transition-all">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-4 w-full max-w-md sm:max-w-none mx-auto">
+            <Link to="/register" className="btn-gradient px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-xl hover:scale-105 transition-all">
               <span>Start Preparing Free</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-5 h-5 shrink-0" />
             </Link>
-            <Link to="/ai-mock-interview" className="px-8 py-4 rounded-2xl font-bold text-base bg-white dark:bg-dark-card border border-gray-200 dark:border-dark-border text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-dark-border transition-all">
+            <Link to="/ai-mock-interview" className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-bold text-sm sm:text-base bg-white dark:bg-dark-card border border-gray-200 dark:border-dark-border text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-dark-border transition-all flex items-center justify-center text-center">
               Try AI Mock Interview
-            </Link>
-            <Link to="/login?mode=admin" className="px-8 py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-amber-500 to-rose-600 text-white shadow-xl hover:scale-105 transition-all flex items-center gap-2">
-              <span>Admin Login Dashboard 🛡️</span>
             </Link>
           </div>
 
           {/* Quick Metrics Banner */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 border-t border-gray-200 dark:border-dark-border/60 max-w-4xl mx-auto">
-            <div>
-              <div className="text-3xl font-extrabold text-brand-blue">500+</div>
-              <div className="text-xs text-gray-500 font-medium">Placement Questions</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-8 sm:pt-12 border-t border-gray-200 dark:border-dark-border/60 max-w-4xl mx-auto">
+            <div className="p-2">
+              <div className="text-2xl sm:text-3xl font-extrabold text-brand-blue">500+</div>
+              <div className="text-[11px] sm:text-xs text-gray-500 font-medium">Placement Questions</div>
             </div>
-            <div>
-              <div className="text-3xl font-extrabold text-brand-purple">6 Top</div>
-              <div className="text-xs text-gray-500 font-medium">IT Recruiters Covered</div>
+            <div className="p-2">
+              <div className="text-2xl sm:text-3xl font-extrabold text-brand-purple">6 Top</div>
+              <div className="text-[11px] sm:text-xs text-gray-500 font-medium">IT Recruiters Covered</div>
             </div>
-            <div>
-              <div className="text-3xl font-extrabold text-emerald-500">95%</div>
-              <div className="text-xs text-gray-500 font-medium">Viva Satisfaction</div>
+            <div className="p-2">
+              <div className="text-2xl sm:text-3xl font-extrabold text-emerald-500">95%</div>
+              <div className="text-[11px] sm:text-xs text-gray-500 font-medium">Viva Satisfaction</div>
             </div>
-            <div>
-              <div className="text-3xl font-extrabold text-amber-500">24/7</div>
-              <div className="text-xs text-gray-500 font-medium">AI Mentor Assistance</div>
+            <div className="p-2">
+              <div className="text-2xl sm:text-3xl font-extrabold text-amber-500">24/7</div>
+              <div className="text-[11px] sm:text-xs text-gray-500 font-medium">AI Mentor Assistance</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Feature Showcase Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         <div className="text-center space-y-2">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">All-In-One Placement Toolkit</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Structured modules engineered specifically for freshers and job candidates.</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">All-In-One Placement Toolkit</h2>
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Structured modules engineered specifically for freshers and job candidates.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {features.map((f, i) => {
             const Icon = f.icon;
             return (
@@ -129,28 +126,28 @@ export const Home = () => {
       </section>
 
       {/* Separate Dedicated Admin Dashboard Access Banner */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="glass-card p-8 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl border border-indigo-500/30 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+      <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="glass-card p-5 sm:p-8 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl border border-indigo-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6 shadow-2xl">
           <div className="space-y-2">
             <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-extrabold uppercase tracking-wider border border-amber-500/30">
               RECRUITER & ADMIN PORTAL
             </span>
-            <h3 className="text-2xl font-extrabold">Admin Control & Hiring Dashboard</h3>
+            <h3 className="text-xl sm:text-2xl font-extrabold">Admin Control & Hiring Dashboard</h3>
             <p className="text-xs text-indigo-200 max-w-xl">
               Access candidate analytics, evaluation scorecards, question banks, and trigger automated hiring decisions.
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto shrink-0">
             <Link
-              to="/login?mode=admin"
-              className="px-6 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-gray-950 font-black text-xs shadow-lg transition-all flex items-center gap-2"
+              to="/login"
+              className="px-6 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-gray-950 font-black text-xs shadow-lg transition-all flex items-center justify-center gap-2"
             >
               <span>Go to Admin Login 🛡️</span>
             </Link>
             <Link
               to="/recruiter-dashboard"
-              className="px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-xs backdrop-blur-md transition-all flex items-center gap-2 border border-white/20"
+              className="px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-xs backdrop-blur-md transition-all flex items-center justify-center gap-2 border border-white/20 text-center"
             >
               <span>Recruiter Dashboard</span>
             </Link>

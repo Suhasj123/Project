@@ -150,26 +150,27 @@ export const WebcamProctor = ({
       {/* ------------------------------------------------------------- */}
       {/* FLOATING PROCTOR WIDGET (BOTTOM RIGHT) */}
       {/* ------------------------------------------------------------- */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2 pointer-events-auto">
+      <div className="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-1.5 sm:gap-2 pointer-events-auto">
         
         {/* Proctoring Status Pill */}
-        <div className={`px-3 py-1.5 rounded-2xl text-[11px] font-extrabold flex items-center gap-2 shadow-2xl backdrop-blur-md border transition-all ${
+        <div className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl sm:rounded-2xl text-[10px] sm:text-[11px] font-extrabold flex items-center gap-1.5 sm:gap-2 shadow-2xl backdrop-blur-md border transition-all ${
           tabSwitches > 0 || faceStatus !== 'VERIFIED'
             ? 'bg-rose-600 text-white border-rose-400 animate-pulse'
             : 'bg-slate-900/90 text-slate-100 border-slate-700'
         }`}>
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>AI Face & App Lock Active</span>
+          <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
+          <span className="hidden xs:inline">AI Face & App Lock Active</span>
+          <span className="xs:hidden">Proctor Active</span>
 
           {tabSwitches > 0 && (
-            <span className="bg-rose-500 text-white px-2 py-0.5 rounded-full text-[10px] font-black">
-              {tabSwitches} / {maxWarnings} Violation{tabSwitches > 1 ? 's' : ''}
+            <span className="bg-rose-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black">
+              {tabSwitches} / {maxWarnings}
             </span>
           )}
         </div>
 
         {/* Live Camera Preview Box & Face Bounding Scanner */}
-        <div className="relative w-48 h-36 rounded-2xl overflow-hidden border-2 border-brand-purple/60 bg-slate-950 shadow-2xl group">
+        <div className="relative w-32 h-24 sm:w-48 sm:h-36 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-brand-purple/60 bg-slate-950 shadow-2xl group">
           
           {/* Live Video Feed */}
           {!cameraError ? (
@@ -181,18 +182,22 @@ export const WebcamProctor = ({
               className="w-full h-full object-cover transform -scale-x-100"
             />
           ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center p-3 text-center bg-slate-900">
-              <Camera className="w-6 h-6 mb-1 text-brand-purple" />
-              <span className="text-[10px] font-bold text-slate-200">Face Proctor Active</span>
-              <span className="text-[9px] text-slate-400">Virtual Sensor Feed</span>
+            <div className="w-full h-full flex flex-col items-center justify-center p-2 text-center bg-slate-900">
+              <Camera className="w-5 h-5 mb-1 text-brand-purple" />
+              <span className="text-[9px] sm:text-[10px] font-bold text-slate-200">Face Proctor Active</span>
+              <span className="text-[8px] sm:text-[9px] text-slate-400">Virtual Sensor Feed</span>
             </div>
           )}
 
           {/* Simulated Face Bounding Box & Facial Keypoints Overlay */}
           <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-            <div className={`w-28 h-28 border-2 rounded-xl transition-all duration-300 relative flex items-center justify-center ${
+            <div className={`w-16 h-16 sm:w-28 sm:h-28 border-2 rounded-xl transition-all duration-300 relative flex items-center justify-center ${
               faceStatus === 'VERIFIED'
                 ? 'border-emerald-400/80 shadow-[0_0_15px_rgba(52,211,153,0.3)]'
+                : faceStatus === 'MULTIPLE_FACES'
+                ? 'border-rose-500 shadow-[0_0_20px_rgba(244,63,94,0.6)] animate-ping'
+                : 'border-amber-400 shadow-[0_0_15px_rgba(251,191,36,0.5)]'
+            }`}>
                 : faceStatus === 'MULTIPLE_FACES'
                 ? 'border-rose-500 shadow-[0_0_20px_rgba(244,63,94,0.6)] animate-ping'
                 : 'border-amber-400 shadow-[0_0_15px_rgba(251,191,36,0.5)]'

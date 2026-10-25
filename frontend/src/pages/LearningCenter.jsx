@@ -87,29 +87,29 @@ export const LearningCenter = () => {
   });
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-16">
+    <div className="w-full max-w-4xl mx-auto space-y-6 sm:space-y-8 pb-16 min-w-0">
       {/* Quiz Score Overview Card */}
-      <div className="glass-card p-8 text-center space-y-6">
-        <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white mx-auto flex items-center justify-center shadow-lg">
-          <Award className="w-8 h-8" />
+      <div className="glass-card p-4 sm:p-6 md:p-8 text-center space-y-6">
+        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-3xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white mx-auto flex items-center justify-center shadow-lg">
+          <Award className="w-7 h-7 sm:w-8 sm:h-8" />
         </div>
 
         <div className="space-y-2">
-          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">Learning & Review Center</h1>
-          <p className="text-sm text-gray-500">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">Learning & Review Center</h1>
+          <p className="text-xs sm:text-sm text-gray-500">
             Focus on understanding your mistakes rather than just viewing scores.
           </p>
         </div>
 
         {/* Score Pill Banner */}
-        <div className="inline-flex items-center gap-6 px-6 py-4 rounded-2xl bg-gray-100 dark:bg-dark-border border border-gray-200 dark:border-dark-border">
+        <div className="inline-flex items-center gap-4 sm:gap-6 px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-gray-100 dark:bg-dark-border border border-gray-200 dark:border-dark-border">
           <div>
-            <div className="text-2xl font-extrabold text-brand-purple">{quizResult.score} / {quizResult.totalQuestions}</div>
+            <div className="text-xl sm:text-2xl font-extrabold text-brand-purple">{quizResult.score} / {quizResult.totalQuestions}</div>
             <div className="text-[10px] font-bold text-gray-400 uppercase">Total Score</div>
           </div>
           <div className="w-px h-8 bg-gray-300 dark:bg-gray-700"></div>
           <div>
-            <div className={`text-2xl font-extrabold ${quizResult.percentage >= 70 ? 'text-emerald-500' : 'text-amber-500'}`}>
+            <div className={`text-xl sm:text-2xl font-extrabold ${quizResult.percentage >= 70 ? 'text-emerald-500' : 'text-amber-500'}`}>
               {quizResult.percentage}%
             </div>
             <div className="text-[10px] font-bold text-gray-400 uppercase">Accuracy Rate</div>
@@ -117,37 +117,37 @@ export const LearningCenter = () => {
         </div>
 
         {/* Action Controls */}
-        <div className="flex flex-wrap justify-center gap-3 pt-2">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 pt-2">
           <button
             onClick={() => setFilterMode('All')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition ${filterMode === 'All' ? 'btn-gradient' : 'bg-gray-100 dark:bg-dark-border text-gray-600'}`}
+            className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition ${filterMode === 'All' ? 'btn-gradient' : 'bg-gray-100 dark:bg-dark-border text-gray-600'}`}
           >
-            All Questions ({answers.length})
+            All ({answers.length})
           </button>
           <button
             onClick={() => setFilterMode('Wrong')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition ${filterMode === 'Wrong' ? 'bg-rose-500 text-white' : 'bg-rose-500/10 text-rose-500'}`}
+            className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition ${filterMode === 'Wrong' ? 'bg-rose-500 text-white' : 'bg-rose-500/10 text-rose-500'}`}
           >
-            Wrong Answers Only ({answers.filter(a => !a.isCorrect).length})
+            Wrong ({answers.filter(a => !a.isCorrect).length})
           </button>
           <button
             onClick={() => setFilterMode('Correct')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition ${filterMode === 'Correct' ? 'bg-emerald-500 text-white' : 'bg-emerald-500/10 text-emerald-500'}`}
+            className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition ${filterMode === 'Correct' ? 'bg-emerald-500 text-white' : 'bg-emerald-500/10 text-emerald-500'}`}
           >
-            Correct Answers Only ({answers.filter(a => a.isCorrect).length})
+            Correct ({answers.filter(a => a.isCorrect).length})
           </button>
-          <Link to="/aptitude-quiz" className="px-4 py-2 rounded-xl text-xs font-bold border border-gray-200 dark:border-dark-border flex items-center gap-1">
-            <RotateCcw className="w-3.5 h-3.5" /> Retry Quiz
+          <Link to="/aptitude-quiz" className="px-3 sm:px-4 py-2 rounded-xl text-xs font-bold border border-gray-200 dark:border-dark-border flex items-center gap-1">
+            <RotateCcw className="w-3.5 h-3.5" /> Retry
           </Link>
         </div>
       </div>
 
       {/* Answer Explanations List */}
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {filteredAnswers.map((item, idx) => (
           <div
             key={idx}
-            className={`glass-card p-6 border-l-4 space-y-4 ${
+            className={`glass-card p-4 sm:p-6 border-l-4 space-y-4 ${
               item.isCorrect ? 'border-l-emerald-500' : 'border-l-rose-500'
             }`}
           >

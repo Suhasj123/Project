@@ -162,25 +162,25 @@ export const OnboardingTourModal = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
-      <div className="max-w-2xl w-full bg-white dark:bg-dark-card border border-gray-200 dark:border-dark-border rounded-3xl shadow-2xl overflow-hidden text-gray-900 dark:text-white transition-all">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
+      <div className="max-w-2xl w-full max-h-[90vh] overflow-y-auto bg-white dark:bg-dark-card border border-gray-200 dark:border-dark-border rounded-2xl sm:rounded-3xl shadow-2xl overflow-x-hidden text-gray-900 dark:text-white transition-all">
         
         {/* Header Bar */}
-        <div className={`p-6 bg-gradient-to-r ${currentInfo.color} text-white relative flex items-center justify-between`}>
-          <div className="space-y-1 z-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-[11px] font-black uppercase tracking-wider backdrop-blur-sm">
-              <Sparkles className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+        <div className={`p-4 sm:p-6 bg-gradient-to-r ${currentInfo.color} text-white relative flex items-center justify-between`}>
+          <div className="space-y-1 z-10 min-w-0 pr-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-[10px] sm:text-[11px] font-black uppercase tracking-wider backdrop-blur-sm">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300 fill-amber-300 shrink-0" />
               <span>{currentInfo.badge}</span>
             </div>
-            <h2 className="text-xl font-extrabold tracking-tight">{currentInfo.title}</h2>
-            <p className="text-xs text-white/80 font-medium">{currentInfo.subtitle}</p>
+            <h2 className="text-base sm:text-xl font-extrabold tracking-tight truncate">{currentInfo.title}</h2>
+            <p className="text-xs text-white/80 font-medium truncate">{currentInfo.subtitle}</p>
           </div>
 
           <button
             onClick={onClose}
-            className="w-9 h-9 rounded-full bg-black/20 hover:bg-black/40 text-white flex items-center justify-center transition-all shrink-0 z-10"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/20 hover:bg-black/40 text-white flex items-center justify-center transition-all shrink-0 z-10"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
 
@@ -197,7 +197,7 @@ export const OnboardingTourModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Body Content */}
-        <div className="p-6 md:p-8 space-y-6">
+        <div className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
           
           <div className="flex items-start gap-4">
             <div className="w-14 h-14 rounded-2xl bg-brand-purple/10 text-brand-purple flex items-center justify-center shrink-0 shadow-inner">
@@ -244,32 +244,32 @@ export const OnboardingTourModal = ({ isOpen, onClose }) => {
         </div>
 
         {/* Footer Actions */}
-        <div className="p-5 bg-gray-50 dark:bg-dark-border/20 border-t border-gray-100 dark:border-dark-border flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="p-3.5 sm:p-5 bg-gray-50 dark:bg-dark-border/20 border-t border-gray-100 dark:border-dark-border flex flex-col sm:flex-row items-center justify-between gap-3">
           
           <button
             onClick={handleLaunchModule}
-            className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-brand-purple/10 text-brand-purple font-extrabold text-xs hover:bg-brand-purple/20 transition-all flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-xl bg-brand-purple/10 text-brand-purple font-extrabold text-xs hover:bg-brand-purple/20 transition-all flex items-center justify-center gap-2"
           >
-            <Zap className="w-4 h-4 text-amber-500 fill-amber-500" />
-            <span>Launch {currentInfo.title.split(':')[1] || 'Module'} 🚀</span>
+            <Zap className="w-4 h-4 text-amber-500 fill-amber-500 shrink-0" />
+            <span className="truncate">Launch {currentInfo.title.split(':')[1] || 'Module'} 🚀</span>
           </button>
 
           <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
             {currentStep > 0 && (
               <button
                 onClick={handlePrev}
-                className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-dark-border text-gray-700 dark:text-gray-300 font-bold text-xs hover:bg-gray-100 dark:hover:bg-dark-border transition-all flex items-center gap-1.5"
+                className="flex-1 sm:flex-initial justify-center px-4 py-2.5 rounded-xl border border-gray-200 dark:border-dark-border text-gray-700 dark:text-gray-300 font-bold text-xs hover:bg-gray-100 dark:hover:bg-dark-border transition-all flex items-center gap-1.5"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span>Previous</span>
+                <span>Prev</span>
               </button>
             )}
 
             <button
               onClick={handleNext}
-              className="btn-gradient px-5 py-2.5 rounded-xl font-extrabold text-xs shadow-md flex items-center gap-1.5"
+              className="btn-gradient flex-1 sm:flex-initial justify-center px-5 py-2.5 rounded-xl font-extrabold text-xs shadow-md flex items-center gap-1.5"
             >
-              <span>{currentStep < tourSteps.length - 1 ? 'Next Module Step' : 'Finish Guided Tour 🎉'}</span>
+              <span>{currentStep < tourSteps.length - 1 ? 'Next Step' : 'Finish Tour 🎉'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>

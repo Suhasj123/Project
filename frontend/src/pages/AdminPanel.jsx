@@ -152,23 +152,23 @@ export const AdminPanel = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8 pb-16">
+    <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8 pb-16 w-full max-w-full min-w-0">
       {/* Header */}
-      <div className="glass-card p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-l-4 border-l-brand-purple">
+      <div className="glass-card p-4 sm:p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-l-4 border-l-brand-purple">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-brand-purple/10 text-brand-purple flex items-center justify-center font-bold">
+          <div className="w-12 h-12 rounded-2xl bg-brand-purple/10 text-brand-purple flex items-center justify-center font-bold shrink-0">
             <ShieldAlert className="w-6 h-6" />
           </div>
-          <div>
-            <h1 className="text-2xl font-extrabold text-gray-900 dark:text-white">Admin Control Console</h1>
-            <p className="text-xs text-gray-500">Authorized Administrator: <strong className="text-brand-purple">{currentUser?.email || 'suhasjsuhasj123@gmail.com'}</strong></p>
+          <div className="min-w-0">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white truncate">Admin Control Console</h1>
+            <p className="text-xs text-gray-500 truncate">Authorized Administrator: <strong className="text-brand-purple">{currentUser?.email || 'suhasjsuhasj123@gmail.com'}</strong></p>
           </div>
         </div>
 
         {activeTab === 'questions' && (
           <button
             onClick={() => setShowAddQModal(true)}
-            className="btn-gradient px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-md shrink-0"
+            className="btn-gradient px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-md shrink-0 w-full sm:w-auto justify-center"
           >
             <Plus className="w-4 h-4" />
             <span>Add Question</span>
@@ -177,20 +177,20 @@ export const AdminPanel = () => {
       </div>
 
       {/* Admin Navigation Tabs */}
-      <div className="flex flex-wrap border-b border-gray-200 dark:border-dark-border gap-2 pb-2">
+      <div className="flex flex-wrap border-b border-gray-200 dark:border-dark-border gap-1.5 sm:gap-2 pb-2">
         {adminTabs.map(tab => {
           const Icon = tab.icon;
           return (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition ${
+              className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 sm:gap-2 transition ${
                 activeTab === tab.key
                   ? 'btn-gradient shadow-md'
                   : 'text-gray-500 hover:text-gray-900 dark:hover:text-white bg-gray-100 dark:bg-dark-border/40'
               }`}
             >
-              <Icon className="w-4 h-4" />
+              <Icon className="w-4 h-4 shrink-0" />
               <span>{tab.label}</span>
             </button>
           );
@@ -200,35 +200,35 @@ export const AdminPanel = () => {
       {/* Tab 1: View Analytics & Real-time Live Activity Stream */}
       {activeTab === 'analytics' && (
         <div className="space-y-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div className="glass-card p-6 space-y-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+            <div className="glass-card p-4 sm:p-6 space-y-1">
               <div className="text-xs text-gray-400 font-semibold">Total Registered Users</div>
-              <div className="text-3xl font-extrabold text-brand-blue">{analytics?.totalUsers || 48}</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-brand-blue">{analytics?.totalUsers || 48}</div>
             </div>
-            <div className="glass-card p-6 space-y-1">
+            <div className="glass-card p-4 sm:p-6 space-y-1">
               <div className="text-xs text-gray-400 font-semibold">Question Bank Items</div>
-              <div className="text-3xl font-extrabold text-brand-purple">{analytics?.totalQuestions || 35}</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-brand-purple">{analytics?.totalQuestions || 35}</div>
             </div>
-            <div className="glass-card p-6 space-y-1">
+            <div className="glass-card p-4 sm:p-6 space-y-1">
               <div className="text-xs text-gray-400 font-semibold">Coding Challenges</div>
-              <div className="text-3xl font-extrabold text-indigo-500">{analytics?.totalCodingChallenges || 3}</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-indigo-500">{analytics?.totalCodingChallenges || 3}</div>
             </div>
-            <div className="glass-card p-6 space-y-1">
+            <div className="glass-card p-4 sm:p-6 space-y-1">
               <div className="text-xs text-gray-400 font-semibold">Completed Quizzes</div>
-              <div className="text-3xl font-extrabold text-emerald-500">{analytics?.totalQuizzesCompleted || 142}</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-emerald-500">{analytics?.totalQuizzesCompleted || 142}</div>
             </div>
-            <div className="glass-card p-6 space-y-1">
+            <div className="glass-card p-4 sm:p-6 space-y-1">
               <div className="text-xs text-gray-400 font-semibold">AI Mock Interviews</div>
-              <div className="text-3xl font-extrabold text-amber-500">{analytics?.totalInterviewsConducted || 52}</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-amber-500">{analytics?.totalInterviewsConducted || 52}</div>
             </div>
-            <div className="glass-card p-6 space-y-1">
+            <div className="glass-card p-4 sm:p-6 space-y-1">
               <div className="text-xs text-gray-400 font-semibold">Listed Recruiters</div>
-              <div className="text-3xl font-extrabold text-rose-500">{analytics?.totalCompaniesListed || 6}</div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-rose-500">{analytics?.totalCompaniesListed || 6}</div>
             </div>
           </div>
 
           {/* Real-time Live System Assessment Stream */}
-          <div className="glass-card p-6 space-y-4 border-l-4 border-l-emerald-500">
+          <div className="glass-card p-4 sm:p-6 space-y-4 border-l-4 border-l-emerald-500">
             <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-3">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
@@ -287,39 +287,39 @@ export const AdminPanel = () => {
               const roundScores = user.scores || { aptitude: '85/100', coding: '90/100', aiInterview: '4.8/5.0' };
 
               return (
-                <div key={user._id} className="glass-card p-6 space-y-4 border-l-4 border-l-brand-purple hover:shadow-xl transition">
+                <div key={user._id} className="glass-card p-4 sm:p-6 space-y-4 border-l-4 border-l-brand-purple hover:shadow-xl transition">
                   {/* Row Header */}
                   <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-gray-100 dark:border-dark-border pb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-2xl bg-brand-purple/10 text-brand-purple flex items-center justify-center font-extrabold text-base">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-brand-purple/10 text-brand-purple flex items-center justify-center font-extrabold text-sm sm:text-base shrink-0">
                         {user.name ? user.name.slice(0, 2).toUpperCase() : 'CA'}
                       </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <h3 className="font-extrabold text-gray-900 dark:text-white text-base">{user.name}</h3>
-                          <span className={`px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase ${user.role === 'admin' ? 'bg-purple-500/10 text-purple-500 border border-purple-500/20' : 'bg-blue-500/10 text-blue-600 dark:text-blue-400'}`}>
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h3 className="font-extrabold text-gray-900 dark:text-white text-sm sm:text-base truncate">{user.name}</h3>
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-extrabold uppercase ${user.role === 'admin' ? 'bg-purple-500/10 text-purple-500 border border-purple-500/20' : 'bg-blue-500/10 text-blue-600 dark:text-blue-400'}`}>
                             {user.role}
                           </span>
                         </div>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-gray-500 break-words">
                           {user.email} • {user.phone || '+91 98765 43210'} • Target: <strong className="text-gray-700 dark:text-gray-300">{user.targetRole || 'Software Engineer'}</strong>
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full md:w-auto">
                       <button
                         onClick={() => setSelectedCandidateModal(user)}
-                        className="px-3.5 py-2 rounded-xl bg-brand-purple text-white text-xs font-extrabold hover:bg-brand-purple/90 transition shadow-md flex items-center gap-1.5"
+                        className="flex-1 sm:flex-initial px-3.5 py-2 rounded-xl bg-brand-purple text-white text-xs font-extrabold hover:bg-brand-purple/90 transition shadow-md flex items-center justify-center gap-1.5"
                       >
-                        <FileBarChart className="w-4 h-4" />
+                        <FileBarChart className="w-4 h-4 shrink-0" />
                         <span>View Full Resume & Dossier 📄</span>
                       </button>
 
                       {user.email !== 'suhasjsuhasj505@gmail.com' && user.email !== 'suhasjsuhasj123@gmail.com' && (
                         <button
                           onClick={() => handleDeleteUser(user._id)}
-                          className="p-2 rounded-xl text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition"
+                          className="p-2 rounded-xl text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition shrink-0"
                           title="Delete Candidate Record"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -329,7 +329,7 @@ export const AdminPanel = () => {
                   </div>
 
                   {/* Detailed Scores & Status Row */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-xs">
                     <div className="p-3 rounded-xl bg-gray-50 dark:bg-dark-border/40 space-y-0.5">
                       <span className="text-[10px] font-bold text-gray-400 uppercase">Aptitude Score</span>
                       <div className="font-extrabold text-emerald-600 dark:text-emerald-400 text-sm">{roundScores.aptitude || '85/100'}</div>

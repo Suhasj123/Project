@@ -42,30 +42,30 @@ export const Dashboard = () => {
   const quizHistory = data?.quizHistory || [];
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-6 sm:space-y-8 pb-12 w-full max-w-full min-w-0">
       {/* Welcome Banner */}
-      <div className="relative overflow-hidden p-8 rounded-3xl bg-gradient-to-r from-brand-blue via-brand-purple to-indigo-900 text-white shadow-xl">
+      <div className="relative overflow-hidden p-5 sm:p-7 md:p-8 rounded-3xl bg-gradient-to-r from-brand-blue via-brand-purple to-indigo-900 text-white shadow-xl">
         <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
-        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-semibold backdrop-blur-md">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Target Role: {user?.targetRole || 'Software Engineer'}</span>
             </div>
-            <h1 className="text-3xl font-extrabold tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Welcome back, {user?.name || 'Candidate'}! 👋
             </h1>
-            <p className="text-sm text-indigo-100 max-w-xl">
+            <p className="text-xs sm:text-sm text-indigo-100 max-w-xl">
               Complete your step-by-step placement pathway below to maximize your interview readiness score!
             </p>
           </div>
 
-          <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 shrink-0">
-            <div className="p-3 bg-amber-400/20 text-amber-300 rounded-xl">
-              <Flame className="w-7 h-7 fill-amber-400" />
+          <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl border border-white/20 w-full md:w-auto shrink-0">
+            <div className="p-3 bg-amber-400/20 text-amber-300 rounded-xl shrink-0">
+              <Flame className="w-6 h-6 sm:w-7 sm:h-7 fill-amber-400" />
             </div>
             <div>
-              <div className="text-2xl font-black">{streak} Days</div>
+              <div className="text-xl sm:text-2xl font-black">{streak} Days</div>
               <div className="text-xs text-indigo-200">Active Learning Streak</div>
             </div>
           </div>
@@ -73,20 +73,20 @@ export const Dashboard = () => {
       </div>
 
       {/* STEP-BY-STEP PLACEMENT PATHWAY ROADMAP */}
-      <div className="glass-card p-6 border-l-4 border-l-brand-purple space-y-4">
-        <div className="flex items-center justify-between">
+      <div className="glass-card p-4 sm:p-6 border-l-4 border-l-brand-purple space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <Target className="w-6 h-6 text-brand-purple" />
-            <h2 className="text-xl font-extrabold text-gray-900 dark:text-white">
+            <Target className="w-5 h-5 sm:w-6 sm:h-6 text-brand-purple shrink-0" />
+            <h2 className="text-lg sm:text-xl font-extrabold text-gray-900 dark:text-white">
               Official Step-by-Step Candidate Placement Pathway
             </h2>
           </div>
-          <span className="px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple font-extrabold text-xs">
+          <span className="self-start sm:self-auto px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple font-extrabold text-xs">
             4-STEP WORKFLOW
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-2">
           {/* Step 1 */}
           <Link
             to="/resume-analyzer"
@@ -213,7 +213,7 @@ export const Dashboard = () => {
           <Target className="w-5 h-5 text-brand-purple" />
           <span>Quick Actions</span>
         </h2>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
           <Link to="/aptitude-quiz" className="glass-card glass-card-hover p-5 flex items-center gap-4 group">
             <div className="p-3 rounded-2xl bg-blue-500/10 text-blue-500 group-hover:scale-110 transition-transform">
               <BookOpen className="w-6 h-6" />
@@ -257,7 +257,7 @@ export const Dashboard = () => {
       </div>
 
       {/* Weak Topics & Recommended Learning */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <div className="glass-card p-6 space-y-4">
           <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-3">
             <h3 className="font-bold text-gray-900 dark:text-white text-base flex items-center gap-2">

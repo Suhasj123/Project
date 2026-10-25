@@ -68,7 +68,7 @@ export const CompanyDetail = () => {
   if (!company && !loading) return <div className="p-12 text-center text-xs">Company not found.</div>;
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8 pb-16">
+    <div className="w-full max-w-6xl mx-auto space-y-6 sm:space-y-8 pb-16 min-w-0">
       
       {/* Back Button */}
       <button
@@ -81,9 +81,9 @@ export const CompanyDetail = () => {
 
       {/* Header Banner */}
       {company && (
-        <div className="glass-card p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-l-4 border-l-brand-purple">
+        <div className="glass-card p-4 sm:p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-l-4 border-l-brand-purple">
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white font-black text-2xl flex items-center justify-center shadow-xl">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-3xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white font-black text-xl sm:text-2xl flex items-center justify-center shadow-xl shrink-0">
               {company.name.charAt(0)}
             </div>
             <div>
@@ -94,17 +94,17 @@ export const CompanyDetail = () => {
                   {company.isVerified ? 'Verified Profile ✓' : 'AI-Generated Guide ✨'}
                 </span>
               </div>
-              <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white mt-1">{company.name}</h1>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mt-1">{company.name}</h1>
               <p className="text-xs text-gray-500">{company.industry}</p>
             </div>
           </div>
 
           <button
             onClick={() => navigate(`/ai-mock-interview?company=${company.name}`)}
-            className="btn-gradient px-6 py-3.5 rounded-2xl font-bold text-xs shadow-lg hover:scale-105 transition-all flex items-center gap-2 shrink-0"
+            className="btn-gradient w-full sm:w-auto justify-center px-6 py-3.5 rounded-2xl font-bold text-xs shadow-lg hover:scale-105 transition-all flex items-center gap-2 shrink-0"
           >
             <Sparkles className="w-4 h-4" />
-            <span>Practice {company.name} Mock Interview 🚀</span>
+            <span>Practice {company.name} Mock 🚀</span>
           </button>
         </div>
       )}
@@ -115,7 +115,7 @@ export const CompanyDetail = () => {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
+            className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs font-bold transition-all shrink-0 ${
               activeTab === tab
                 ? 'bg-brand-purple text-white shadow-md'
                 : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-border'
@@ -128,7 +128,7 @@ export const CompanyDetail = () => {
 
       {/* Tab 1: Overview */}
       {activeTab === 'Overview' && company && (
-        <div className="glass-card p-8 space-y-6 text-xs animate-fadeIn">
+        <div className="glass-card p-4 sm:p-6 md:p-8 space-y-6 text-xs animate-fadeIn">
           <div className="space-y-2">
             <h3 className="text-base font-extrabold text-gray-900 dark:text-white">About {company.name}</h3>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{company.about}</p>

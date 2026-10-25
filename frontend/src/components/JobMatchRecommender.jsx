@@ -41,25 +41,25 @@ export const JobMatchRecommender = () => {
   const [selectedRole, setSelectedRole] = useState(roleProfiles[0]);
 
   return (
-    <div className="glass-card p-6 space-y-6 rounded-3xl border border-gray-200 dark:border-dark-border">
+    <div className="glass-card p-4 sm:p-6 space-y-6 rounded-2xl sm:rounded-3xl border border-gray-200 dark:border-dark-border min-w-0">
       
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-gray-100 dark:border-dark-border pb-4">
         <div className="flex items-center gap-3">
-          <div className="p-3 rounded-2xl bg-brand-purple/10 text-brand-purple">
-            <Target className="w-6 h-6" />
+          <div className="p-2.5 sm:p-3 rounded-2xl bg-brand-purple/10 text-brand-purple shrink-0">
+            <Target className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
           <div>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-brand-purple/10 text-brand-purple text-[10px] font-extrabold uppercase">
               <Sparkles className="w-3 h-3" /> AI JOB MATCH RECOMMENDER
             </div>
-            <h3 className="text-lg font-extrabold text-gray-900 dark:text-white">
+            <h3 className="text-base sm:text-lg font-extrabold text-gray-900 dark:text-white">
               Corporate Job Readiness & Compatibility Engine
             </h3>
           </div>
         </div>
 
-        <span className="text-xs font-bold text-gray-500 bg-gray-100 dark:bg-dark-border px-3 py-1.5 rounded-xl">
+        <span className="text-xs font-bold text-gray-500 bg-gray-100 dark:bg-dark-border px-3 py-1.5 rounded-xl shrink-0">
           Profile Synced with Placement History
         </span>
       </div>

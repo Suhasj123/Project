@@ -75,6 +75,40 @@ export const WhiteboardCanvas = ({ scheduleId = 'demo_whiteboard', sessionId = '
     setIsDrawing(false);
   };
 
+  const getTouchPos = (e) => {
+    const canvas = canvasRef.current;
+    if (!canvas || !e.touches?.length) return { x: 0, y: 0 };
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches[0];
+    return {
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top
+    };
+  };
+
+  const handleTouchStart = (e) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const { x, y } = getTouchPos(e);
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    setIsDrawing(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDrawing) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const { x, y } = getTouchPos(e);
+    ctx.strokeStyle = tool === 'eraser' ? '#0f172a' : color;
+    ctx.lineWidth = tool === 'eraser' ? 24 : lineWidth;
+    ctx.lineCap = 'round';
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  };
+
   const clearCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -189,7 +223,10 @@ export const WhiteboardCanvas = ({ scheduleId = 'demo_whiteboard', sessionId = '
           onMouseMove={draw}
           onMouseUp={stopDrawing}
           onMouseLeave={stopDrawing}
-          className="w-full block"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={stopDrawing}
+          className="w-full block touch-none"
         />
       </div>
     </div>

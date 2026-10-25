@@ -64,22 +64,22 @@ export const ProgressDashboard = () => {
   ];
 
   return (
-    <div id="print-area" className="max-w-6xl mx-auto space-y-8 pb-16">
+    <div id="print-area" className="w-full max-w-6xl mx-auto space-y-6 sm:space-y-8 pb-16 min-w-0">
       {/* Header */}
-      <div className="glass-card p-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="glass-card p-4 sm:p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white flex items-center gap-3">
-            <BarChart3 className="w-8 h-8 text-brand-purple" />
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white flex items-center gap-3">
+            <BarChart3 className="w-7 h-7 sm:w-8 sm:h-8 text-brand-purple shrink-0" />
             <span>Progress Analytics & Badges</span>
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-xs sm:text-sm text-gray-500 mt-1">
             Track your preparation trajectory, domain accuracy, and unlocked achievements.
           </p>
         </div>
 
         <button
           onClick={handleDownloadReport}
-          className="btn-gradient px-6 py-3 rounded-2xl text-xs font-bold flex items-center gap-2 shadow-lg shrink-0"
+          className="btn-gradient w-full sm:w-auto justify-center px-6 py-3 rounded-2xl text-xs font-bold flex items-center gap-2 shadow-lg shrink-0"
         >
           <Download className="w-4 h-4" />
           <span>Download PDF Report</span>
@@ -87,40 +87,40 @@ export const ProgressDashboard = () => {
       </div>
 
       {/* Overview Stat Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-card p-5 space-y-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+        <div className="glass-card p-4 sm:p-5 space-y-1">
           <div className="text-xs text-gray-400 font-semibold">Job Readiness</div>
-          <div className="text-3xl font-extrabold text-brand-blue">{data?.jobReadinessScore || 78}%</div>
+          <div className="text-2xl sm:text-3xl font-extrabold text-brand-blue">{data?.jobReadinessScore || 78}%</div>
           <div className="text-[10px] text-emerald-500 font-bold">↑ Top 15% in Batch</div>
         </div>
 
-        <div className="glass-card p-5 space-y-1">
+        <div className="glass-card p-4 sm:p-5 space-y-1">
           <div className="text-xs text-gray-400 font-semibold">Learning Streak</div>
-          <div className="text-3xl font-extrabold text-amber-500 flex items-center gap-1">
-            <Flame className="w-6 h-6 fill-amber-500" /> {data?.streakDays || 5} Days
+          <div className="text-2xl sm:text-3xl font-extrabold text-amber-500 flex items-center gap-1">
+            <Flame className="w-5 h-5 sm:w-6 sm:h-6 fill-amber-500 shrink-0" /> {data?.streakDays || 5} Days
           </div>
           <div className="text-[10px] text-gray-400">Continuous Practice</div>
         </div>
 
-        <div className="glass-card p-5 space-y-1">
+        <div className="glass-card p-4 sm:p-5 space-y-1">
           <div className="text-xs text-gray-400 font-semibold">Quizzes Taken</div>
-          <div className="text-3xl font-extrabold text-brand-purple">{data?.totalQuizzesTaken || 12}</div>
+          <div className="text-2xl sm:text-3xl font-extrabold text-brand-purple">{data?.totalQuizzesTaken || 12}</div>
           <div className="text-[10px] text-gray-400">Avg Score: {data?.avgQuizScore || 82}%</div>
         </div>
 
-        <div className="glass-card p-5 space-y-1">
+        <div className="glass-card p-4 sm:p-5 space-y-1">
           <div className="text-xs text-gray-400 font-semibold">AI Interviews</div>
-          <div className="text-3xl font-extrabold text-emerald-500">{data?.totalInterviewsTaken || 4}</div>
+          <div className="text-2xl sm:text-3xl font-extrabold text-emerald-500">{data?.totalInterviewsTaken || 4}</div>
           <div className="text-[10px] text-gray-400">Avg Grade: {data?.avgInterviewScore || 85}%</div>
         </div>
       </div>
 
       {/* Performance Charts */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
         {/* Weekly Trend */}
-        <div className="glass-card p-6 space-y-4">
+        <div className="glass-card p-4 sm:p-6 space-y-4">
           <h3 className="font-bold text-gray-900 dark:text-white text-base flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-brand-blue" />
+            <TrendingUp className="w-5 h-5 text-brand-blue shrink-0" />
             <span>Weekly Accuracy Trend</span>
           </h3>
           <div className="h-64">
@@ -143,7 +143,7 @@ export const ProgressDashboard = () => {
         </div>
 
         {/* Weak vs Strong Topics */}
-        <div className="glass-card p-6 space-y-6">
+        <div className="glass-card p-4 sm:p-6 space-y-6">
           <div className="space-y-3">
             <h4 className="font-bold text-gray-900 dark:text-white text-sm flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-500" /> Strong Topics
@@ -173,16 +173,16 @@ export const ProgressDashboard = () => {
       </div>
 
       {/* Module 11: Achievements & Gamified Badges */}
-      <div className="glass-card p-8 space-y-6">
+      <div className="glass-card p-4 sm:p-6 md:p-8 space-y-6">
         <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-4">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-            <Award className="w-6 h-6 text-amber-500" />
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+            <Award className="w-5 h-5 sm:w-6 sm:h-6 text-amber-500 shrink-0" />
             <span>Unlocked Achievements & Badges</span>
           </h2>
-          <span className="text-xs text-gray-400 font-medium">Gamified Milestones</span>
+          <span className="text-xs text-gray-400 font-medium shrink-0">Milestones</span>
         </div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
           {achievements.map((badge, i) => (
             <div
               key={i}

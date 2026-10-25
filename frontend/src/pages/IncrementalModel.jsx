@@ -291,12 +291,12 @@ export const IncrementalModel = () => {
   const currentPhase = phaseSteps[activePhaseIdx];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-10 pb-20 animate-fadeIn">
+    <div className="w-full max-w-7xl mx-auto space-y-6 sm:space-y-10 pb-20 min-w-0 animate-fadeIn">
       
       {/* ------------------------------------------------------------- */}
       {/* HERO BANNER SECTION */}
       {/* ------------------------------------------------------------- */}
-      <div className="relative overflow-hidden p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-brand-purple via-indigo-700 to-brand-blue text-white shadow-2xl">
+      <div className="relative overflow-hidden p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-brand-purple via-indigo-700 to-brand-blue text-white shadow-2xl">
         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
         
         <div className="relative z-10 space-y-6">
@@ -313,16 +313,16 @@ export const IncrementalModel = () => {
           </div>
 
           <div className="space-y-2">
-            <h1 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
+            <h1 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight">
               The Incremental Model in Software Engineering
             </h1>
-            <p className="text-sm sm:text-base text-indigo-100 max-w-3xl leading-relaxed">
+            <p className="text-xs sm:text-base text-indigo-100 max-w-3xl leading-relaxed">
               Master the **Incremental SDLC Model** where software requirements are split into multiple standalone builds. Learn how core features are delivered early in **Increment 1**, followed by iterative enhancements to reduce risk and deliver value faster.
             </p>
           </div>
 
           {/* Quick Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-2">
             <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15">
               <div className="text-[10px] font-bold uppercase tracking-wider text-indigo-200">Delivery Style</div>
               <div className="text-lg font-black text-white mt-0.5">Iterative Builds</div>
@@ -346,13 +346,13 @@ export const IncrementalModel = () => {
       {/* ------------------------------------------------------------- */}
       {/* MODULE 1: INTERACTIVE INCREMENTAL BUILD SIMULATOR */}
       {/* ------------------------------------------------------------- */}
-      <div className="glass-card p-6 sm:p-8 space-y-6 border-l-4 border-l-brand-purple">
+      <div className="glass-card p-4 sm:p-6 md:p-8 space-y-6 border-l-4 border-l-brand-purple">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 dark:border-dark-border pb-4">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-black text-brand-purple uppercase tracking-wider mb-1">
               <Play className="w-4 h-4" /> Live Interactive Simulation
             </div>
-            <h2 className="text-2xl font-black text-gray-900 dark:text-white">
+            <h2 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">
               Building InterviewPro via Incremental SDLC Model
             </h2>
             <p className="text-xs text-gray-500 mt-0.5">
@@ -360,7 +360,7 @@ export const IncrementalModel = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
             <button
               onClick={handleResetSim}
               className="px-3.5 py-2 rounded-xl text-xs font-extrabold border border-gray-200 dark:border-dark-border hover:bg-gray-100 dark:hover:bg-dark-border text-gray-600 dark:text-gray-300 transition flex items-center gap-1.5"
@@ -377,7 +377,7 @@ export const IncrementalModel = () => {
         </div>
 
         {/* Increments Progress Stepper Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {projectIncrements.map((inc, idx) => {
             const isCurrent = idx === activeIncrementIdx;
             const isDone = completedIncrements.includes(idx);

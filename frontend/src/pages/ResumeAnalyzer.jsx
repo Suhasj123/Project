@@ -164,33 +164,32 @@ export const ResumeAnalyzer = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8 pb-16">
+    <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8 pb-16 w-full max-w-full min-w-0">
       
       {/* Header Stepper */}
       <PlacementStepper currentStage={1} />
 
       {/* Header Banner */}
-      <div className="relative overflow-hidden p-8 rounded-3xl bg-gradient-to-r from-brand-blue via-brand-purple to-indigo-900 text-white shadow-xl">
+      <div className="relative overflow-hidden p-5 sm:p-7 md:p-8 rounded-3xl bg-gradient-to-r from-brand-blue via-brand-purple to-indigo-900 text-white shadow-xl">
         <div className="relative z-10 space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-semibold backdrop-blur-md">
             <Target className="w-3.5 h-3.5" />
             <span>AI RESUME + ROLE GAP ANALYZER</span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             Resume vs Job Description Match & Roadmap
           </h1>
-          <p className="text-sm text-indigo-100 max-w-2xl">
+          <p className="text-xs sm:text-sm text-indigo-100 max-w-2xl leading-relaxed">
             Compare your resume directly against target job descriptions. Extract missing skills, get an accurate match percentage, and follow a personalized week-by-week prep roadmap.
           </p>
         </div>
       </div>
 
-
       {/* Upload & JD Input Form */}
-      <div className="glass-card p-8 space-y-6">
+      <div className="glass-card p-4 sm:p-6 md:p-8 space-y-6">
         <form onSubmit={handleAnalyze} className="space-y-6 text-xs">
           
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             
             {/* Left: Resume Input */}
             <div className="space-y-4">
@@ -210,7 +209,7 @@ export const ResumeAnalyzer = () => {
                 />
                 <label htmlFor="resume-file-input" className="cursor-pointer space-y-2 block">
                   <Upload className="w-8 h-8 text-brand-purple mx-auto" />
-                  <span className="font-bold text-gray-700 dark:text-gray-200 block">
+                  <span className="font-bold text-gray-700 dark:text-gray-200 block break-words">
                     {file ? file.name : 'Click to Upload PDF / Word Resume'}
                   </span>
                   <span className="text-[11px] text-gray-400">PDF, DOCX up to 5MB</span>
@@ -268,7 +267,7 @@ export const ResumeAnalyzer = () => {
           {loading && (
             <div className="flex flex-col items-center justify-center p-6 bg-brand-purple/5 rounded-2xl border border-brand-purple/20 space-y-2">
               <LottieAnimationPlayer animationType="scanning" className="w-24 h-24" />
-              <span className="font-extrabold text-xs text-brand-purple animate-pulse">
+              <span className="font-extrabold text-xs text-brand-purple animate-pulse text-center">
                 LottieFiles Vector Scanner Parsing Skills & Keyword Relevance...
               </span>
             </div>
@@ -277,9 +276,9 @@ export const ResumeAnalyzer = () => {
           <button
             type="submit"
             disabled={loading}
-            className="btn-gradient w-full py-4 rounded-2xl font-bold text-sm shadow-xl hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
+            className="btn-gradient w-full py-3.5 sm:py-4 rounded-2xl font-bold text-xs sm:text-sm shadow-xl hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-4 h-4 shrink-0" />
             <span>{loading ? 'Analyzing Skills & Generating Roadmap...' : 'Analyze Resume Gap & Build Personal Roadmap 🚀'}</span>
           </button>
         </form>
@@ -287,15 +286,15 @@ export const ResumeAnalyzer = () => {
 
       {/* Analysis Output Section */}
       {analysis && (
-        <div className="space-y-8 animate-fadeIn">
+        <div className="space-y-6 sm:space-y-8 animate-fadeIn">
           
           {/* Match Score Overview */}
-          <div className="glass-card p-8 flex flex-col md:flex-row items-center justify-between gap-8 border-l-4 border-l-brand-purple">
-            <div className="flex items-center gap-6">
+          <div className="glass-card p-4 sm:p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 border-l-4 border-l-brand-purple">
+            <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4 sm:gap-6 w-full md:w-auto">
               <ScoreGauge score={analysis.match_percentage || analysis.matchPercentage || 78} label="JD Match Score" />
-              <div className="space-y-1">
+              <div className="space-y-1 min-w-0">
                 <span className="text-xs font-extrabold uppercase text-brand-purple">TARGET ROLE ALIGNMENT</span>
-                <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
+                <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white">
                   {analysis.match_percentage || analysis.matchPercentage}% Compatibility Score
                 </h2>
                 <p className="text-xs text-gray-500 max-w-md">
@@ -304,17 +303,17 @@ export const ResumeAnalyzer = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto shrink-0">
               <button
                 onClick={() => navigate('/resume-builder')}
-                className="btn-gradient px-6 py-3 rounded-xl font-bold text-xs shadow-md flex items-center gap-2"
+                className="btn-gradient px-6 py-3 rounded-xl font-bold text-xs shadow-md flex items-center justify-center gap-2"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>Prepare Single-Page ATS Resume 📄</span>
               </button>
               <button
                 onClick={() => navigate('/prep-dashboard')}
-                className="px-5 py-3 rounded-xl border border-gray-300 dark:border-dark-border font-bold text-xs hover:bg-gray-100 dark:hover:bg-dark-border/40 transition flex items-center gap-2"
+                className="px-5 py-3 rounded-xl border border-gray-300 dark:border-dark-border font-bold text-xs hover:bg-gray-100 dark:hover:bg-dark-border/40 transition flex items-center justify-center gap-2"
               >
                 <span>Prep Dashboard</span>
                 <ArrowRight className="w-4 h-4" />
@@ -323,7 +322,7 @@ export const ResumeAnalyzer = () => {
           </div>
 
           {/* Quick Scanner AI Review Card (Single-Upload Integrated) */}
-          <div className="glass-card p-6 space-y-4 border-l-4 border-l-brand-blue shadow-lg animate-fadeIn">
+          <div className="glass-card p-4 sm:p-6 space-y-4 border-l-4 border-l-brand-blue shadow-lg animate-fadeIn">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 dark:border-dark-border pb-3">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-xl bg-brand-blue/10 text-brand-blue flex items-center justify-center font-bold shrink-0">
@@ -343,7 +342,7 @@ export const ResumeAnalyzer = () => {
               </span>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4 text-xs">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
               {/* Strengths */}
               <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 space-y-2">
                 <span className="font-extrabold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
@@ -393,7 +392,7 @@ export const ResumeAnalyzer = () => {
               </div>
               <button
                 onClick={() => navigate('/quick-assessment/aptitude-screener?sessionId=qsess_demo')}
-                className="btn-gradient px-6 py-3 rounded-xl font-bold text-xs shadow-lg hover:scale-105 transition-all flex items-center gap-2 shrink-0"
+                className="btn-gradient w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs shadow-lg hover:scale-105 transition-all flex items-center justify-center gap-2 shrink-0"
               >
                 <span>Continue to Aptitude Screener (Stage 1)</span>
                 <ArrowRight className="w-4 h-4" />
@@ -402,10 +401,10 @@ export const ResumeAnalyzer = () => {
           </div>
 
           {/* Skill Breakdown: Matching vs Missing */}
-          <div className="grid md:grid-cols-2 gap-6 text-xs">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-xs">
             
             {/* Matching Skills */}
-            <div className="glass-card p-6 space-y-3 border-l-4 border-l-emerald-500">
+            <div className="glass-card p-4 sm:p-6 space-y-3 border-l-4 border-l-emerald-500">
               <h3 className="font-extrabold text-emerald-600 dark:text-emerald-400 text-sm flex items-center gap-2 uppercase tracking-wider">
                 <CheckCircle2 className="w-4 h-4" /> Matching Skills Present ({analysis.matching_skills?.length || analysis.matchingSkills?.length || 0})
               </h3>
@@ -419,7 +418,7 @@ export const ResumeAnalyzer = () => {
             </div>
 
             {/* Missing Skills */}
-            <div className="glass-card p-6 space-y-3 border-l-4 border-l-rose-500">
+            <div className="glass-card p-4 sm:p-6 space-y-3 border-l-4 border-l-rose-500">
               <h3 className="font-extrabold text-rose-600 dark:text-rose-400 text-sm flex items-center gap-2 uppercase tracking-wider">
                 <AlertTriangle className="w-4 h-4" /> Missing JD Skills to Learn ({analysis.missing_skills?.length || analysis.missingSkills?.length || 0})
               </h3>
@@ -435,7 +434,7 @@ export const ResumeAnalyzer = () => {
           </div>
 
           {/* Suggested Focus Areas */}
-          <div className="glass-card p-6 space-y-4 border-l-4 border-l-amber-500">
+          <div className="glass-card p-4 sm:p-6 space-y-4 border-l-4 border-l-amber-500">
             <h3 className="font-extrabold text-amber-600 dark:text-amber-400 text-sm flex items-center gap-2 uppercase tracking-wider">
               <Sparkles className="w-4 h-4" /> Recommended High-Priority Focus Areas
             </h3>
@@ -452,13 +451,13 @@ export const ResumeAnalyzer = () => {
           </div>
 
           {/* Week-by-Week Preparation Roadmap Timeline UI */}
-          <div className="glass-card p-8 space-y-6">
-            <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-4">
-              <h3 className="text-xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+          <div className="glass-card p-4 sm:p-6 md:p-8 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 dark:border-dark-border pb-4">
+              <h3 className="text-lg sm:text-xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-brand-purple" />
                 <span>Personalized 4-Week Preparation Roadmap</span>
               </h3>
-              <span className="px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple font-extrabold text-xs">
+              <span className="self-start sm:self-auto px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple font-extrabold text-xs">
                 WEEK-BY-WEEK PLAN
               </span>
             </div>
@@ -468,25 +467,25 @@ export const ResumeAnalyzer = () => {
                 <div
                   key={idx}
                   onClick={() => toggleRoadmapItem(idx)}
-                  className={`p-6 rounded-2xl border transition-all cursor-pointer space-y-2 ${
+                  className={`p-4 sm:p-6 rounded-2xl border transition-all cursor-pointer space-y-3 ${
                     step.completed
                       ? 'bg-emerald-500/10 border-emerald-500/30'
                       : 'bg-gray-50 dark:bg-dark-border/40 border-gray-200 dark:border-dark-border hover:border-brand-purple'
                   }`}
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                     <div className="flex items-center gap-3">
-                      <span className={`w-8 h-8 rounded-xl font-extrabold flex items-center justify-center text-xs ${
+                      <span className={`w-8 h-8 rounded-xl font-extrabold flex items-center justify-center text-xs shrink-0 ${
                         step.completed ? 'bg-emerald-500 text-white' : 'bg-brand-purple text-white'
                       }`}>
                         W{step.week}
                       </span>
-                      <h4 className={`text-base font-extrabold ${step.completed ? 'line-through text-emerald-700 dark:text-emerald-400' : 'text-gray-900 dark:text-white'}`}>
+                      <h4 className={`text-sm sm:text-base font-extrabold ${step.completed ? 'line-through text-emerald-700 dark:text-emerald-400' : 'text-gray-900 dark:text-white'}`}>
                         Week {step.week}: {step.focusTopic || step.focus_topic}
                       </h4>
                     </div>
 
-                    <div className="flex items-center gap-2 text-xs font-bold">
+                    <div className="flex items-center gap-2 text-xs font-bold shrink-0 self-end sm:self-auto">
                       <input
                         type="checkbox"
                         checked={!!step.completed}
@@ -497,7 +496,7 @@ export const ResumeAnalyzer = () => {
                     </div>
                   </div>
 
-                  <p className="text-xs text-gray-600 dark:text-gray-300 pl-11">
+                  <p className="text-xs text-gray-600 dark:text-gray-300 pl-0 sm:pl-11">
                     <strong className="text-gray-700 dark:text-gray-200">Suggested Action: </strong>
                     {step.suggestedActivity || step.suggested_activity}
                   </p>
@@ -506,12 +505,12 @@ export const ResumeAnalyzer = () => {
             </div>
 
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-gray-100 dark:border-dark-border">
-              <span className="text-xs text-gray-500 font-semibold">
+              <span className="text-xs text-gray-500 font-semibold text-center sm:text-left">
                 Single-Upload Verified: Resume is attached to your session.
               </span>
               <button
                 onClick={() => navigate('/quick-assessment/aptitude-screener?sessionId=qsess_demo')}
-                className="btn-gradient px-8 py-3.5 rounded-xl font-bold text-xs shadow-xl hover:scale-105 transition-all flex items-center gap-2"
+                className="btn-gradient w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-xl font-bold text-xs shadow-xl hover:scale-105 transition-all flex items-center justify-center gap-2"
               >
                 <span>Proceed to Stage 1 — Aptitude Screener (20 Mins)</span>
                 <ArrowRight className="w-4 h-4" />

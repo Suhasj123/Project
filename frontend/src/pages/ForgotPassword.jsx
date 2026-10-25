@@ -42,8 +42,8 @@ export const ForgotPassword = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto py-12 px-4">
-      <div className="visme-card p-8 md:p-10 space-y-6 shadow-2xl">
+    <div className="w-full max-w-md mx-auto py-6 sm:py-12 px-3 sm:px-4 min-w-0">
+      <div className="visme-card p-5 sm:p-7 md:p-10 space-y-6 shadow-2xl">
         <div className="text-center space-y-2">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white mx-auto flex items-center justify-center shadow-lg">
             <KeyRound className="w-7 h-7" />

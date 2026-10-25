@@ -52,15 +52,15 @@ export const AIMentor = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 pb-16">
+    <div className="w-full max-w-4xl mx-auto space-y-4 sm:space-y-6 pb-16 min-w-0">
       {/* Header */}
-      <div className="glass-card p-6 flex items-center justify-between">
+      <div className="glass-card p-4 sm:p-6 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white flex items-center justify-center shadow-lg">
-            <Bot className="w-6 h-6" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white flex items-center justify-center shadow-lg shrink-0">
+            <Bot className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
-          <div>
-            <h1 className="text-xl font-bold text-gray-900 dark:text-white">AI Placement Mentor</h1>
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white truncate">AI Placement Mentor</h1>
             <span className="text-xs text-emerald-500 font-semibold flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Online 24/7 Support
             </span>
@@ -78,7 +78,7 @@ export const AIMentor = () => {
           <button
             key={i}
             onClick={() => handleSendMessage(prompt)}
-            className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white/80 dark:bg-dark-card/80 border border-gray-200 dark:border-dark-border hover:border-brand-purple text-gray-700 dark:text-gray-300 transition shadow-sm"
+            className="px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl text-xs font-semibold bg-white/80 dark:bg-dark-card/80 border border-gray-200 dark:border-dark-border hover:border-brand-purple text-gray-700 dark:text-gray-300 transition shadow-sm"
           >
             💡 {prompt}
           </button>
@@ -86,19 +86,19 @@ export const AIMentor = () => {
       </div>
 
       {/* Chat Messages Container */}
-      <div className="glass-card p-6 min-h-[420px] max-h-[500px] overflow-y-auto space-y-4">
+      <div className="glass-card p-4 sm:p-6 min-h-[350px] sm:min-h-[420px] max-h-[500px] overflow-y-auto space-y-4">
         {messages.map((msg, i) => (
           <div
             key={i}
-            className={`flex items-start gap-3 ${msg.sender === 'user' ? 'flex-row-reverse' : ''}`}
+            className={`flex items-start gap-2.5 sm:gap-3 ${msg.sender === 'user' ? 'flex-row-reverse' : ''}`}
           >
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 font-bold text-xs ${
+            <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 font-bold text-xs ${
               msg.sender === 'user' ? 'bg-brand-blue text-white' : 'bg-brand-purple text-white'
             }`}>
-              {msg.sender === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+              {msg.sender === 'user' ? <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
             </div>
 
-            <div className={`p-4 rounded-2xl max-w-lg text-xs leading-relaxed ${
+            <div className={`p-3.5 sm:p-4 rounded-2xl max-w-[85%] sm:max-w-lg text-xs leading-relaxed break-words ${
               msg.sender === 'user'
                 ? 'bg-brand-blue text-white rounded-tr-none font-medium'
                 : 'bg-gray-100 dark:bg-dark-border text-gray-900 dark:text-white rounded-tl-none space-y-2'
@@ -121,19 +121,19 @@ export const AIMentor = () => {
       {/* Input Controls */}
       <form
         onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }}
-        className="flex items-center gap-3 glass-card p-2"
+        className="flex items-center gap-2 sm:gap-3 glass-card p-2 min-w-0"
       >
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Ask any question (e.g. Explain OOPs, What is DBMS, How to write SQL JOIN)..."
-          className="flex-1 p-3 rounded-xl bg-transparent text-xs text-gray-900 dark:text-white focus:outline-none"
+          placeholder="Ask any question..."
+          className="flex-1 min-w-0 p-2.5 sm:p-3 rounded-xl bg-transparent text-xs text-gray-900 dark:text-white focus:outline-none"
         />
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="btn-gradient p-3 rounded-xl text-white font-bold disabled:opacity-40"
+          className="btn-gradient p-2.5 sm:p-3 rounded-xl text-white font-bold disabled:opacity-40 shrink-0"
         >
           <Send className="w-4 h-4" />
         </button>

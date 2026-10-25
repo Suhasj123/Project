@@ -85,7 +85,7 @@ export const VismeInfographicWidget = ({
   const strokeDashoffset = circumference - (current.score / 100) * circumference;
 
   return (
-    <div className="visme-card p-6 md:p-8 space-y-6">
+    <div className="visme-card p-4 sm:p-6 md:p-8 space-y-6 min-w-0">
       
       {/* Top Banner Header with Visme Animated Badge */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-gray-100 dark:border-dark-border pb-5">
@@ -243,12 +243,12 @@ export const VismeInfographicWidget = ({
           </div>
 
           {/* Visme Bottom Micro-Interaction Action Bar */}
-          <div className="p-4 rounded-2xl bg-gradient-to-r from-brand-purple/10 to-brand-blue/10 border border-brand-purple/20 flex items-center justify-between gap-4">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-brand-purple/10 to-brand-blue/10 border border-brand-purple/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
             <div className="flex items-center gap-2.5 text-xs text-brand-purple dark:text-indigo-300 font-bold">
-              <Flame className="w-4 h-4 text-amber-500 fill-amber-500 animate-bounce" />
+              <Flame className="w-4 h-4 text-amber-500 fill-amber-500 animate-bounce shrink-0" />
               <span>Real-Time AI Telemetry & Feedback Active</span>
             </div>
-            <span className="text-[11px] font-black text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+            <span className="text-[11px] font-black text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 shrink-0">
               Optimal Placement Target
             </span>
           </div>

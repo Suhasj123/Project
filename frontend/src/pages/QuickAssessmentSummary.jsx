@@ -42,31 +42,31 @@ export const QuickAssessmentSummary = () => {
   }, [sessionId]);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-16 pt-6 animate-fadeIn">
+    <div className="w-full max-w-4xl mx-auto space-y-6 sm:space-y-8 pb-16 pt-3 sm:pt-6 min-w-0 animate-fadeIn">
       
       {/* Header Banner */}
-      <div className="relative overflow-hidden p-8 rounded-3xl bg-gradient-to-r from-brand-purple via-indigo-700 to-brand-blue text-white shadow-xl text-center space-y-4">
-        <div className="w-16 h-16 rounded-3xl bg-white/20 backdrop-blur-md text-white mx-auto flex items-center justify-center font-black">
-          <Zap className="w-8 h-8" />
+      <div className="relative overflow-hidden p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-brand-purple via-indigo-700 to-brand-blue text-white shadow-xl text-center space-y-4">
+        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-3xl bg-white/20 backdrop-blur-md text-white mx-auto flex items-center justify-center font-black">
+          <Zap className="w-7 h-7 sm:w-8 sm:h-8" />
         </div>
         
         <div>
           <span className="px-3 py-1 rounded-full bg-white/20 text-xs font-extrabold uppercase backdrop-blur-md">
             QUICK ASSESSMENT COMPLETED
           </span>
-          <h1 className="text-3xl font-extrabold tracking-tight mt-2">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight mt-2">
             Your Candidate Self-Check Summary
           </h1>
         </div>
 
         {/* Progress Indicator Stepper */}
-        <div className="flex items-center justify-center gap-4 pt-2">
-          <div className="flex items-center gap-2 text-xs font-extrabold text-emerald-300">
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-xs font-extrabold text-emerald-300">
             <CheckCircle2 className="w-4 h-4" />
             <span>Aptitude Screener ✓</span>
           </div>
-          <div className="w-8 h-0.5 bg-white/30"></div>
-          <div className="flex items-center gap-2 text-xs font-extrabold text-emerald-300">
+          <div className="w-6 sm:w-8 h-0.5 bg-white/30 hidden xs:block"></div>
+          <div className="flex items-center gap-1.5 sm:gap-2 text-xs font-extrabold text-emerald-300">
             <CheckCircle2 className="w-4 h-4" />
             <span>Coding Round ✓</span>
           </div>
@@ -74,23 +74,23 @@ export const QuickAssessmentSummary = () => {
       </div>
 
       {/* Main Score Metrics Card */}
-      <div className="glass-card p-8 text-center space-y-6 border-l-4 border-l-brand-purple">
-        <div className="grid md:grid-cols-2 gap-6">
+      <div className="glass-card p-4 sm:p-6 md:p-8 text-center space-y-6 border-l-4 border-l-brand-purple">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
           
-          <div className="p-6 rounded-2xl bg-brand-purple/10 border border-brand-purple/20 space-y-2">
-            <BookOpen className="w-8 h-8 text-brand-purple mx-auto" />
+          <div className="p-4 sm:p-6 rounded-2xl bg-brand-purple/10 border border-brand-purple/20 space-y-2">
+            <BookOpen className="w-7 h-7 sm:w-8 sm:h-8 text-brand-purple mx-auto" />
             <div className="text-xs font-extrabold uppercase text-brand-purple">STAGE 1 APTITUDE SCREENER</div>
-            <div className="text-4xl font-black text-brand-purple">
-              {summary.aptitudeScore} <span className="text-xl font-bold text-gray-400">/ {summary.aptitudeTotal}</span>
+            <div className="text-3xl sm:text-4xl font-black text-brand-purple">
+              {summary.aptitudeScore} <span className="text-lg sm:text-xl font-bold text-gray-400">/ {summary.aptitudeTotal}</span>
             </div>
             <div className="text-[11px] text-gray-500 font-semibold">80% Accuracy</div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 space-y-2">
-            <Code2 className="w-8 h-8 text-emerald-500 mx-auto" />
+          <div className="p-4 sm:p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 space-y-2">
+            <Code2 className="w-7 h-7 sm:w-8 sm:h-8 text-emerald-500 mx-auto" />
             <div className="text-xs font-extrabold uppercase text-emerald-500">STAGE 2 CODING ROUND</div>
-            <div className="text-4xl font-black text-emerald-500">
-              {summary.codingScore} <span className="text-xl font-bold text-gray-400">/ {summary.codingTotal}</span>
+            <div className="text-3xl sm:text-4xl font-black text-emerald-500">
+              {summary.codingScore} <span className="text-lg sm:text-xl font-bold text-gray-400">/ {summary.codingTotal}</span>
             </div>
             <div className="text-[11px] text-gray-500 font-semibold">80% Code Pass Rate</div>
           </div>
@@ -99,16 +99,16 @@ export const QuickAssessmentSummary = () => {
       </div>
 
       {/* Next Step Call-to-Action Cards */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
         
         {/* CTA 1: AI Mock Interview */}
-        <div className="glass-card p-6 space-y-4 border-l-4 border-l-brand-purple hover:scale-[1.02] transition-all">
+        <div className="glass-card p-4 sm:p-6 space-y-4 border-l-4 border-l-brand-purple hover:scale-[1.02] transition-all">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-brand-purple text-white flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-xl bg-brand-purple text-white flex items-center justify-center font-bold shrink-0">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-extrabold text-gray-900 dark:text-white">Try an AI Mock Interview</h3>
+              <h3 className="text-sm sm:text-base font-extrabold text-gray-900 dark:text-white">Try an AI Mock Interview</h3>
               <p className="text-xs text-gray-500">1-on-1 voice interview with dynamic Claude AI follow-up questions.</p>
             </div>
           </div>
@@ -123,13 +123,13 @@ export const QuickAssessmentSummary = () => {
         </div>
 
         {/* CTA 2: Prep Dashboard */}
-        <div className="glass-card p-6 space-y-4 border-l-4 border-l-brand-blue hover:scale-[1.02] transition-all">
+        <div className="glass-card p-4 sm:p-6 space-y-4 border-l-4 border-l-brand-blue hover:scale-[1.02] transition-all">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-brand-blue text-white flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-xl bg-brand-blue text-white flex items-center justify-center font-bold shrink-0">
               <TrendingUp className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-extrabold text-gray-900 dark:text-white">View Candidate Prep Dashboard</h3>
+              <h3 className="text-sm sm:text-base font-extrabold text-gray-900 dark:text-white">View Candidate Prep Dashboard</h3>
               <p className="text-xs text-gray-500">Track readiness trends, radar skill charts, and week-by-week roadmaps.</p>
             </div>
           </div>

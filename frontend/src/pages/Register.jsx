@@ -113,8 +113,8 @@ export const Register = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto py-8 md:py-16 px-4">
-      <div className="grid md:grid-cols-12 gap-8 items-center">
+    <div className="max-w-6xl mx-auto py-6 sm:py-8 md:py-16 px-3 sm:px-4 w-full max-w-full">
+      <div className="grid md:grid-cols-12 gap-6 md:gap-8 items-center">
         
         {/* Left Presentation Showcase */}
         <div className="md:col-span-6 space-y-8 hidden md:block">
@@ -155,7 +155,7 @@ export const Register = () => {
 
         {/* Right Form Card */}
         <div className="md:col-span-6 max-w-md w-full mx-auto">
-          <div className="visme-card p-8 md:p-10 space-y-6 shadow-2xl">
+          <div className="visme-card p-5 sm:p-7 md:p-10 space-y-5 sm:space-y-6 shadow-2xl w-full">
             <div className="text-center space-y-2">
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white mx-auto flex items-center justify-center shadow-lg">
                 <Brain className="w-7 h-7" />

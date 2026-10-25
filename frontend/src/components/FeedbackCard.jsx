@@ -27,29 +27,29 @@ export const FeedbackCard = ({ evaluation }) => {
   } = evaluation;
 
   return (
-    <div className="glass-card p-6 space-y-6 border-l-4 border-l-brand-purple animate-fadeIn">
+    <div className="glass-card p-4 sm:p-6 space-y-6 border-l-4 border-l-brand-purple animate-fadeIn min-w-0">
       {/* Header & Readiness Score */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 dark:border-dark-border pb-4">
         <div>
           <span className="px-2.5 py-0.5 rounded-full bg-brand-purple/10 text-brand-purple text-[10px] font-extrabold uppercase">
             AI EVALUATION SUMMARY
           </span>
-          <h3 className="text-xl font-extrabold text-gray-900 dark:text-white mt-1">
+          <h3 className="text-lg sm:text-xl font-extrabold text-gray-900 dark:text-white mt-1">
             Answer Evaluation & Readiness Feedback
           </h3>
         </div>
 
-        <div className="flex items-center gap-3 bg-brand-purple/10 p-3.5 rounded-2xl border border-brand-purple/20">
-          <Award className="w-7 h-7 text-brand-purple" />
+        <div className="flex items-center gap-3 bg-brand-purple/10 p-3 sm:p-3.5 rounded-2xl border border-brand-purple/20 shrink-0">
+          <Award className="w-6 h-6 sm:w-7 sm:h-7 text-brand-purple shrink-0" />
           <div>
-            <div className="text-2xl font-black text-brand-purple">{overall_readiness_score}%</div>
+            <div className="text-xl sm:text-2xl font-black text-brand-purple">{overall_readiness_score}%</div>
             <div className="text-[10px] font-bold text-gray-500 uppercase">Readiness Score</div>
           </div>
         </div>
       </div>
 
       {/* 4 Dimension Score Bars */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
         <div className="p-3 rounded-xl bg-gray-50 dark:bg-dark-border/40 space-y-1">
           <div className="flex justify-between text-gray-500 font-semibold">
             <span>Clarity:</span>

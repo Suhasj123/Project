@@ -43,10 +43,10 @@ const AppContent = () => {
   const isSidebarVisible = user && location.pathname !== '/login' && location.pathname !== '/register' && location.pathname !== '/forgot-password' && location.pathname !== '/reset-password';
 
   return (
-    <div className="flex min-h-screen bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-dark-text transition-colors duration-200">
+    <div className="flex min-h-screen w-full max-w-full overflow-x-hidden bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-dark-text transition-colors duration-200">
       <Navbar />
-      <div className={`flex-1 flex flex-col justify-between min-h-screen w-full overflow-x-hidden ${isSidebarVisible ? 'lg:pl-64' : ''}`}>
-        <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className={`flex-1 flex flex-col justify-between min-h-screen w-full min-w-0 max-w-full overflow-x-hidden ${isSidebarVisible ? 'lg:pl-64' : ''}`}>
+        <main className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 min-w-0">
           <Routes>
                     {/* Public Auth Routes */}
                     <Route path="/" element={<Navigate to="/login" replace />} />

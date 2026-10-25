@@ -430,16 +430,16 @@ export const CodingQuiz = () => {
 
       {/* 1. Stage-2 Start Banner */}
       {!quizStarted && !submitted && (
-        <div className="glass-card p-8 text-center space-y-6">
-          <div className="w-16 h-16 rounded-3xl bg-brand-purple/10 text-brand-purple mx-auto flex items-center justify-center">
-            <Code2 className="w-8 h-8" />
+        <div className="glass-card p-4 sm:p-6 md:p-8 text-center space-y-5 sm:space-y-6">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-3xl bg-brand-purple/10 text-brand-purple mx-auto flex items-center justify-center">
+            <Code2 className="w-7 h-7 sm:w-8 sm:h-8" />
           </div>
 
           <div className="space-y-2">
             <span className="px-3 py-1 rounded-full bg-brand-purple/10 text-brand-purple font-extrabold text-xs">
               STAGE - 2 ASSESSMENT
             </span>
-            <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">Stage-2 Coding & Algorithmic Test</h1>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">Stage-2 Coding & Algorithmic Test</h1>
             <p className="text-xs text-gray-500 max-w-md mx-auto leading-relaxed">
               Solve <strong>5 Coding Problems in 5 Minutes</strong>. Includes interactive code testing, AI face proctoring, and comprehensive solution explanations.
             </p>
@@ -448,12 +448,12 @@ export const CodingQuiz = () => {
           {/* Language Selection */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-gray-500 block">Select Preferred Coding Language:</label>
-            <div className="flex flex-wrap justify-center gap-3 py-2">
+            <div className="flex flex-wrap justify-center gap-2 py-2">
               {languages.map(lang => (
                 <button
                   key={lang}
                   onClick={() => setLanguage(lang)}
-                  className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all ${
+                  className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs font-bold transition-all ${
                     language === lang
                       ? 'btn-gradient shadow-md'
                       : 'bg-gray-100 dark:bg-dark-border text-gray-700 dark:text-gray-300 hover:bg-gray-200'
@@ -468,7 +468,7 @@ export const CodingQuiz = () => {
           <button
             onClick={startStage2CodingTest}
             disabled={loading}
-            className="btn-gradient px-8 py-3.5 rounded-2xl font-bold text-sm shadow-xl hover:scale-105 transition-all"
+            className="btn-gradient w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-2xl font-bold text-xs sm:text-sm shadow-xl hover:scale-105 transition-all"
           >
             {loading ? 'Initializing Compiler...' : `Start ${language} Coding Test (5 Mins) ⚡`}
           </button>
@@ -480,25 +480,25 @@ export const CodingQuiz = () => {
         <div className="space-y-6">
 
           {/* Header Bar with Live Language Switcher */}
-          <div className="glass-card p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="glass-card p-3 sm:p-4 flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
             <div className="flex items-center gap-2">
-              <Terminal className="w-5 h-5 text-brand-purple" />
+              <Terminal className="w-5 h-5 text-brand-purple shrink-0" />
               <div>
                 <span className="text-[10px] font-extrabold text-brand-purple uppercase bg-brand-purple/10 px-2 py-0.5 rounded-md">
                   CODING ASSESSMENT
                 </span>
-                <span className="text-sm font-bold text-gray-900 dark:text-white ml-2">{language} Assessment</span>
+                <span className="text-xs sm:text-sm font-bold text-gray-900 dark:text-white ml-2">{language} Assessment</span>
               </div>
             </div>
 
             {/* Language Switcher Tabs */}
-            <div className="flex items-center gap-1.5 bg-gray-100 dark:bg-dark-border/60 p-1.5 rounded-2xl border border-gray-200 dark:border-dark-border">
+            <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 bg-gray-100 dark:bg-dark-border/60 p-1 sm:p-1.5 rounded-2xl border border-gray-200 dark:border-dark-border max-w-full">
               {languages.map(lang => (
                 <button
                   key={lang}
                   type="button"
                   onClick={() => handleLanguageSwitch(lang)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                  className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-xs font-bold transition-all ${
                     language === lang
                       ? 'bg-brand-purple text-white shadow-md font-extrabold scale-105'
                       : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
@@ -509,9 +509,9 @@ export const CodingQuiz = () => {
               ))}
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 w-full sm:w-auto">
               <Timer initialSeconds={300} onTimeUp={handleFinalSubmit} />
-              <div className="text-xs font-bold text-brand-purple bg-brand-purple/10 px-3 py-1.5 rounded-xl">
+              <div className="text-xs font-bold text-brand-purple bg-brand-purple/10 px-3 py-1.5 rounded-xl shrink-0">
                 Problem {currentIndex + 1} of {questions.length}
               </div>
             </div>
@@ -519,7 +519,7 @@ export const CodingQuiz = () => {
 
           {/* Active Question & Code Sandbox */}
           {currentQ && (
-            <div className="glass-card p-8 space-y-6">
+            <div className="glass-card p-4 sm:p-6 md:p-8 space-y-6">
               <div className="space-y-2">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-brand-purple bg-brand-purple/10 px-2.5 py-1 rounded-lg">
                   {currentQ.subTopic || 'Algorithmic Problem'}

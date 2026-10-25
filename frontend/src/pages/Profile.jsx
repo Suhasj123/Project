@@ -28,19 +28,19 @@ export const Profile = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8 pb-16">
-      <div className="glass-card p-8 space-y-8">
+    <div className="w-full max-w-3xl mx-auto space-y-6 sm:space-y-8 pb-16 min-w-0">
+      <div className="glass-card p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8">
         <div className="flex items-center gap-4 border-b border-gray-100 dark:border-dark-border pb-6">
-          <div className="relative">
+          <div className="relative shrink-0">
             <img
               src={profilePic || avatarOptions[0]}
               alt="Avatar"
-              className="w-20 h-20 rounded-full object-cover border-4 border-brand-purple shadow-md"
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-4 border-brand-purple shadow-md"
             />
           </div>
-          <div>
-            <h1 className="text-2xl font-extrabold text-gray-900 dark:text-white">{user?.name}</h1>
-            <p className="text-xs text-gray-500">{user?.email}</p>
+          <div className="min-w-0">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white truncate">{user?.name}</h1>
+            <p className="text-xs text-gray-500 truncate">{user?.email}</p>
             <span className="inline-block text-[10px] font-bold text-brand-purple bg-brand-purple/10 px-2.5 py-0.5 rounded-full mt-1 uppercase">
               {user?.role || 'Student'} Account
             </span>
@@ -81,7 +81,7 @@ export const Profile = () => {
               <label className="text-xs font-bold text-gray-500 mb-2 flex items-center gap-2">
                 <Camera className="w-4 h-4 text-brand-purple" /> Select Profile Avatar
               </label>
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 {avatarOptions.map((url, i) => (
                   <img
                     key={i}
@@ -100,7 +100,7 @@ export const Profile = () => {
           <button
             type="submit"
             disabled={loading}
-            className="btn-gradient px-8 py-3.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg"
+            className="btn-gradient w-full sm:w-auto justify-center px-8 py-3.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg"
           >
             <Save className="w-4 h-4" />
             <span>{loading ? 'Saving Changes...' : 'Save Profile Changes'}</span>

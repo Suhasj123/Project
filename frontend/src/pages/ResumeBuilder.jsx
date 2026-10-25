@@ -450,7 +450,7 @@ ${formData.certifications.map(c => `• ${c}`).join('\n')}
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 pb-20 pt-2">
+    <div className="w-full max-w-6xl mx-auto space-y-6 pb-20 pt-2 min-w-0">
       
       {/* Stepper Header (Screen Only) */}
       <div className="print:hidden">
@@ -458,7 +458,7 @@ ${formData.certifications.map(c => `• ${c}`).join('\n')}
       </div>
 
       {/* Main Configuration & Intelligence Bar (Screen Only) */}
-      <div className="glass-card p-6 space-y-5 border-l-4 border-l-brand-purple shadow-lg print:hidden">
+      <div className="glass-card p-4 sm:p-6 space-y-5 border-l-4 border-l-brand-purple shadow-lg print:hidden">
         
         {/* Top Header Row with ATS Score Badge */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 dark:border-dark-border pb-4">
@@ -467,7 +467,7 @@ ${formData.certifications.map(c => `• ${c}`).join('\n')}
               <Sparkles className="w-3.5 h-3.5" />
               <span>SINGLE-PAGE A4 ATS RESUME ENGINE</span>
             </div>
-            <h1 className="text-2xl font-black text-gray-900 dark:text-white">
+            <h1 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">
               Company & Role-Tailored Resume Preparer
             </h1>
             <p className="text-xs text-gray-500">
@@ -477,14 +477,14 @@ ${formData.certifications.map(c => `• ${c}`).join('\n')}
 
           {/* Live ATS Score Indicator */}
           <div className="flex items-center gap-3 bg-gradient-to-r from-emerald-500/10 via-brand-purple/10 to-indigo-500/10 p-3 rounded-2xl border border-emerald-500/20 shrink-0">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500 text-white flex flex-col items-center justify-center font-black shadow-md">
+            <div className="w-12 h-12 rounded-xl bg-emerald-500 text-white flex flex-col items-center justify-center font-black shadow-md shrink-0">
               <span className="text-base leading-none">{atsScore}%</span>
               <span className="text-[9px] font-bold uppercase">ATS</span>
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-1.5 text-xs font-black text-emerald-700 dark:text-emerald-400">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Target Match for {targetCompany}</span>
+                <CheckCircle2 className="w-4 h-4 shrink-0" />
+                <span className="truncate">Target Match for {targetCompany}</span>
               </div>
               <p className="text-[11px] text-gray-500">
                 Full-Sheet A4 Verified • Clean White Paper
@@ -495,34 +495,34 @@ ${formData.certifications.map(c => `• ${c}`).join('\n')}
 
         {/* Action Tabs */}
         <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
             <button
               onClick={() => setActiveTab('tailor')}
-              className={`px-4 py-2 rounded-xl font-black text-xs transition-all flex items-center gap-1.5 ${
+              className={`px-3 sm:px-4 py-2 rounded-xl font-black text-xs transition-all flex items-center gap-1.5 flex-1 sm:flex-initial justify-center ${
                 activeTab === 'tailor'
                   ? 'bg-brand-purple text-white shadow-md'
                   : 'bg-gray-100 dark:bg-dark-border/40 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
               }`}
             >
               <Zap className="w-3.5 h-3.5" />
-              <span>1. Company & Role Tailoring</span>
+              <span>1. Tailoring</span>
             </button>
 
             <button
               onClick={() => setActiveTab('import')}
-              className={`px-4 py-2 rounded-xl font-black text-xs transition-all flex items-center gap-1.5 ${
+              className={`px-3 sm:px-4 py-2 rounded-xl font-black text-xs transition-all flex items-center gap-1.5 flex-1 sm:flex-initial justify-center ${
                 activeTab === 'import'
                   ? 'bg-brand-purple text-white shadow-md'
                   : 'bg-gray-100 dark:bg-dark-border/40 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
               }`}
             >
               <Upload className="w-3.5 h-3.5" />
-              <span>2. Upload / Import Resume</span>
+              <span>2. Import</span>
             </button>
 
             <button
               onClick={() => setActiveTab('edit')}
-              className={`px-4 py-2 rounded-xl font-black text-xs transition-all flex items-center gap-1.5 ${
+              className={`px-3 sm:px-4 py-2 rounded-xl font-black text-xs transition-all flex items-center gap-1.5 flex-1 sm:flex-initial justify-center ${
                 activeTab === 'edit'
                   ? 'bg-brand-purple text-white shadow-md'
                   : 'bg-gray-100 dark:bg-dark-border/40 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
@@ -534,10 +534,10 @@ ${formData.certifications.map(c => `• ${c}`).join('\n')}
           </div>
 
           {/* Export Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
             <button
               onClick={handleCopyText}
-              className="px-3.5 py-2 rounded-xl border border-gray-200 dark:border-dark-border hover:bg-gray-100 dark:hover:bg-dark-border/40 text-gray-700 dark:text-gray-200 text-xs font-bold transition flex items-center gap-1.5"
+              className="flex-1 sm:flex-initial justify-center px-3.5 py-2 rounded-xl border border-gray-200 dark:border-dark-border hover:bg-gray-100 dark:hover:bg-dark-border/40 text-gray-700 dark:text-gray-200 text-xs font-bold transition flex items-center gap-1.5"
               title="Copy ATS compliant plain text"
             >
               <Copy className="w-3.5 h-3.5" />
@@ -546,10 +546,10 @@ ${formData.certifications.map(c => `• ${c}`).join('\n')}
 
             <button
               onClick={handleExportPDF}
-              className="btn-gradient px-5 py-2 rounded-xl font-black text-xs shadow-md hover:scale-[1.02] transition-all flex items-center gap-2"
+              className="btn-gradient flex-1 sm:flex-initial justify-center px-4 sm:px-5 py-2 rounded-xl font-black text-xs shadow-md hover:scale-[1.02] transition-all flex items-center gap-2"
             >
               <Printer className="w-4 h-4" />
-              <span>Export A4 PDF (Print) 📄</span>
+              <span>Export A4 PDF 📄</span>
             </button>
           </div>
         </div>
@@ -809,14 +809,14 @@ ${formData.certifications.map(c => `• ${c}`).join('\n')}
       {/* ========================================================================= */}
       {/* 📄 THE A4 SHEET DOCUMENT (Full-Sheet Single Page A4 Presentation)         */}
       {/* ========================================================================= */}
-      <div className="bg-white text-gray-900 p-8 sm:p-10 shadow-2xl rounded-2xl border border-gray-200 font-sans printable-document print:rounded-none print:shadow-none print:border-none print:p-0 print:m-0 print:w-full print:bg-white space-y-2 text-[10.5pt] leading-normal">
+      <div className="bg-white text-gray-900 p-4 sm:p-8 md:p-10 shadow-2xl rounded-2xl border border-gray-200 font-sans printable-document print:rounded-none print:shadow-none print:border-none print:p-0 print:m-0 print:w-full print:bg-white space-y-2 text-[10.5pt] leading-normal overflow-hidden break-words">
         
         {/* Document Header */}
         <div className="border-b-2 border-brand-purple pb-1.5 text-center space-y-0.5 avoid-break">
-          <h1 className="text-2xl font-black text-gray-950 tracking-tight leading-none uppercase">
+          <h1 className="text-xl sm:text-2xl font-black text-gray-950 tracking-tight leading-none uppercase">
             {formData.name}
           </h1>
-          <p className="resume-role text-[11pt] font-extrabold text-blue-700 uppercase tracking-wider">
+          <p className="resume-role text-[10.5pt] sm:text-[11pt] font-extrabold text-blue-700 uppercase tracking-wider">
             {formData.targetRole}
           </p>
           
@@ -826,7 +826,7 @@ ${formData.certifications.map(c => `• ${c}`).join('\n')}
             <span>📍 {formData.location}</span>
           </div>
 
-          <div className="resume-contact flex items-center justify-center gap-3 text-[8.5pt] text-gray-600 font-mono pt-0.5">
+          <div className="resume-contact flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[8.5pt] text-gray-600 font-mono pt-0.5 break-all">
             <span>LinkedIn: {formData.linkedin}</span> •
             <span>GitHub: {formData.github}</span> •
             <span>Portfolio: {formData.portfolio}</span>

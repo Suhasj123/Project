@@ -90,31 +90,31 @@ export const PrepDashboard = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8 pb-16">
+    <div className="w-full max-w-7xl mx-auto space-y-6 sm:space-y-8 pb-16 min-w-0">
       
       {/* Top Metric Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-card p-5 space-y-2 border-l-4 border-l-brand-purple">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="glass-card p-4 sm:p-5 space-y-2 border-l-4 border-l-brand-purple">
           <div className="text-xs font-extrabold text-gray-400 uppercase">Current Readiness Score</div>
-          <div className="text-3xl font-black text-brand-purple">88 / 100</div>
+          <div className="text-2xl sm:text-3xl font-black text-brand-purple">88 / 100</div>
           <div className="text-[11px] text-emerald-500 font-bold">↑ +14% Improvement</div>
         </div>
 
-        <div className="glass-card p-5 space-y-2 border-l-4 border-l-brand-blue">
+        <div className="glass-card p-4 sm:p-5 space-y-2 border-l-4 border-l-brand-blue">
           <div className="text-xs font-extrabold text-gray-400 uppercase">Mock Sessions Completed</div>
-          <div className="text-3xl font-black text-gray-900 dark:text-white">5 Sessions</div>
+          <div className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">5 Sessions</div>
           <div className="text-[11px] text-brand-blue font-bold">Claude AI Dynamic Follow-ups</div>
         </div>
 
-        <div className="glass-card p-5 space-y-2 border-l-4 border-l-emerald-500">
+        <div className="glass-card p-4 sm:p-5 space-y-2 border-l-4 border-l-emerald-500">
           <div className="text-xs font-extrabold text-gray-400 uppercase">Practice Streak & XP</div>
-          <div className="text-3xl font-black text-emerald-500">450 XP</div>
+          <div className="text-2xl sm:text-3xl font-black text-emerald-500">450 XP</div>
           <div className="text-[11px] text-amber-500 font-extrabold">🔥 5-Day Practice Streak</div>
         </div>
 
-        <div className="glass-card p-5 space-y-2 border-l-4 border-l-amber-500">
+        <div className="glass-card p-4 sm:p-5 space-y-2 border-l-4 border-l-amber-500">
           <div className="text-xs font-extrabold text-gray-400 uppercase">Resume JD Match Score</div>
-          <div className="text-3xl font-black text-amber-500">78% Match</div>
+          <div className="text-2xl sm:text-3xl font-black text-amber-500">78% Match</div>
           <div className="text-[11px] text-amber-500 font-bold">4-Week Active Roadmap</div>
         </div>
       </div>
@@ -123,16 +123,16 @@ export const PrepDashboard = () => {
       <VismeInfographicWidget readinessScore={88} atsScore={92} codingSpeed={95} confidence={86} />
 
       {/* Charts Grid: Readiness Trend Line Chart & Skill Breakdown Radar Chart */}
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
         
         {/* Left: Recharts Line Chart */}
-        <div className="lg:col-span-2 glass-card p-6 space-y-4">
+        <div className="lg:col-span-2 glass-card p-4 sm:p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-brand-purple" />
+            <h3 className="text-base sm:text-lg font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-brand-purple shrink-0" />
               <span>Interview Readiness Score Trend</span>
             </h3>
-            <span className="text-xs text-gray-400 font-semibold">Target: 70+ Score</span>
+            <span className="text-xs text-gray-400 font-semibold shrink-0">Target: 70+</span>
           </div>
 
           <ResponsiveContainer width="100%" height={280}>
@@ -170,9 +170,9 @@ export const PrepDashboard = () => {
         </div>
 
         {/* Right: Recharts Skill Radar Chart */}
-        <div className="glass-card p-6 space-y-4">
-          <h3 className="text-lg font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
-            <Award className="w-5 h-5 text-brand-blue" />
+        <div className="glass-card p-4 sm:p-6 space-y-4">
+          <h3 className="text-base sm:text-lg font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+            <Award className="w-5 h-5 text-brand-blue shrink-0" />
             <span>Latest Session Radar</span>
           </h3>
 
@@ -189,13 +189,13 @@ export const PrepDashboard = () => {
       </div>
 
       {/* Mock Interview Session History & Weak Topics Grid */}
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
         
         {/* Mock Interview Session History List */}
-        <div className="lg:col-span-2 glass-card p-6 space-y-4">
+        <div className="lg:col-span-2 glass-card p-4 sm:p-6 space-y-4">
           <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-3">
-            <h3 className="text-lg font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-brand-purple" />
+            <h3 className="text-base sm:text-lg font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+              <BookOpen className="w-5 h-5 text-brand-purple shrink-0" />
               <span>Mock Interview Session History</span>
             </h3>
             <button

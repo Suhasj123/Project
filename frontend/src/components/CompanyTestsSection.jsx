@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useToast } from '../context/ToastContext';
 import {
   Building2,
   CheckCircle2,
@@ -230,7 +231,7 @@ export const CompanyTestsSection = ({ onStartCompanyTest, onDownloadPDF }) => {
 
             {/* THREE INTERACTIVE BUTTONS PER COMPANY */}
             <div className="space-y-2 pt-3 border-t border-gray-100 dark:border-dark-border">
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {/* Button 1: Take Test */}
                 <button
                   onClick={() => handleStartTest(comp)}
@@ -306,7 +307,7 @@ export const CompanyTestsSection = ({ onStartCompanyTest, onDownloadPDF }) => {
             </div>
 
             {/* Modal Tabs */}
-            <div className="flex border-b border-gray-200 dark:border-dark-border gap-2 pb-2">
+            <div className="flex flex-wrap sm:flex-nowrap sm:overflow-x-auto border-b border-gray-200 dark:border-dark-border gap-1.5 sm:gap-2 pb-2">
               {[
                 { key: 'pattern', label: 'Company Overview & Pattern' },
                 { key: 'questions', label: 'Prep Questions & Solutions' },

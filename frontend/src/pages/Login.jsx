@@ -112,8 +112,8 @@ export const Login = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto py-8 md:py-16 px-4">
-      <div className="grid md:grid-cols-12 gap-8 items-center">
+    <div className="max-w-6xl mx-auto py-6 sm:py-8 md:py-16 px-3 sm:px-4 w-full max-w-full">
+      <div className="grid md:grid-cols-12 gap-6 md:gap-8 items-center">
         
         {/* Left Column: Presentation Showcase */}
         <div className="md:col-span-6 space-y-8 hidden md:block">
@@ -173,7 +173,7 @@ export const Login = () => {
 
         {/* Right Column: Glassmorphism Login Card */}
         <div className="md:col-span-6 max-w-md w-full mx-auto">
-          <div className="visme-card p-8 md:p-10 space-y-6 shadow-2xl">
+          <div className="visme-card p-5 sm:p-7 md:p-10 space-y-5 sm:space-y-6 shadow-2xl w-full">
             
             {/* Header Icon & Title */}
             <div className="text-center space-y-2">

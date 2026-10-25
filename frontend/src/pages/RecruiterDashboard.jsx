@@ -15,6 +15,9 @@ import {
   Building2,
   Sparkles,
   Search,
+  CheckSquare,
+  Filter,
+  Brain
 } from 'lucide-react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -144,28 +147,28 @@ export const RecruiterDashboard = () => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8 pb-16">
+    <div className="w-full max-w-7xl mx-auto space-y-6 sm:space-y-8 pb-16 min-w-0">
       
       {/* Header Banner */}
-      <div className="relative overflow-hidden p-8 rounded-3xl bg-gradient-to-r from-brand-purple via-indigo-700 to-brand-blue text-white shadow-xl">
+      <div className="relative overflow-hidden p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-brand-purple via-indigo-700 to-brand-blue text-white shadow-xl">
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-semibold backdrop-blur-md">
-              <CheckSquare className="w-3.5 h-3.5" />
+              <CheckSquare className="w-3.5 h-3.5 shrink-0" />
               <span>RECRUITER FEEDBACK & DECISION DASHBOARD</span>
             </div>
-            <h1 className="text-3xl font-extrabold tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Candidate Hiring Decision Panel
             </h1>
-            <p className="text-sm text-indigo-100 max-w-xl">
+            <p className="text-xs sm:text-sm text-indigo-100 max-w-xl">
               Evaluate candidates across Aptitude scores, Monaco coding test performance, and behavioral video ratings to issue final Hire / Reject / Hold decisions.
             </p>
           </div>
 
-          <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 shrink-0">
-            <Users className="w-8 h-8 text-white" />
+          <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl border border-white/20 shrink-0 w-full md:w-auto">
+            <Users className="w-7 h-7 sm:w-8 sm:h-8 text-white shrink-0" />
             <div>
-              <div className="text-2xl font-black">{candidates.length} Applicants</div>
+              <div className="text-xl sm:text-2xl font-black">{candidates.length} Applicants</div>
               <div className="text-xs text-indigo-200">Active Candidates</div>
             </div>
           </div>
@@ -173,28 +176,28 @@ export const RecruiterDashboard = () => {
       </div>
 
       {/* Metric Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-card p-5 space-y-2 border-l-4 border-l-brand-blue">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+        <div className="glass-card p-4 sm:p-5 space-y-2 border-l-4 border-l-brand-blue">
           <div className="text-xs font-extrabold text-gray-400 uppercase">Aptitude Auto-Scored</div>
-          <div className="text-2xl font-black text-gray-900 dark:text-white">100% Verified</div>
+          <div className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">100% Verified</div>
           <div className="text-[11px] text-emerald-500 font-bold">4 Sections Auto-Graded</div>
         </div>
 
-        <div className="glass-card p-5 space-y-2 border-l-4 border-l-brand-purple">
+        <div className="glass-card p-4 sm:p-5 space-y-2 border-l-4 border-l-brand-purple">
           <div className="text-xs font-extrabold text-gray-400 uppercase">Coding Test Sandboxed</div>
-          <div className="text-2xl font-black text-gray-900 dark:text-white">Monaco Editor</div>
+          <div className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">Monaco Editor</div>
           <div className="text-[11px] text-brand-purple font-bold">Test Cases Passed</div>
         </div>
 
-        <div className="glass-card p-5 space-y-2 border-l-4 border-l-amber-500">
+        <div className="glass-card p-4 sm:p-5 space-y-2 border-l-4 border-l-amber-500">
           <div className="text-xs font-extrabold text-gray-400 uppercase">WebRTC Interviews</div>
-          <div className="text-2xl font-black text-gray-900 dark:text-white">Live Rooms</div>
+          <div className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">Live Rooms</div>
           <div className="text-[11px] text-amber-500 font-bold">Notes Synced</div>
         </div>
 
-        <div className="glass-card p-5 space-y-2 border-l-4 border-l-emerald-500">
+        <div className="glass-card p-4 sm:p-5 space-y-2 border-l-4 border-l-emerald-500">
           <div className="text-xs font-extrabold text-gray-400 uppercase">Offers Extended</div>
-          <div className="text-2xl font-black text-emerald-500">
+          <div className="text-xl sm:text-2xl font-black text-emerald-500">
             {candidates.filter(c => c.decision === 'Hire').length} Candidates
           </div>
           <div className="text-[11px] text-emerald-500 font-bold">Automated Status Email</div>
@@ -202,7 +205,7 @@ export const RecruiterDashboard = () => {
       </div>
 
       {/* Search & Filter Bar */}
-      <div className="glass-card p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="glass-card p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="relative flex-1">
           <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -234,17 +237,17 @@ export const RecruiterDashboard = () => {
         {filteredCandidates.map((cand) => (
           <div
             key={cand.id}
-            className="glass-card p-6 space-y-6 hover:border-brand-purple transition-all border-l-4 border-l-brand-purple"
+            className="glass-card p-4 sm:p-6 space-y-6 hover:border-brand-purple transition-all border-l-4 border-l-brand-purple"
           >
             {/* Header: Candidate Info & Decision Badge */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 dark:border-dark-border pb-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white flex items-center justify-center font-black text-lg">
+              <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white flex items-center justify-center font-black text-base sm:text-lg shrink-0">
                   {cand.name.charAt(0)}
                 </div>
-                <div>
-                  <h3 className="text-xl font-extrabold text-gray-900 dark:text-white">{cand.name}</h3>
-                  <p className="text-xs text-gray-500">{cand.email} • <span className="font-semibold text-brand-purple">{cand.appliedRole}</span></p>
+                <div className="min-w-0">
+                  <h3 className="text-lg sm:text-xl font-extrabold text-gray-900 dark:text-white truncate">{cand.name}</h3>
+                  <p className="text-xs text-gray-500 truncate">{cand.email} • <span className="font-semibold text-brand-purple">{cand.appliedRole}</span></p>
                 </div>
               </div>
 
@@ -338,12 +341,12 @@ export const RecruiterDashboard = () => {
             </div>
 
             {/* Action Bar: Dispatch Email Notification */}
-            <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-dark-border">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-gray-100 dark:border-dark-border">
               <span className="text-xs text-gray-400 font-semibold">Status: <span className="text-gray-700 dark:text-gray-200 font-bold">{cand.status}</span></span>
               
               <button
                 onClick={() => handleSendEmail(cand)}
-                className="btn-gradient px-5 py-2.5 rounded-xl text-xs font-bold shadow-md hover:scale-105 transition-all flex items-center gap-2"
+                className="btn-gradient w-full sm:w-auto justify-center px-5 py-2.5 rounded-xl text-xs font-bold shadow-md hover:scale-105 transition-all flex items-center gap-2"
               >
                 <Send className="w-4 h-4" />
                 <span>Send Candidate Status Notification</span>
@@ -356,7 +359,7 @@ export const RecruiterDashboard = () => {
       {/* Candidate Notification Email Modal */}
       {emailModalOpen && selectedCandidate && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="glass-card max-w-lg w-full p-8 space-y-6 animate-fadeIn">
+          <div className="glass-card max-w-lg w-full p-5 sm:p-8 space-y-6 animate-fadeIn">
             <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-4">
               <h3 className="text-xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
                 <Send className="w-5 h-5 text-brand-purple" />

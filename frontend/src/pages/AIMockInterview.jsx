@@ -474,25 +474,25 @@ export const AIMockInterview = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 pb-16">
+    <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 pb-16 w-full max-w-full min-w-0">
       
       {/* Header Banner */}
-      <div className="relative overflow-hidden p-8 rounded-3xl bg-gradient-to-r from-brand-purple via-indigo-700 to-brand-blue text-white shadow-xl">
-        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div className="relative overflow-hidden p-5 sm:p-7 md:p-8 rounded-3xl bg-gradient-to-r from-brand-purple via-indigo-700 to-brand-blue text-white shadow-xl">
+        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-semibold backdrop-blur-md">
               <Bot className="w-3.5 h-3.5" />
               <span>AI MOCK INTERVIEW BOT</span>
             </div>
-            <h1 className="text-3xl font-extrabold tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Adaptive AI Mock Interviewer
             </h1>
-            <p className="text-sm text-indigo-100 max-w-xl">
+            <p className="text-xs sm:text-sm text-indigo-100 max-w-xl leading-relaxed">
               Simulate live 1-on-1 interviews with dynamic speech recognition, instant knowledge gauging, adaptive follow-up questions, and STAR readiness feedback.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/20">
+          <div className="flex flex-wrap items-center gap-2 bg-white/10 backdrop-blur-md p-2.5 sm:p-3 rounded-2xl border border-white/20 w-full md:w-auto">
             <button
               onClick={() => setTtsEnabled(!ttsEnabled)}
               className={`p-2.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
@@ -541,12 +541,12 @@ export const AIMockInterview = () => {
 
       {/* Setup Form Card */}
       {!interviewStarted && (
-        <div className="glass-card max-w-2xl mx-auto p-8 space-y-6">
+        <div className="glass-card max-w-2xl mx-auto p-4 sm:p-6 md:p-8 space-y-6">
           <div className="text-center space-y-3">
-            <div className="mx-auto w-24 h-24 flex items-center justify-center">
-              <LottieAnimationPlayer animationType="aiBrain" className="w-24 h-24" />
+            <div className="mx-auto w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center">
+              <LottieAnimationPlayer animationType="aiBrain" className="w-20 h-20 sm:w-24 sm:h-24" />
             </div>
-            <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white">
               Configure Your AI Mock Interview Round
             </h2>
             <p className="text-xs text-gray-500">
@@ -570,7 +570,7 @@ export const AIMockInterview = () => {
               </select>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="font-bold text-gray-700 dark:text-gray-200 block mb-1.5">Interview Round Type:</label>
                 <select
@@ -800,11 +800,11 @@ export const AIMockInterview = () => {
 
           {/* Input & Voice Controls (when active) */}
           {!interviewEnded && (
-            <form onSubmit={handleFormSubmit} className="glass-card p-3 flex items-center gap-3">
+            <form onSubmit={handleFormSubmit} className="glass-card p-2 sm:p-3 flex items-center gap-2 sm:gap-3 w-full max-w-full">
               <button
                 type="button"
                 onClick={toggleListening}
-                className={`p-3 rounded-xl transition flex items-center gap-1.5 ${
+                className={`p-2.5 sm:p-3 rounded-xl transition flex items-center gap-1.5 shrink-0 ${
                   isListening
                     ? 'bg-rose-500 text-white animate-pulse shadow-md'
                     : 'bg-brand-purple/10 text-brand-purple hover:bg-brand-purple hover:text-white'
@@ -822,13 +822,13 @@ export const AIMockInterview = () => {
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder={isListening ? "Listening to your voice... Speak your answer now" : "Type your answer or click 'Speak Answer' to talk..."}
-                className="flex-1 p-3 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg text-xs focus:ring-2 focus:ring-brand-purple focus:outline-none"
+                className="flex-1 min-w-0 p-2.5 sm:p-3 rounded-xl border border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg text-xs focus:ring-2 focus:ring-brand-purple focus:outline-none"
               />
 
               <button
                 type="submit"
                 disabled={loading || (!inputText.trim() && !interimText.trim())}
-                className="btn-gradient p-3 rounded-xl shadow-md disabled:opacity-50"
+                className="btn-gradient p-2.5 sm:p-3 rounded-xl shadow-md disabled:opacity-50 shrink-0"
                 title="Submit Answer"
               >
                 <Send className="w-4 h-4" />

@@ -34,6 +34,18 @@ export const Navbar = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Prevent background scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   // If user is not logged in or on login/auth pages, DO NOT display the navigation header/sidebar
   if (!user || location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/forgot-password' || location.pathname === '/reset-password') {
     return null;
@@ -79,24 +91,26 @@ export const Navbar = () => {
   return (
     <>
       {/* Mobile Top Navigation Bar (Visible only on small screens < lg) */}
-      <header className="lg:hidden sticky top-0 z-40 bg-white/90 dark:bg-dark-card/90 backdrop-blur-md border-b border-gray-200 dark:border-dark-border px-4 py-3 flex items-center justify-between shadow-sm">
-        <Link to="/" className="flex items-center gap-2 font-bold text-lg text-gray-900 dark:text-white">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-blue via-brand-purple to-indigo-600 flex items-center justify-center text-white shadow">
-            <Brain className="w-5 h-5" />
+      <header className="lg:hidden sticky top-0 z-40 bg-white/95 dark:bg-dark-card/95 backdrop-blur-md border-b border-gray-200 dark:border-dark-border px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between shadow-sm w-full max-w-full">
+        <Link to="/" className="flex items-center gap-2 font-bold text-base sm:text-lg text-gray-900 dark:text-white shrink-0 min-w-0">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-blue via-brand-purple to-indigo-600 flex items-center justify-center text-white shadow shrink-0">
+            <Brain className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
-          <span>Interview<span className="text-brand-purple font-extrabold">Pro</span></span>
+          <span className="truncate">Interview<span className="text-brand-purple font-extrabold">Pro</span></span>
         </Link>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <button
             onClick={toggleDarkMode}
-            className="p-2 rounded-xl bg-gray-100 dark:bg-dark-border text-gray-700 dark:text-gray-200"
+            className="p-1.5 sm:p-2 rounded-xl bg-gray-100 dark:bg-dark-border text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            aria-label="Toggle Theme"
           >
             {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-600" />}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-dark-border"
+            className="p-1.5 sm:p-2 rounded-xl text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-dark-border hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -106,17 +120,17 @@ export const Navbar = () => {
       {/* Mobile Sidebar Overlay Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex">
-          <aside className="w-72 bg-white dark:bg-dark-card h-full p-5 space-y-6 flex flex-col justify-between shadow-2xl border-r border-gray-200 dark:border-dark-border overflow-y-auto">
+          <aside className="w-72 max-w-[85vw] bg-white dark:bg-dark-card h-full p-4 sm:p-5 space-y-6 flex flex-col justify-between shadow-2xl border-r border-gray-200 dark:border-dark-border overflow-y-auto">
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-4">
-                <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 font-bold text-lg text-gray-900 dark:text-white">
-                  <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-purple flex items-center justify-center text-white shadow">
-                    <Brain className="w-5 h-5" />
+                <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 font-bold text-base sm:text-lg text-gray-900 dark:text-white truncate">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-purple flex items-center justify-center text-white shadow shrink-0">
+                    <Brain className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <span>Interview<span className="text-brand-purple font-extrabold">Pro</span></span>
+                  <span className="truncate">Interview<span className="text-brand-purple font-extrabold">Pro</span></span>
                 </Link>
-                <button onClick={() => setMobileMenuOpen(false)} className="p-1 text-gray-400 hover:text-gray-700 dark:hover:text-white">
-                  <X className="w-6 h-6" />
+                <button onClick={() => setMobileMenuOpen(false)} className="p-1 text-gray-400 hover:text-gray-700 dark:hover:text-white shrink-0" aria-label="Close menu">
+                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
               </div>
 

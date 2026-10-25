@@ -201,40 +201,40 @@ export const AptitudeQuiz = () => {
 
       {/* 1. Pre-test Stage-1 Welcome Screen */}
       {!quizStarted && !submitted && (
-        <div className="glass-card p-8 text-center space-y-6">
-          <div className="w-16 h-16 rounded-3xl bg-brand-blue/10 text-brand-blue mx-auto flex items-center justify-center">
-            <BookOpen className="w-8 h-8" />
+        <div className="glass-card p-4 sm:p-6 md:p-8 text-center space-y-5 sm:space-y-6">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-3xl bg-brand-blue/10 text-brand-blue mx-auto flex items-center justify-center">
+            <BookOpen className="w-7 h-7 sm:w-8 sm:h-8" />
           </div>
 
           <div className="space-y-2">
             <span className="px-3 py-1 rounded-full bg-brand-blue/10 text-brand-blue font-extrabold text-xs">
               STAGE - 1 ASSESSMENT
             </span>
-            <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">Aptitude & Technical MCQ Test</h1>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">Aptitude & Technical MCQ Test</h1>
             <p className="text-xs text-gray-500 max-w-md mx-auto leading-relaxed">
               Complete <strong>20 Questions in 10 Minutes</strong> covering Quantitative Aptitude, Logical Reasoning, Verbal Ability, and Core CS.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-lg mx-auto text-left text-xs">
-            <div className="p-4 rounded-xl bg-gray-50 dark:bg-dark-border/40 border border-gray-100 dark:border-dark-border">
-              <span className="text-gray-400 font-bold block">Questions</span>
-              <span className="font-extrabold text-gray-900 dark:text-white text-base">20 MCQs</span>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 max-w-lg mx-auto text-left text-xs">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-gray-50 dark:bg-dark-border/40 border border-gray-100 dark:border-dark-border">
+              <span className="text-gray-400 font-bold block text-[11px]">Questions</span>
+              <span className="font-extrabold text-gray-900 dark:text-white text-sm sm:text-base">20 MCQs</span>
             </div>
-            <div className="p-4 rounded-xl bg-gray-50 dark:bg-dark-border/40 border border-gray-100 dark:border-dark-border">
-              <span className="text-gray-400 font-bold block">Time Limit</span>
-              <span className="font-extrabold text-gray-900 dark:text-white text-base">10 Minutes</span>
+            <div className="p-3.5 sm:p-4 rounded-xl bg-gray-50 dark:bg-dark-border/40 border border-gray-100 dark:border-dark-border">
+              <span className="text-gray-400 font-bold block text-[11px]">Time Limit</span>
+              <span className="font-extrabold text-gray-900 dark:text-white text-sm sm:text-base">10 Minutes</span>
             </div>
-            <div className="col-span-2 md:col-span-1 p-4 rounded-xl bg-gray-50 dark:bg-dark-border/40 border border-gray-100 dark:border-dark-border">
-              <span className="text-gray-400 font-bold block">Assessment</span>
-              <span className="font-extrabold text-emerald-500 text-base">Timed Mode</span>
+            <div className="col-span-2 md:col-span-1 p-3.5 sm:p-4 rounded-xl bg-gray-50 dark:bg-dark-border/40 border border-gray-100 dark:border-dark-border">
+              <span className="text-gray-400 font-bold block text-[11px]">Assessment</span>
+              <span className="font-extrabold text-emerald-500 text-sm sm:text-base">Timed Mode</span>
             </div>
           </div>
 
           <button
             onClick={startStage1Quiz}
             disabled={loading}
-            className="btn-gradient px-8 py-3.5 rounded-2xl font-bold text-sm shadow-xl hover:scale-105 transition-all"
+            className="btn-gradient w-full sm:w-auto px-6 sm:px-8 py-3.5 rounded-2xl font-bold text-xs sm:text-sm shadow-xl hover:scale-105 transition-all"
           >
             {loading ? 'Initializing Stage-1 Assessment...' : 'Start Stage-1 MCQ Test Now 🚀'}
           </button>
@@ -246,7 +246,7 @@ export const AptitudeQuiz = () => {
         <div className="space-y-6">
 
           {/* Header Bar */}
-          <div className="glass-card p-4 flex items-center justify-between">
+          <div className="glass-card p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
             <div>
               <span className="text-[11px] font-extrabold text-brand-purple bg-brand-purple/10 px-2.5 py-1 rounded-lg">
                 STAGE-1 MCQ TEST
@@ -254,9 +254,9 @@ export const AptitudeQuiz = () => {
               <div className="text-sm font-bold text-gray-900 dark:text-white mt-1">20 Questions Assessment</div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-between sm:justify-end gap-3 sm:gap-4 w-full sm:w-auto">
               <Timer initialSeconds={600} onTimeUp={handleFinalSubmit} />
-              <div className="text-xs font-bold text-brand-purple bg-brand-purple/10 px-3 py-1.5 rounded-xl">
+              <div className="text-xs font-bold text-brand-purple bg-brand-purple/10 px-3 py-1.5 rounded-xl shrink-0">
                 Q {currentIndex + 1} of {questions.length}
               </div>
             </div>
@@ -272,12 +272,12 @@ export const AptitudeQuiz = () => {
 
           {/* Question Box */}
           {currentQ && (
-            <div className="glass-card p-8 space-y-6">
+            <div className="glass-card p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
               <div className="space-y-2">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 bg-gray-100 dark:bg-dark-border px-2.5 py-1 rounded-lg">
                   Q{currentIndex + 1} • {currentQ.subTopic || 'Aptitude'}
                 </span>
-                <h2 className="text-lg font-bold text-gray-900 dark:text-white leading-relaxed pt-1">
+                <h2 className="text-base sm:text-lg font-bold text-gray-900 dark:text-white leading-relaxed pt-1">
                   {currentQ.questionText}
                 </h2>
               </div>
@@ -302,10 +302,10 @@ export const AptitudeQuiz = () => {
                     <button
                       key={oIdx}
                       onClick={() => handleSelectOption(opt)}
-                      className={`w-full text-left p-4 rounded-xl border text-sm font-medium transition-all flex items-center justify-between ${btnStyle}`}
+                      className={`w-full text-left p-3.5 sm:p-4 rounded-xl border text-xs sm:text-sm font-medium transition-all flex items-center justify-between gap-3 min-w-0 ${btnStyle}`}
                     >
-                      <span>{opt}</span>
-                      <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
+                      <span className="break-words flex-1 min-w-0">{opt}</span>
+                      <div className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
                         hasAnswered && isCorrectOpt
                           ? 'border-emerald-500 bg-emerald-500 text-white'
                           : isSelected

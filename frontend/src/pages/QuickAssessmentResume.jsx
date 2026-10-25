@@ -110,18 +110,18 @@ export const QuickAssessmentResume = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-16 pt-4">
+    <div className="w-full max-w-4xl mx-auto space-y-6 sm:space-y-8 pb-16 pt-2 sm:pt-4 min-w-0">
       {/* Header Stepper */}
       <PlacementStepper currentStage={2} />
 
       {/* Header Banner */}
-      <div className="relative overflow-hidden p-8 rounded-3xl bg-gradient-to-r from-brand-purple via-indigo-700 to-brand-blue text-white shadow-xl">
+      <div className="relative overflow-hidden p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-brand-purple via-indigo-700 to-brand-blue text-white shadow-xl">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-semibold backdrop-blur-md">
-            <Zap className="w-3.5 h-3.5" />
+            <Zap className="w-3.5 h-3.5 shrink-0" />
             <span>STAGE 1 OF 3 — CANDIDATE RESUME CHECK</span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             Resume Verification & Quick Screener
           </h1>
           <p className="text-xs text-indigo-100 max-w-xl">
@@ -132,22 +132,22 @@ export const QuickAssessmentResume = () => {
 
       {/* When Resume Is Attached and Verified (Single-Upload Enforced) */}
       {hasAttachedResume && !showReupload && (
-        <div className="glass-card p-8 space-y-6 border-l-4 border-l-emerald-500 shadow-xl animate-fadeIn">
+        <div className="glass-card p-4 sm:p-6 md:p-8 space-y-6 border-l-4 border-l-emerald-500 shadow-xl animate-fadeIn">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-gray-100 dark:border-dark-border pb-4">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 min-w-0">
               <div className="w-10 h-10 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-bold shrink-0 shadow-md">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-extrabold text-gray-900 dark:text-white">
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h2 className="text-base sm:text-lg font-extrabold text-gray-900 dark:text-white">
                     Active Verified Resume Attached
                   </h2>
                   <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-[10px] font-black uppercase">
                     Single-Upload Enforced
                   </span>
                 </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 break-words">
                   Source: <strong className="text-gray-700 dark:text-gray-200">{attachedResumeName || 'Resume ATS Audit'}</strong>. Your resume is linked to your candidate session. No duplicate upload required.
                 </p>
               </div>
@@ -165,9 +165,9 @@ export const QuickAssessmentResume = () => {
           {/* Instant AI Feedback Details */}
           {feedback ? (
             <div className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6 text-xs">
+              <div className="grid md:grid-cols-2 gap-4 sm:gap-6 text-xs">
                 {/* Strengths */}
-                <div className="p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 space-y-2">
+                <div className="p-4 sm:p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 space-y-2">
                   <span className="font-extrabold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
                     <CheckCircle2 className="w-4 h-4" /> Strengths Identified
                   </span>
@@ -182,7 +182,7 @@ export const QuickAssessmentResume = () => {
                 </div>
 
                 {/* Suggestions */}
-                <div className="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20 space-y-2">
+                <div className="p-4 sm:p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20 space-y-2">
                   <span className="font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
                     <AlertTriangle className="w-4 h-4" /> Suggestions to Improve
                   </span>
@@ -200,7 +200,7 @@ export const QuickAssessmentResume = () => {
               <div className="pt-2 text-center">
                 <button
                   onClick={() => navigate(`/quick-assessment/aptitude-screener?sessionId=${sessionId}`)}
-                  className="btn-gradient px-8 py-4 rounded-2xl font-bold text-sm shadow-xl hover:scale-105 transition-all inline-flex items-center gap-2"
+                  className="btn-gradient w-full sm:w-auto justify-center px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-bold text-xs sm:text-sm shadow-xl hover:scale-105 transition-all inline-flex items-center gap-2"
                 >
                   <span>Continue to Stage 1 — Aptitude Screener (20 Mins)</span>
                   <ArrowRight className="w-4 h-4" />

@@ -200,39 +200,39 @@ export const QuickAssessmentCoding = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-16 pt-6">
+    <div className="w-full max-w-4xl mx-auto space-y-6 sm:space-y-8 pb-16 pt-3 sm:pt-6 min-w-0">
       
       {/* 1. Active Coding Round Workspace */}
       {!submitted && (
         <>
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
           
           {/* Header Bar with Language Switcher */}
-          <div className="glass-card p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="glass-card p-3.5 sm:p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-brand-purple text-white flex items-center justify-center font-bold">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-brand-purple text-white flex items-center justify-center font-bold shrink-0">
                 <Code2 className="w-5 h-5" />
               </div>
               <div>
                 <span className="text-[10px] font-extrabold uppercase text-brand-purple bg-brand-purple/10 px-2 py-0.5 rounded">
                   STAGE 2 — CODING ROUND ({language})
                 </span>
-                <h2 className="text-sm font-bold text-gray-900 dark:text-white mt-0.5">
+                <h2 className="text-xs sm:text-sm font-bold text-gray-900 dark:text-white mt-0.5">
                   8 Quick {language} MCQs + 2 {language} Coding Tasks
                 </h2>
               </div>
             </div>
 
             {/* Language Switcher Tabs */}
-            <div className="flex items-center gap-1.5 bg-gray-100 dark:bg-dark-border/60 p-1.5 rounded-2xl border border-gray-200 dark:border-dark-border">
+            <div className="flex flex-wrap items-center gap-1.5 bg-gray-100 dark:bg-dark-border/60 p-1.5 rounded-2xl border border-gray-200 dark:border-dark-border w-full md:w-auto">
               {languages.map(lang => (
                 <button
                   key={lang}
                   type="button"
                   onClick={() => handleLanguageSwitch(lang)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                  className={`flex-1 md:flex-initial px-3 py-1.5 rounded-xl text-xs font-bold transition-all text-center ${
                     language === lang
-                      ? 'bg-brand-purple text-white shadow-md font-extrabold scale-105'
+                      ? 'bg-brand-purple text-white shadow-md font-extrabold'
                       : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                   }`}
                 >
@@ -241,19 +241,19 @@ export const QuickAssessmentCoding = () => {
               ))}
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
               <Timer initialSeconds={720} onTimeUp={handleFinalSubmit} />
               <button
                 onClick={handleFinalSubmit}
-                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow transition"
+                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow transition shrink-0"
               >
-                Submit Coding Round
+                Submit Round
               </button>
             </div>
           </div>
 
           {/* Part A: 8 Quick Code MCQs */}
-          <div className="glass-card p-8 space-y-6">
+          <div className="glass-card p-4 sm:p-6 md:p-8 space-y-6">
             <div className="border-b border-gray-100 dark:border-dark-border pb-3">
               <h3 className="text-lg font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
                 <Terminal className="w-5 h-5 text-brand-purple" />

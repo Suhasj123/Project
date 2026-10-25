@@ -177,33 +177,33 @@ export const CompanyExplorerWidget = () => {
       </div>
 
       {/* Main Company Intelligence Canvas */}
-      <div className="glass-card p-8 space-y-6">
+      <div className="glass-card p-4 sm:p-6 md:p-8 space-y-6">
         
         {/* Company Title Banner */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-gray-100 dark:border-dark-border pb-6">
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white flex items-center justify-center text-xl font-black shadow-lg shrink-0">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6 border-b border-gray-100 dark:border-dark-border pb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 w-full md:w-auto">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-tr from-brand-blue to-brand-purple text-white flex items-center justify-center text-lg sm:text-xl font-black shadow-lg shrink-0">
               {activeCompany.shortName.slice(0, 3)}
             </div>
 
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <h1 className="text-2xl font-extrabold text-gray-900 dark:text-white">{activeCompany.name}</h1>
+            <div className="space-y-1 min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white">{activeCompany.name}</h1>
                 <span className="px-2.5 py-0.5 rounded-full bg-brand-purple/10 text-brand-purple font-extrabold text-[10px] uppercase">
                   {activeCompany.difficulty} Difficulty
                 </span>
               </div>
-              <p className="text-xs text-gray-500 font-medium flex items-center gap-2">
+              <p className="text-xs text-gray-500 font-medium flex flex-wrap items-center gap-2">
                 <span>{activeCompany.category}</span> •
                 <span className="text-emerald-600 dark:text-emerald-400 font-bold">{activeCompany.package}</span>
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
             <button
               onClick={() => toggleSaveCompany(activeCompany.shortName)}
-              className={`px-4 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center gap-2 ${
+              className={`w-full sm:w-auto px-4 py-2.5 rounded-xl font-extrabold text-xs transition-all flex items-center justify-center gap-2 ${
                 savedCompanies.includes(activeCompany.shortName)
                   ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30'
                   : 'bg-gray-100 dark:bg-dark-border text-gray-700 dark:text-gray-300 hover:bg-gray-200'
