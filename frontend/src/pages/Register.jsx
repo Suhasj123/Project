@@ -131,6 +131,11 @@ export const Register = () => {
             <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
               Create your student candidate profile to track test scores, run Monaco code sandboxes, benchmark ATS resume gap analysis, and practice voice AI interviews.
             </p>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-xs font-bold text-gray-700 dark:text-gray-200">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+              <span>Developed by <strong className="text-brand-purple font-extrabold">Suhas J</strong></span>
+            </div>
           </div>
 
           <div className="p-6 rounded-3xl bg-gradient-to-tr from-brand-purple/10 via-indigo-500/10 to-emerald-500/10 border border-brand-purple/20 flex items-center justify-between">
@@ -352,11 +357,16 @@ export const Register = () => {
               </button>
             </form>
 
-            <div className="text-center pt-2 border-t border-gray-100 dark:border-dark-border text-xs text-gray-500">
-              Already registered?{' '}
-              <Link to="/login" className="text-brand-purple font-bold hover:underline">
-                Sign In to Candidate Portal
-              </Link>
+            <div className="text-center pt-2 border-t border-gray-100 dark:border-dark-border text-xs text-gray-500 space-y-2">
+              <span className="block">
+                Already registered?{' '}
+                <Link to="/login" className="text-brand-purple font-bold hover:underline">
+                  Sign In to Candidate Portal
+                </Link>
+              </span>
+              <p className="text-[11px] font-bold text-gray-400">
+                Developed by <span className="text-brand-purple font-extrabold">Suhas J</span>
+              </p>
             </div>
           </div>
         </div>

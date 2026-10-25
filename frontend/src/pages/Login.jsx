@@ -131,6 +131,11 @@ export const Login = () => {
             <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
               Accelerate your campus placement success with real-time AI mock interviews, Monaco code execution sandboxes, ATS resume screeners, and interactive performance telemetry.
             </p>
+
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-purple/10 border border-brand-purple/20 text-xs font-bold text-gray-700 dark:text-gray-200">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+              <span>Developed by <strong className="text-brand-purple font-extrabold">Suhas J</strong></span>
+            </div>
           </div>
 
           {/* Lottie Vector Animation Player Showcase */}
@@ -349,13 +354,16 @@ export const Login = () => {
             </form>
 
             {/* Footer Registration Redirect */}
-            <div className="text-center pt-2 border-t border-gray-100 dark:border-dark-border">
-              <span className="text-xs text-gray-500">
+            <div className="text-center pt-2 border-t border-gray-100 dark:border-dark-border space-y-2">
+              <span className="text-xs text-gray-500 block">
                 New candidate user?{' '}
                 <Link to="/register" className="font-bold text-brand-purple hover:underline">
                   Create Student Candidate Profile
                 </Link>
               </span>
+              <p className="text-[11px] font-bold text-gray-400">
+                Developed by <span className="text-brand-purple font-extrabold">Suhas J</span>
+              </p>
             </div>
 
           </div>

@@ -173,6 +173,13 @@ export const Navbar = () => {
                 </div>
               )}
             </div>
+
+            {/* Mobile Developer Credit */}
+            <div className="pt-2 text-center border-t border-gray-100 dark:border-dark-border">
+              <span className="text-[11px] font-bold text-gray-400 dark:text-gray-500">
+                Developed by <strong className="text-brand-purple font-extrabold">Suhas J</strong>
+              </span>
+            </div>
           </aside>
           <div className="flex-1" onClick={() => setMobileMenuOpen(false)} />
         </div>
@@ -262,6 +269,13 @@ export const Navbar = () => {
               </Link>
             </div>
           )}
+
+          {/* Desktop Developer Credit */}
+          <div className="pt-2 text-center border-t border-gray-100 dark:border-dark-border">
+            <span className="text-[11px] font-bold text-gray-400 dark:text-gray-500">
+              Developed by <strong className="text-brand-purple font-extrabold">Suhas J</strong>
+            </span>
+          </div>
         </div>
       </aside>
     </>
