@@ -132,31 +132,23 @@ export const Navbar = () => {
         </div>
       </header>
 
-      {/* Mobile Off-Canvas Sidebar Drawer & Backdrop */}
-      <div
-        className={`lg:hidden fixed inset-0 z-50 transition-opacity duration-300 ${
-          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        aria-hidden={!mobileMenuOpen}
-      >
-        {/* Semi-transparent Backdrop */}
-        <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
-          onClick={() => setMobileMenuOpen(false)}
-          aria-label="Close navigation overlay"
-          role="button"
-          tabIndex={-1}
-        />
+      {/* Mobile Navigation Drawer & Backdrop (Rendered ONLY when mobileMenuOpen is true) */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 flex" role="dialog" aria-modal="true" aria-label="Navigation Menu">
+          {/* Semi-transparent Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close navigation overlay"
+            role="button"
+            tabIndex={0}
+          />
 
-        {/* Off-Canvas Navigation Drawer */}
-        <aside
-          className={`fixed top-0 left-0 w-72 max-w-[85vw] h-full bg-white dark:bg-dark-card p-4 sm:p-5 flex flex-col justify-between shadow-2xl border-r border-gray-200 dark:border-dark-border overflow-y-auto z-10 transform transition-transform duration-300 ease-in-out ${
-            mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation Drawer"
-        >
+          {/* Navigation Drawer */}
+          <aside
+            className="relative w-80 max-w-[85vw] h-full bg-white dark:bg-dark-card p-4 sm:p-5 flex flex-col justify-between shadow-2xl border-r border-gray-200 dark:border-dark-border overflow-y-auto z-10"
+            aria-label="Navigation Drawer"
+          >
           <div className="space-y-6">
             <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-4">
               <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 font-bold text-base sm:text-lg text-gray-900 dark:text-white truncate">
@@ -240,6 +232,7 @@ export const Navbar = () => {
           </div>
         </aside>
       </div>
+    )}
 
       {/* Desktop Left-Side Vertical Sidebar Navigation Panel */}
       <aside className="hidden lg:flex w-64 h-screen fixed top-0 left-0 z-40 bg-white/95 dark:bg-dark-card/95 backdrop-blur-md border-r border-gray-200 dark:border-dark-border flex-col justify-between p-5 shadow-2xl overflow-y-auto">
