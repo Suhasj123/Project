@@ -4,6 +4,7 @@
   "description": "AI-Powered Interview Preparation & Assessment System with GSD, Ralph Loop, Ponytail, and CodeRabbit",
   "scripts": {
     "start": "node backend/server.js",
+    "build": "npm --prefix frontend install && npm --prefix frontend run build",
     "gsd": "gsd-core",
     "ralph": "powershell -ExecutionPolicy Bypass -File ./ralph.ps1",
     "ralph:bash": "bash ./ralph.sh",

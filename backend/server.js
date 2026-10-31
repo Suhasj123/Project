@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
+const fs = require('fs');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -133,7 +135,17 @@ app.post('/api/email/send', protect, emailLimiter, async (req, res) => {
   }
 });
 
-// 404 Route handler
+// Serve Frontend Production Build
+const frontendDist = path.join(__dirname, '..', 'frontend', 'dist');
+if (fs.existsSync(frontendDist)) {
+  app.use(express.static(frontendDist));
+  app.get('*', (req, res, next) => {
+    if (req.originalUrl.startsWith('/api')) return next();
+    res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+}
+
+// 404 Route handler for API Endpoints
 app.use((req, res) => {
   res.status(404).json({ message: `API Endpoint ${req.originalUrl} not found` });
 });
