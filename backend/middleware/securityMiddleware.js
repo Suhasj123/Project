@@ -149,6 +149,9 @@ const isOriginAllowed = (origin) => {
   // Allow all Render deployed origins
   if (/^https:\/\/.*\.onrender\.com$/.test(origin)) return true;
 
+  // Allow all Netlify deployed frontend origins
+  if (/^https:\/\/.*\.netlify\.app$/.test(origin)) return true;
+
   // In non-production or local environment, automatically allow all localhost & 127.0.0.1 ports
   if (process.env.NODE_ENV !== 'production') {
     const isLocalhost = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
