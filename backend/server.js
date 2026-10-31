@@ -166,8 +166,9 @@ app.use((err, req, res, next) => {
   const isProduction = process.env.NODE_ENV === 'production';
   console.error('[Server Internal Error]', err.message);
 
-  res.status(err.status || 500).json({ 
-    message: isProduction ? 'Internal Server Error' : (err.message || 'An unexpected error occurred'),
+  const status = err.status || 500;
+  res.status(status).json({ 
+    message: (isProduction && status >= 500) ? 'Internal Server Error' : (err.message || 'An unexpected error occurred'),
     ...(isProduction ? {} : { stack: err.stack })
   });
 });
