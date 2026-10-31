@@ -17,4 +17,4 @@ services:
       - key: MONGODB_URI
         sync: false
       - key: ALLOWED_ORIGINS
-        value: https://project-suhas-3e82.vercel.app,http://localhost:3000
+        value: https://*.netlify.app,https://project-suhas-3e82.vercel.app,http://localhost:3000
