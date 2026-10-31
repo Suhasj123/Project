@@ -34,17 +34,31 @@ export const Navbar = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Prevent background scroll when mobile drawer is open
+  // Prevent background scroll when mobile drawer is open & handle Escape key
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
       document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [mobileMenuOpen]);
+
+  // Close drawer on route navigation
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   // If user is not logged in or on login/auth pages, DO NOT display the navigation header/sidebar
   if (!user || location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/forgot-password' || location.pathname === '/reset-password') {
@@ -91,7 +105,7 @@ export const Navbar = () => {
   return (
     <>
       {/* Mobile Top Navigation Bar (Visible only on small screens < lg) */}
-      <header className="lg:hidden sticky top-0 z-40 bg-white/95 dark:bg-dark-card/95 backdrop-blur-md border-b border-gray-200 dark:border-dark-border px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between shadow-sm w-full max-w-full">
+      <header className="lg:hidden sticky top-0 z-40 bg-white/95 dark:bg-dark-card/95 backdrop-blur-md border-b border-gray-200 dark:border-dark-border px-3 sm:px-4 py-2 sm:py-2.5 flex items-center justify-between shadow-sm w-full max-w-full">
         <Link to="/" className="flex items-center gap-2 font-bold text-base sm:text-lg text-gray-900 dark:text-white shrink-0 min-w-0">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-blue via-brand-purple to-indigo-600 flex items-center justify-center text-white shadow shrink-0">
             <Brain className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -102,102 +116,130 @@ export const Navbar = () => {
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <button
             onClick={toggleDarkMode}
-            className="p-1.5 sm:p-2 rounded-xl bg-gray-100 dark:bg-dark-border text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl bg-gray-100 dark:bg-dark-border text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
             aria-label="Toggle Theme"
           >
             {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-600" />}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-1.5 sm:p-2 rounded-xl text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-dark-border hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-            aria-label="Toggle Navigation Menu"
+            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-dark-border hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </header>
 
-      {/* Mobile Sidebar Overlay Drawer */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex">
-          <aside className="w-72 max-w-[85vw] bg-white dark:bg-dark-card h-full p-4 sm:p-5 space-y-6 flex flex-col justify-between shadow-2xl border-r border-gray-200 dark:border-dark-border overflow-y-auto">
-            <div className="space-y-6">
-              <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-4">
-                <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 font-bold text-base sm:text-lg text-gray-900 dark:text-white truncate">
-                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-purple flex items-center justify-center text-white shadow shrink-0">
-                    <Brain className="w-4 h-4 sm:w-5 sm:h-5" />
+      {/* Mobile Off-Canvas Sidebar Drawer & Backdrop */}
+      <div
+        className={`lg:hidden fixed inset-0 z-50 transition-opacity duration-300 ${
+          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        aria-hidden={!mobileMenuOpen}
+      >
+        {/* Semi-transparent Backdrop */}
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-label="Close navigation overlay"
+          role="button"
+          tabIndex={-1}
+        />
+
+        {/* Off-Canvas Navigation Drawer */}
+        <aside
+          className={`fixed top-0 left-0 w-72 max-w-[85vw] h-full bg-white dark:bg-dark-card p-4 sm:p-5 flex flex-col justify-between shadow-2xl border-r border-gray-200 dark:border-dark-border overflow-y-auto z-10 transform transition-transform duration-300 ease-in-out ${
+            mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation Drawer"
+        >
+          <div className="space-y-6">
+            <div className="flex items-center justify-between border-b border-gray-100 dark:border-dark-border pb-4">
+              <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 font-bold text-base sm:text-lg text-gray-900 dark:text-white truncate">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-purple flex items-center justify-center text-white shadow shrink-0">
+                  <Brain className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <span className="truncate">Interview<span className="text-brand-purple font-extrabold">Pro</span></span>
+              </Link>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-gray-400 hover:text-gray-700 dark:hover:text-white shrink-0 rounded-xl"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
+              </button>
+            </div>
+
+            <nav className="space-y-1">
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                const isActive = location.pathname === link.path;
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`min-h-[44px] px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-3 transition-all ${
+                      isActive
+                        ? 'bg-brand-purple text-white shadow-md'
+                        : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-border'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4 shrink-0" />
+                    <span>{link.name}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+
+          {/* Mobile Footer User Section */}
+          <div className="border-t border-gray-100 dark:border-dark-border pt-4 space-y-3">
+            {user ? (
+              <div className="flex items-center justify-between">
+                <Link to="/profile" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 min-h-[44px]">
+                  <img
+                    src={user.profilePic || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200'}
+                    alt="Profile"
+                    className="w-9 h-9 rounded-full object-cover border-2 border-brand-purple"
+                  />
+                  <div>
+                    <div className="text-xs font-bold text-gray-900 dark:text-white">{user.name}</div>
+                    <div className="text-[10px] text-brand-purple capitalize font-extrabold">{user.role}</div>
                   </div>
-                  <span className="truncate">Interview<span className="text-brand-purple font-extrabold">Pro</span></span>
                 </Link>
-                <button onClick={() => setMobileMenuOpen(false)} className="p-1 text-gray-400 hover:text-gray-700 dark:hover:text-white shrink-0" aria-label="Close menu">
-                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
+                <button
+                  onClick={() => { setMobileMenuOpen(false); handleLogout(); }}
+                  className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl"
+                  aria-label="Logout"
+                >
+                  <LogOut className="w-5 h-5" />
                 </button>
               </div>
+            ) : (
+              <div className="flex flex-col gap-2">
+                <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2.5 min-h-[44px] flex items-center justify-center text-xs font-bold border rounded-xl">
+                  Sign In
+                </Link>
+                <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="btn-gradient w-full text-center py-2.5 min-h-[44px] flex items-center justify-center text-xs font-bold rounded-xl">
+                  Get Started
+                </Link>
+              </div>
+            )}
+          </div>
 
-              <nav className="space-y-1">
-                {navLinks.map((link) => {
-                  const Icon = link.icon;
-                  const isActive = location.pathname === link.path;
-                  return (
-                    <Link
-                      key={link.name}
-                      to={link.path}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-3 transition-all ${
-                        isActive
-                          ? 'bg-brand-purple text-white shadow-md'
-                          : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-border'
-                      }`}
-                    >
-                      <Icon className="w-4 h-4" />
-                      <span>{link.name}</span>
-                    </Link>
-                  );
-                })}
-              </nav>
-            </div>
-
-            {/* Mobile Footer User Section */}
-            <div className="border-t border-gray-100 dark:border-dark-border pt-4 space-y-3">
-              {user ? (
-                <div className="flex items-center justify-between">
-                  <Link to="/profile" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2">
-                    <img
-                      src={user.profilePic || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200'}
-                      alt="Profile"
-                      className="w-9 h-9 rounded-full object-cover border-2 border-brand-purple"
-                    />
-                    <div>
-                      <div className="text-xs font-bold text-gray-900 dark:text-white">{user.name}</div>
-                      <div className="text-[10px] text-brand-purple capitalize font-extrabold">{user.role}</div>
-                    </div>
-                  </Link>
-                  <button onClick={() => { setMobileMenuOpen(false); handleLogout(); }} className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg">
-                    <LogOut className="w-5 h-5" />
-                  </button>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-2">
-                  <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="w-full text-center py-2 text-xs font-bold border rounded-xl">
-                    Sign In
-                  </Link>
-                  <Link to="/register" onClick={() => setMobileMenuOpen(false)} className="btn-gradient w-full text-center py-2 text-xs font-bold rounded-xl">
-                    Get Started
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* Mobile Developer Credit */}
-            <div className="pt-2 text-center border-t border-gray-100 dark:border-dark-border">
-              <span className="text-[11px] font-bold text-gray-400 dark:text-gray-500">
-                Developed by <strong className="text-brand-purple font-extrabold">Suhas J</strong>
-              </span>
-            </div>
-          </aside>
-          <div className="flex-1" onClick={() => setMobileMenuOpen(false)} />
-        </div>
-      )}
+          {/* Mobile Developer Credit */}
+          <div className="pt-2 text-center border-t border-gray-100 dark:border-dark-border">
+            <span className="text-[11px] font-bold text-gray-400 dark:text-gray-500">
+              Developed by <strong className="text-brand-purple font-extrabold">Suhas J</strong>
+            </span>
+          </div>
+        </aside>
+      </div>
 
       {/* Desktop Left-Side Vertical Sidebar Navigation Panel */}
       <aside className="hidden lg:flex w-64 h-screen fixed top-0 left-0 z-40 bg-white/95 dark:bg-dark-card/95 backdrop-blur-md border-r border-gray-200 dark:border-dark-border flex-col justify-between p-5 shadow-2xl overflow-y-auto">
