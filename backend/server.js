@@ -75,7 +75,7 @@ app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 app.use(sanitizeInput);
 
 // Root API Welcome & Health Route (Public)
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.json({
     status: 'online',
     app: 'InterviewPro - Full-Stack Online Hiring & Assessment Platform API',
@@ -142,6 +142,17 @@ if (fs.existsSync(frontendDist)) {
   app.get('*', (req, res, next) => {
     if (req.originalUrl.startsWith('/api')) return next();
     res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+} else {
+  app.get('/', (req, res) => {
+    res.json({
+      status: 'online',
+      app: 'InterviewPro - Full-Stack Online Hiring & Assessment Platform API',
+      health: '/api/health',
+      environment: process.env.NODE_ENV || 'development',
+      serverless: !!process.env.VERCEL,
+      timestamp: new Date()
+    });
   });
 }
 
