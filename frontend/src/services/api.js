@@ -1,7 +1,15 @@
 import axios from 'axios';
 
+let rawBaseURL = import.meta.env.VITE_API_BASE_URL || '/api';
+if (rawBaseURL.startsWith('http')) {
+  rawBaseURL = rawBaseURL.replace(/\/+$/, '');
+  if (!rawBaseURL.endsWith('/api')) {
+    rawBaseURL = `${rawBaseURL}/api`;
+  }
+}
+
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || '/api'
+  baseURL: rawBaseURL
 });
 
 // Interceptor to attach Authorization Token to every outgoing HTTP request
